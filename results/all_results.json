@@ -1,0 +1,670 @@
+{
+  "LineWorld": {
+    "Random": {
+      "avg_reward": -10.739999999999998,
+      "std_reward": 7.682929128919523,
+      "avg_length": 114.55,
+      "avg_step_time_ms": 0.019810553230239773,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "TabularQL": {
+      "avg_reward": 0.2000000000000001,
+      "std_reward": 2.7755575615628914e-17,
+      "avg_length": 9.0,
+      "avg_step_time_ms": 0.022494792938232422,
+      "win_rate": 0.0,
+      "loss_rate": 0.0,
+      "draw_rate": 1.0,
+      "num_episodes": 20
+    },
+    "DQN": {
+      "avg_reward": 0.2000000000000001,
+      "std_reward": 2.7755575615628914e-17,
+      "avg_length": 9.0,
+      "avg_step_time_ms": 0.04737642076280383,
+      "win_rate": 0.0,
+      "loss_rate": 0.0,
+      "draw_rate": 1.0,
+      "num_episodes": 20
+    },
+    "DoubleDQN": {
+      "avg_reward": 0.2000000000000001,
+      "std_reward": 2.7755575615628914e-17,
+      "avg_length": 9.0,
+      "avg_step_time_ms": 0.04753404193454318,
+      "win_rate": 0.0,
+      "loss_rate": 0.0,
+      "draw_rate": 1.0,
+      "num_episodes": 20
+    },
+    "DDQN+ER": {
+      "avg_reward": 0.2000000000000001,
+      "std_reward": 2.7755575615628914e-17,
+      "avg_length": 9.0,
+      "avg_step_time_ms": 0.0388238165113661,
+      "win_rate": 0.0,
+      "loss_rate": 0.0,
+      "draw_rate": 1.0,
+      "num_episodes": 20
+    },
+    "DDQN+PER": {
+      "avg_reward": 0.2000000000000001,
+      "std_reward": 2.7755575615628914e-17,
+      "avg_length": 9.0,
+      "avg_step_time_ms": 0.034589237636990025,
+      "win_rate": 0.0,
+      "loss_rate": 0.0,
+      "draw_rate": 1.0,
+      "num_episodes": 20
+    },
+    "REINFORCE": {
+      "avg_reward": -20.00000000000001,
+      "std_reward": 3.552713678800501e-15,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.05056065320968628,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "REINFORCE+Mean": {
+      "avg_reward": -20.00000000000001,
+      "std_reward": 3.552713678800501e-15,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.05466282367706299,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "REINFORCE+Critic": {
+      "avg_reward": -20.00000000000001,
+      "std_reward": 3.552713678800501e-15,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.05886441469192505,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "PPO": {
+      "avg_reward": -20.00000000000001,
+      "std_reward": 3.552713678800501e-15,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.0744592547416687,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "A2C": {
+      "avg_reward": -20.00000000000001,
+      "std_reward": 3.552713678800501e-15,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.051641762256622314,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "RandomRollout": {
+      "avg_reward": -0.14500000000000005,
+      "std_reward": 0.44212554778026597,
+      "avg_length": 12.45,
+      "avg_step_time_ms": 15.647716579999102,
+      "win_rate": 0.0,
+      "loss_rate": 0.2,
+      "draw_rate": 0.8,
+      "num_episodes": 20
+    },
+    "MCTS": {
+      "avg_reward": -0.6250000000000002,
+      "std_reward": 0.4559331091289601,
+      "avg_length": 17.25,
+      "avg_step_time_ms": 13.744359766106337,
+      "win_rate": 0.0,
+      "loss_rate": 0.65,
+      "draw_rate": 0.35,
+      "num_episodes": 20
+    },
+    "ExpertApprentice": {
+      "avg_reward": 0.2000000000000001,
+      "std_reward": 2.7755575615628914e-17,
+      "avg_length": 9.0,
+      "avg_step_time_ms": 0.042825274997287326,
+      "win_rate": 0.0,
+      "loss_rate": 0.0,
+      "draw_rate": 1.0,
+      "num_episodes": 20
+    },
+    "AlphaZero": {
+      "avg_reward": -20.00000000000001,
+      "std_reward": 3.552713678800501e-15,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.05329716205596924,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "MuZero": {
+      "avg_reward": -20.00000000000001,
+      "std_reward": 3.552713678800501e-15,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 1.6572813987731934,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "MuZero_Stochastic": {
+      "avg_reward": -6.77499999999999,
+      "std_reward": 5.548502050103244,
+      "avg_length": 78.2,
+      "avg_step_time_ms": 3.7223572522520385,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    }
+  },
+  "GridWorld": {
+    "Random": {
+      "avg_reward": 8.744499999999999,
+      "std_reward": 3.4889159849443208,
+      "avg_length": 93.45,
+      "avg_step_time_ms": 0.03593471059693988,
+      "win_rate": 0.9,
+      "loss_rate": 0.1,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "TabularQL": {
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.039102137088775635,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "DQN": {
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.09621977806091309,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "DoubleDQN": {
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.1619681715965271,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "DDQN+ER": {
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.06728023290634155,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "DDQN+PER": {
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.07864534854888916,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "REINFORCE": {
+      "avg_reward": -2.000000000000001,
+      "std_reward": 4.440892098500626e-16,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.10995858907699585,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "REINFORCE+Mean": {
+      "avg_reward": -2.000000000000001,
+      "std_reward": 4.440892098500626e-16,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.08196187019348145,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "REINFORCE+Critic": {
+      "avg_reward": -2.000000000000001,
+      "std_reward": 4.440892098500626e-16,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.08121544122695923,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "PPO": {
+      "avg_reward": -2.000000000000001,
+      "std_reward": 4.440892098500626e-16,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.10474997758865356,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "A2C": {
+      "avg_reward": -2.000000000000001,
+      "std_reward": 4.440892098500626e-16,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.10082417726516724,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "RandomRollout": {
+      "avg_reward": 10.565,
+      "std_reward": 0.04533210782657228,
+      "avg_length": 14.5,
+      "avg_step_time_ms": 107.58761257219051,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "MCTS": {
+      "avg_reward": -0.868,
+      "std_reward": 2.4387406586187064,
+      "avg_length": 194.85,
+      "avg_step_time_ms": 53.40974860646061,
+      "win_rate": 0.05,
+      "loss_rate": 0.95,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "ExpertApprentice": {
+      "avg_reward": -1.3000000000000012,
+      "std_reward": 2.220446049250313e-16,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.06249260902404785,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "AlphaZero": {
+      "avg_reward": -1.900000000000001,
+      "std_reward": 4.440892098500626e-16,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 0.0722726583480835,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "MuZero": {
+      "avg_reward": -2.000000000000001,
+      "std_reward": 4.440892098500626e-16,
+      "avg_length": 200.0,
+      "avg_step_time_ms": 226.49336791038513,
+      "win_rate": 0.0,
+      "loss_rate": 1.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "MuZero_Stochastic": {
+      "avg_reward": -0.09250000000000051,
+      "std_reward": 3.886632057450255,
+      "avg_length": 193.4,
+      "avg_step_time_ms": 3.634183883936134,
+      "win_rate": 0.15,
+      "loss_rate": 0.85,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    }
+  },
+  "TicTacToe": {
+    "Random": {
+      "avg_reward": 0.5,
+      "std_reward": 0.8660254037844386,
+      "avg_length": 3.85,
+      "avg_step_time_ms": 0.07569074630737306,
+      "win_rate": 0.75,
+      "loss_rate": 0.25,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "DQN": {
+      "avg_reward": 0.0,
+      "std_reward": 0.9486832980505138,
+      "avg_length": 4.3,
+      "avg_step_time_ms": 0.1261359453201294,
+      "win_rate": 0.45,
+      "loss_rate": 0.45,
+      "draw_rate": 0.1,
+      "num_episodes": 20
+    },
+    "DoubleDQN": {
+      "avg_reward": 0.25,
+      "std_reward": 0.9420721840708386,
+      "avg_length": 4.5,
+      "avg_step_time_ms": 0.14741082986195883,
+      "win_rate": 0.6,
+      "loss_rate": 0.35,
+      "draw_rate": 0.05,
+      "num_episodes": 20
+    },
+    "DDQN+ER": {
+      "avg_reward": 0.0,
+      "std_reward": 0.9486832980505138,
+      "avg_length": 4.2,
+      "avg_step_time_ms": 0.11598090330759685,
+      "win_rate": 0.45,
+      "loss_rate": 0.45,
+      "draw_rate": 0.1,
+      "num_episodes": 20
+    },
+    "DDQN+PER": {
+      "avg_reward": 0.1,
+      "std_reward": 0.888819441731559,
+      "avg_length": 4.4,
+      "avg_step_time_ms": 0.11398732662200928,
+      "win_rate": 0.45,
+      "loss_rate": 0.35,
+      "draw_rate": 0.2,
+      "num_episodes": 20
+    },
+    "REINFORCE": {
+      "avg_reward": -0.1,
+      "std_reward": 0.8888194417315589,
+      "avg_length": 4.35,
+      "avg_step_time_ms": 0.2221214771270752,
+      "win_rate": 0.35,
+      "loss_rate": 0.45,
+      "draw_rate": 0.2,
+      "num_episodes": 20
+    },
+    "REINFORCE+Mean": {
+      "avg_reward": 0.55,
+      "std_reward": 0.8046738469715542,
+      "avg_length": 4.1,
+      "avg_step_time_ms": 2.0896788438161216,
+      "win_rate": 0.75,
+      "loss_rate": 0.2,
+      "draw_rate": 0.05,
+      "num_episodes": 20
+    },
+    "REINFORCE+Critic": {
+      "avg_reward": 0.25,
+      "std_reward": 0.9420721840708386,
+      "avg_length": 4.1,
+      "avg_step_time_ms": 0.1976919174194336,
+      "win_rate": 0.6,
+      "loss_rate": 0.35,
+      "draw_rate": 0.05,
+      "num_episodes": 20
+    },
+    "PPO": {
+      "avg_reward": 0.5,
+      "std_reward": 0.806225774829855,
+      "avg_length": 4.1,
+      "avg_step_time_ms": 0.15842000643412274,
+      "win_rate": 0.7,
+      "loss_rate": 0.2,
+      "draw_rate": 0.1,
+      "num_episodes": 20
+    },
+    "A2C": {
+      "avg_reward": 0.25,
+      "std_reward": 0.9420721840708386,
+      "avg_length": 4.45,
+      "avg_step_time_ms": 0.14595826466878253,
+      "win_rate": 0.6,
+      "loss_rate": 0.35,
+      "draw_rate": 0.05,
+      "num_episodes": 20
+    },
+    "RandomRollout": {
+      "avg_reward": 1.0,
+      "std_reward": 0.0,
+      "avg_length": 3.25,
+      "avg_step_time_ms": 43.80380849043529,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "MCTS": {
+      "avg_reward": 0.8,
+      "std_reward": 0.6000000000000001,
+      "avg_length": 4.15,
+      "avg_step_time_ms": 8.817588686943054,
+      "win_rate": 0.9,
+      "loss_rate": 0.1,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "ExpertApprentice": {
+      "avg_reward": 0.8,
+      "std_reward": 0.6000000000000001,
+      "avg_length": 3.6,
+      "avg_step_time_ms": 0.11487305164337158,
+      "win_rate": 0.9,
+      "loss_rate": 0.1,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "AlphaZero": {
+      "avg_reward": -0.05,
+      "std_reward": 0.8645808232895291,
+      "avg_length": 4.3,
+      "avg_step_time_ms": 0.1318522294362386,
+      "win_rate": 0.35,
+      "loss_rate": 0.4,
+      "draw_rate": 0.25,
+      "num_episodes": 20
+    },
+    "MuZero": {
+      "avg_reward": 0.35,
+      "std_reward": 0.9096702699330126,
+      "avg_length": 4.25,
+      "avg_step_time_ms": 1.7810297012329102,
+      "win_rate": 0.65,
+      "loss_rate": 0.3,
+      "draw_rate": 0.05,
+      "num_episodes": 20
+    },
+    "MuZero_Stochastic": {
+      "avg_reward": 0.2,
+      "std_reward": 0.9273618495495705,
+      "avg_length": 4.35,
+      "avg_step_time_ms": 3.899850845336914,
+      "win_rate": 0.55,
+      "loss_rate": 0.35,
+      "draw_rate": 0.1,
+      "num_episodes": 20
+    }
+  },
+  "Quarto": {
+    "Random": {
+      "avg_reward": 0.1,
+      "std_reward": 0.99498743710662,
+      "avg_length": 5.65,
+      "avg_step_time_ms": 0.21140459037962414,
+      "win_rate": 0.55,
+      "loss_rate": 0.45,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "DQN": {
+      "avg_reward": 0.0,
+      "std_reward": 1.0,
+      "avg_length": 5.65,
+      "avg_step_time_ms": 0.20672961359932313,
+      "win_rate": 0.5,
+      "loss_rate": 0.5,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "DoubleDQN": {
+      "avg_reward": 0.1,
+      "std_reward": 0.9949874371066201,
+      "avg_length": 5.85,
+      "avg_step_time_ms": 0.21593335128965832,
+      "win_rate": 0.55,
+      "loss_rate": 0.45,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "DDQN+ER": {
+      "avg_reward": -0.1,
+      "std_reward": 0.9949874371066201,
+      "avg_length": 6.1,
+      "avg_step_time_ms": 0.20847839968545098,
+      "win_rate": 0.45,
+      "loss_rate": 0.55,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "DDQN+PER": {
+      "avg_reward": -0.4,
+      "std_reward": 0.9165151389911679,
+      "avg_length": 5.75,
+      "avg_step_time_ms": 0.20589805784679593,
+      "win_rate": 0.3,
+      "loss_rate": 0.7,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "REINFORCE": {
+      "avg_reward": -0.1,
+      "std_reward": 0.9949874371066201,
+      "avg_length": 6.15,
+      "avg_step_time_ms": 0.2284720540046692,
+      "win_rate": 0.45,
+      "loss_rate": 0.55,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "REINFORCE+Mean": {
+      "avg_reward": -0.3,
+      "std_reward": 0.9539392014169457,
+      "avg_length": 6.35,
+      "avg_step_time_ms": 0.23734133867990406,
+      "win_rate": 0.35,
+      "loss_rate": 0.65,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "REINFORCE+Critic": {
+      "avg_reward": -0.25,
+      "std_reward": 0.9420721840708386,
+      "avg_length": 6.0,
+      "avg_step_time_ms": 0.22850269363040016,
+      "win_rate": 0.35,
+      "loss_rate": 0.6,
+      "draw_rate": 0.05,
+      "num_episodes": 20
+    },
+    "PPO": {
+      "avg_reward": 0.35,
+      "std_reward": 0.9096702699330126,
+      "avg_length": 5.5,
+      "avg_step_time_ms": 0.25369854200453984,
+      "win_rate": 0.65,
+      "loss_rate": 0.3,
+      "draw_rate": 0.05,
+      "num_episodes": 20
+    },
+    "A2C": {
+      "avg_reward": -0.3,
+      "std_reward": 0.9539392014169455,
+      "avg_length": 5.8,
+      "avg_step_time_ms": 0.22432961634227205,
+      "win_rate": 0.35,
+      "loss_rate": 0.65,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "RandomRollout": {
+      "avg_reward": 0.8,
+      "std_reward": 0.6000000000000001,
+      "avg_length": 4.55,
+      "avg_step_time_ms": 216.10164841016132,
+      "win_rate": 0.9,
+      "loss_rate": 0.1,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "MCTS": {
+      "avg_reward": 0.0,
+      "std_reward": 1.0,
+      "avg_length": 6.25,
+      "avg_step_time_ms": 31.370158933457873,
+      "win_rate": 0.5,
+      "loss_rate": 0.5,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "ExpertApprentice": {
+      "avg_reward": 0.1,
+      "std_reward": 0.99498743710662,
+      "avg_length": 5.6,
+      "avg_step_time_ms": 0.2352748172623771,
+      "win_rate": 0.55,
+      "loss_rate": 0.45,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "AlphaZero": {
+      "avg_reward": 0.1,
+      "std_reward": 0.99498743710662,
+      "avg_length": 6.25,
+      "avg_step_time_ms": 0.23420360826310654,
+      "win_rate": 0.55,
+      "loss_rate": 0.45,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "MuZero": {
+      "avg_reward": 0.1,
+      "std_reward": 0.9949874371066201,
+      "avg_length": 5.75,
+      "avg_step_time_ms": 2.4307234230495633,
+      "win_rate": 0.55,
+      "loss_rate": 0.45,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    },
+    "MuZero_Stochastic": {
+      "avg_reward": 0.2,
+      "std_reward": 0.9797958971132713,
+      "avg_length": 6.2,
+      "avg_step_time_ms": 4.239246291773659,
+      "win_rate": 0.6,
+      "loss_rate": 0.4,
+      "draw_rate": 0.0,
+      "num_episodes": 20
+    }
+  }
+}
