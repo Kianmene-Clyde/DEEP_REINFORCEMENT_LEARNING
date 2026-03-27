@@ -19,6 +19,7 @@ from .base_env import BaseEnvironment
 
 
 class Quarto(BaseEnvironment):
+    is_two_player = True
     # Piece attributes: each piece 0-15 has 4 binary attributes
     ATTRS = np.array([[(p >> b) & 1 for b in range(4)] for p in range(16)], dtype=np.int32)
 

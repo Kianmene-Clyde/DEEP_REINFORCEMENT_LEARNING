@@ -186,9 +186,9 @@ class MuZeroAgent(BaseAgent):
 
     def _train_networks(self):
         """Train all three networks on buffered trajectories."""
-        # Sample random trajectories and positions
         batch_obs, batch_actions, batch_pis, batch_values, batch_rewards = \
             [], [], [], [], []
+        batch_next_obs = []
 
         for _ in range(min(self.train_batch_size, len(self.buffer))):
             traj = self.buffer[np.random.randint(len(self.buffer))]
@@ -204,6 +204,11 @@ class MuZeroAgent(BaseAgent):
             batch_pis.append(traj[pos]['pi'])
             batch_values.append(value_target)
             batch_rewards.append(traj[pos].get('reward', 0))
+            # Next obs for dynamics training
+            if pos + 1 < len(traj):
+                batch_next_obs.append(traj[pos + 1]['obs'])
+            else:
+                batch_next_obs.append(traj[pos]['obs'])
 
         if len(batch_obs) < 4:
             return
@@ -211,24 +216,43 @@ class MuZeroAgent(BaseAgent):
         obs = np.array(batch_obs, dtype=np.float32)
         target_pis = np.array(batch_pis, dtype=np.float32)
         target_vs = np.array(batch_values, dtype=np.float32)
+        actions = np.array(batch_actions)
+        rewards = np.array(batch_rewards, dtype=np.float32)
+        next_obs = np.array(batch_next_obs, dtype=np.float32)
 
-        # Train prediction network via representation
+        # Normalize value targets to [-1, 1] for tanh head
+        max_abs_v = max(np.abs(target_vs).max(), 1e-8)
+        target_vs_norm = np.clip(target_vs / max_abs_v, -1, 1)
+
+        # === Train prediction network via representation ===
         latents = self.repr_net.forward(obs, training=True)
         pred_policy, pred_value = self.pred_net.forward(latents, training=True)
 
-        # Policy loss gradient
+        # Policy loss gradient (cross-entropy)
         policy_grad = pred_policy - target_pis
-        # Value loss gradient
+        # Value loss gradient (MSE with normalized targets)
         value_grad = np.zeros_like(pred_value)
-        value_grad[:, 0] = pred_value[:, 0] - target_vs
+        value_grad[:, 0] = pred_value[:, 0] - target_vs_norm
 
         self.pred_net.backward_dual(policy_grad, value_grad)
 
-        # Backprop through representation network
-        # Simplified: just use value error
+        # Backprop through representation: gradient from both policy and value
+        # Use the combined gradient from pred_net trunk
         repr_grad = np.zeros_like(latents)
-        repr_grad += value_grad[:, 0:1] * 0.1  # scale down
+        repr_grad += value_grad * 0.1  # broadcast (batch,1) to (batch, latent_dim)
         self.repr_net.backward(repr_grad)
+
+        # === Train dynamics network ===
+        next_latents_target = self.repr_net.predict(next_obs)
+        # Build dynamics input: latent + action_onehot
+        a_onehot = np.zeros((len(actions), self.action_space_size), dtype=np.float32)
+        a_onehot[np.arange(len(actions)), actions] = 1.0
+        dyn_input = np.concatenate([latents, a_onehot], axis=1)
+        # Dynamics target: next_latent (latent_dim) + reward (1)
+        dyn_target = np.concatenate([next_latents_target, rewards.reshape(-1, 1)], axis=1)
+        dyn_pred = self.dyn_net.forward(dyn_input, training=True)
+        dyn_grad = dyn_pred - dyn_target
+        self.dyn_net.backward(dyn_grad)
 
     def save(self, filepath: str):
         os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)

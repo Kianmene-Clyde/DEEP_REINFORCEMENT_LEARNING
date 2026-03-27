@@ -68,11 +68,12 @@ class REINFORCEAgent(BaseAgent):
         actions = np.array(self.ep_actions)
         probs = self.policy_net.forward(states, training=True)
 
-        # Policy gradient: -d/d(theta) sum_t [advantage_t * log pi(a_t|s_t)]
+        # Policy gradient: minimize L = -sum_t [advantage_t * log pi(a_t|s_t)]
+        # dL/dz = advantage * (p - e_a) for softmax with "externally handled" derivative
         grad = probs.copy()  # start from probs
         for i in range(len(actions)):
-            grad[i, actions[i]] -= 1.0  # d softmax cross-entropy
-            grad[i] *= -advantages[i]   # negative because we maximize
+            grad[i, actions[i]] -= 1.0  # (p - e_a)
+            grad[i] *= advantages[i]    # advantage * (p - e_a) = dL/dz
         self.policy_net.backward(grad)
 
         self.ep_states, self.ep_actions, self.ep_rewards = [], [], []

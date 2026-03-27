@@ -43,6 +43,7 @@ class Trainer:
             steps = 0
             t_start = time.time()
 
+            done = False
             for step in range(self.max_steps):
                 valid = self.env.get_valid_actions(state)
                 if len(valid) == 0:
@@ -50,6 +51,12 @@ class Trainer:
                 encoded = self._encode(state)
                 action = self.agent.select_action(encoded, valid)
                 next_state, reward, done, info = self.env.step(action)
+
+                # Force done on last step (timeout) so episode-based agents
+                # (REINFORCE, PPO, A2C, AlphaZero, MuZero) trigger their update
+                if step == self.max_steps - 1 and not done:
+                    done = True
+
                 self.agent.learn(encoded, action, reward,
                                  self._encode(next_state), done)
                 state = next_state

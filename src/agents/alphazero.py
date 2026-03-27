@@ -54,11 +54,15 @@ class AlphaZeroAgent(BaseAgent):
         self.buffer: List[Tuple] = []
         self.buffer_size = buffer_size
         self.current_episode_data: List[Tuple] = []
+        self.current_episode_rewards: List[float] = []
         self._env = None
+        self._is_two_player = False
         self.train_batch_size = 64
+        self.gamma = 0.99
 
     def set_env(self, env):
         self._env = env
+        self._is_two_player = getattr(env, 'is_two_player', False)
 
     def _nn_predict(self, state_flat: np.ndarray):
         """Get policy and value from network."""
@@ -126,7 +130,8 @@ class AlphaZeroAgent(BaseAgent):
             while node is not None:
                 node.visits += 1
                 node.value_sum += value
-                value = -value  # flip for 2-player
+                if self._is_two_player:
+                    value = -value  # flip for 2-player only
                 node = node.parent
 
         # Build MCTS policy from visit counts
@@ -153,12 +158,35 @@ class AlphaZeroAgent(BaseAgent):
     def learn(self, state, action, reward, next_state, done):
         if not self.training:
             return
+        self.current_episode_rewards.append(reward)
         if done:
-            for s, pi in self.current_episode_data:
-                self.buffer.append((s, pi, reward))
-                if len(self.buffer) > self.buffer_size:
-                    self.buffer.pop(0)
+            # Compute discounted returns for value targets
+            rewards = self.current_episode_rewards
+            if self._is_two_player:
+                # For games: all positions get the final outcome
+                value_target = reward
+                for s, pi in self.current_episode_data:
+                    self.buffer.append((s, pi, value_target))
+                    if len(self.buffer) > self.buffer_size:
+                        self.buffer.pop(0)
+            else:
+                # For single-player: compute discounted returns per step
+                T = len(rewards)
+                returns = np.zeros(T)
+                G = 0.0
+                for t in reversed(range(T)):
+                    G = rewards[t] + self.gamma * G
+                    returns[t] = G
+                # Normalize returns to [-1, 1] range for tanh value head
+                max_abs = max(abs(returns.max()), abs(returns.min()), 1e-8)
+                returns_norm = np.clip(returns / max_abs, -1, 1)
+                for i, (s, pi) in enumerate(self.current_episode_data):
+                    if i < T:
+                        self.buffer.append((s, pi, float(returns_norm[i])))
+                        if len(self.buffer) > self.buffer_size:
+                            self.buffer.pop(0)
             self.current_episode_data = []
+            self.current_episode_rewards = []
             if len(self.buffer) >= self.train_batch_size:
                 self._train_network()
 

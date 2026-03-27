@@ -116,17 +116,17 @@ class PPOAgent(BaseAgent):
             for i in range(len(actions)):
                 # Use surr1 if it's the min, otherwise clipped has zero gradient
                 if surr1[i] <= surr2[i]:
-                    weight = -advantages[i]
+                    weight = advantages[i]
                 else:
                     # Clipped: gradient is zero if ratio is outside [1-eps, 1+eps]
                     if 1 - self.clip_ratio <= ratio[i] <= 1 + self.clip_ratio:
-                        weight = -advantages[i]
+                        weight = advantages[i]
                     else:
                         weight = 0.0
                 actor_grad[i, actions[i]] -= 1.0
-                actor_grad[i] *= weight
-                # Entropy gradient (encourage exploration)
-                actor_grad[i] -= self.entropy_coef * (-np.log(new_probs[i] + 1e-8) - 1)
+                actor_grad[i] *= weight  # correct sign: weight * (p - e_a)
+                # Entropy gradient (encourage exploration - subtract to minimize)
+                actor_grad[i] += self.entropy_coef * (np.log(new_probs[i] + 1e-8) + 1)
             self.actor.backward(actor_grad)
 
             # -- Critic update --

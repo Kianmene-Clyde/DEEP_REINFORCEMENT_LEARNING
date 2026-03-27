@@ -46,6 +46,12 @@ def get_agents(env_name, obs_size, action_size):
         agents['TabularQL'] = TabularQLearningAgent(
             obs_size, action_size, learning_rate=0.1, epsilon=0.3, epsilon_decay=0.999)
 
+    # Env-adaptive learning rates for policy gradient methods
+    # Sparse reward envs (LineWorld/GridWorld) need higher lr
+    pg_lr = 0.005 if env_name in ('LineWorld', 'GridWorld') else 0.001
+    ppo_lr = 0.003 if env_name in ('LineWorld', 'GridWorld') else 0.0003
+    h_small = [64] if env_name == 'LineWorld' else [128, 128]
+
     # Deep agents
     agents['DQN'] = DeepQLearningAgent(
         obs_size, action_size, learning_rate=0.001, epsilon_decay=0.998)
@@ -56,15 +62,15 @@ def get_agents(env_name, obs_size, action_size):
     agents['DDQN+PER'] = DDQNWithPERAgent(
         obs_size, action_size, learning_rate=0.001, epsilon_decay=0.998)
     agents['REINFORCE'] = REINFORCEAgent(
-        obs_size, action_size, learning_rate=0.001)
+        obs_size, action_size, learning_rate=pg_lr, hidden_layers=h_small)
     agents['REINFORCE+Mean'] = REINFORCEMeanBaselineAgent(
-        obs_size, action_size, learning_rate=0.001)
+        obs_size, action_size, learning_rate=pg_lr, hidden_layers=h_small)
     agents['REINFORCE+Critic'] = REINFORCECriticBaselineAgent(
-        obs_size, action_size, learning_rate=0.001)
+        obs_size, action_size, learning_rate=pg_lr, hidden_layers=h_small)
     agents['PPO'] = PPOAgent(
-        obs_size, action_size, learning_rate=0.0003)
+        obs_size, action_size, learning_rate=ppo_lr, hidden_layers=h_small)
     agents['A2C'] = A2CAgent(
-        obs_size, action_size, learning_rate=0.001)
+        obs_size, action_size, learning_rate=pg_lr, hidden_layers=h_small)
 
     # Planning agents (slower but need fewer episodes)
     agents['RandomRollout'] = RandomRolloutAgent(

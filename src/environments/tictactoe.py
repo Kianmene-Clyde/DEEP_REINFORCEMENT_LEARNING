@@ -9,6 +9,8 @@ from .base_env import BaseEnvironment
 
 
 class TicTacToe(BaseEnvironment):
+    is_two_player = True
+
     def __init__(self, opponent_type: str = "random", seed: Optional[int] = None):
         self.opponent_type = opponent_type
         self.board = np.zeros(9, dtype=np.float32)

@@ -7,6 +7,9 @@ from typing import Tuple, Dict, Any, Optional
 class BaseEnvironment(ABC):
     """Abstract base class for RL environments."""
     
+    # Override in subclasses for adversarial environments
+    is_two_player: bool = False
+
     def __init__(self, seed: Optional[int] = None):
         self.seed_value = seed
         if seed is not None:

@@ -79,13 +79,14 @@ class A2CAgent(BaseAgent):
         cgrad[:, 0] = values - returns
         self.critic.backward(cgrad)
 
-        # Actor loss
+        # Actor loss: L = -advantage * log(pi(a|s)) - entropy_coef * H(pi)
         probs = self.actor.forward(states, training=True)
         agrad = probs.copy()
         for i in range(len(actions)):
             agrad[i, actions[i]] -= 1.0
-            agrad[i] *= -advantages[i]
-            agrad[i] -= self.entropy_coef * (-np.log(probs[i] + 1e-8) - 1)
+            agrad[i] *= advantages[i]   # correct sign: adv * (p - e_a)
+            # Entropy gradient: encourage exploration (subtract because we minimize)
+            agrad[i] += self.entropy_coef * (np.log(probs[i] + 1e-8) + 1)
         self.actor.backward(agrad)
 
         self.ep_states, self.ep_actions, self.ep_rewards = [], [], []

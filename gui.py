@@ -15,11 +15,13 @@ Usage:
 import sys, os, json, copy, time
 import numpy as np
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
+from agents import RandomAgent, DeepQLearningAgent, TabularQLearningAgent, \
+    DDQNWithERAgent, DoubleDeepQLearningAgent, REINFORCEAgent, DDQNWithPERAgent, REINFORCEMeanBaselineAgent, \
+    REINFORCECriticBaselineAgent, PPOAgent, StochasticMuZeroAgent, AlphaZeroAgent, ExpertApprenticeAgent, MCTSAgent, \
+    RandomRolloutAgent, A2CAgent, MuZeroAgent
+from environments import LineWorld, GridWorld, TicTacToe, Quarto
 
 from flask import Flask, render_template_string, jsonify, request
-from environments import LineWorld, GridWorld, TicTacToe, Quarto
-from agents import *
 
 app = Flask(__name__)
 
@@ -69,10 +71,10 @@ def create_agent(name, env):
 
     # TabularQL needs the true state space size (not the vector dimension)
     tabular_state_sizes = {
-        'LineWorld': 10,        # 10 positions
-        'GridWorld': 25,        # 5x5 grid
-        'TicTacToe': 3**9,     # 19683 possible board configs
-        'Quarto': obs_size,    # too large but won't crash
+        'LineWorld': 10,  # 10 positions
+        'GridWorld': 25,  # 5x5 grid
+        'TicTacToe': 3 ** 9,  # 19683 possible board configs
+        'Quarto': obs_size,  # too large but won't crash
     }
     tab_size = tabular_state_sizes.get(game_state['env_name'], obs_size)
 
