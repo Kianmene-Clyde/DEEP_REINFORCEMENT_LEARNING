@@ -51,12 +51,12 @@ class LineWorld(BaseEnvironment):
 
     def render(self) -> None:
         line = ['_'] * self.length
-        line[self.position] = 'A'
+        line[self.position] = 'G'
         print(''.join(line))
 
     @property
     def observation_space(self) -> int:
-        return self.length  # vector length
+        return self.length
 
     @property
     def action_space(self) -> int:

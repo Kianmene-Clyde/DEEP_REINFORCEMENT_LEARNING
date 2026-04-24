@@ -1,13 +1,12 @@
-"""Base Environment class for all environments."""
 from abc import ABC, abstractmethod
 import numpy as np
 from typing import Tuple, Dict, Any, Optional
 
 
 class BaseEnvironment(ABC):
-    """Abstract base class for RL environments."""
-    
-    # Override in subclasses for adversarial environments
+    """Classe abstraite pour les autres environnements"""
+
+    # on le remplace dans les sous-classes pour les environnements adversaires
     is_two_player: bool = False
 
     def __init__(self, seed: Optional[int] = None):
@@ -30,7 +29,6 @@ class BaseEnvironment(ABC):
     
     @abstractmethod
     def _get_state(self) -> Any:
-        """Return current state (needed by MCTS/Rollout for deep copy)."""
         pass
 
     @property

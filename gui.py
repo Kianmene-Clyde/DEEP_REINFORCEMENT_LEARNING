@@ -15,6 +15,8 @@ Usage:
 import sys, os, json, copy, time
 import numpy as np
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
+
 from agents import RandomAgent, DeepQLearningAgent, TabularQLearningAgent, \
     DDQNWithERAgent, DoubleDeepQLearningAgent, REINFORCEAgent, DDQNWithPERAgent, REINFORCEMeanBaselineAgent, \
     REINFORCECriticBaselineAgent, PPOAgent, StochasticMuZeroAgent, AlphaZeroAgent, ExpertApprenticeAgent, MCTSAgent, \
@@ -22,6 +24,7 @@ from agents import RandomAgent, DeepQLearningAgent, TabularQLearningAgent, \
 from environments import LineWorld, GridWorld, TicTacToe, Quarto
 
 from flask import Flask, render_template_string, jsonify, request
+
 
 app = Flask(__name__)
 
@@ -71,10 +74,10 @@ def create_agent(name, env):
 
     # TabularQL needs the true state space size (not the vector dimension)
     tabular_state_sizes = {
-        'LineWorld': 10,  # 10 positions
-        'GridWorld': 25,  # 5x5 grid
-        'TicTacToe': 3 ** 9,  # 19683 possible board configs
-        'Quarto': obs_size,  # too large but won't crash
+        'LineWorld': 10,        # 10 positions
+        'GridWorld': 25,        # 5x5 grid
+        'TicTacToe': 3**9,     # 19683 possible board configs
+        'Quarto': obs_size,    # too large but won't crash
     }
     tab_size = tabular_state_sizes.get(game_state['env_name'], obs_size)
 
@@ -98,6 +101,7 @@ def create_agent(name, env):
         'MuZero_Stochastic': lambda: StochasticMuZeroAgent(obs_size, act_size, num_simulations=30),
         'Human': lambda: None,  # No agent for human mode
     }
+
     agent = constructors[name]()
     if agent is not None:
         agent.set_training_mode(False)
@@ -123,7 +127,7 @@ def render_state_html(env, env_name, state):
         return render_tictactoe(env, state)
     elif env_name == 'Quarto':
         return render_quarto(env, state)
-    return '<p>Unknown environment</p>'
+    return '<p>Environnement Inconnu</p>'
 
 
 def render_line_world(env, state):
@@ -744,6 +748,6 @@ HTML_TEMPLATE = """
 """
 
 if __name__ == '__main__':
-    print('Starting DRL GUI on http://localhost:5000')
-    print('Press Ctrl+C to stop')
+    print('Démarrage de la GUI : http://localhost:5000')
+    print('Ctrl+C pour arrêter')
     app.run(debug=False, host='0.0.0.0', port=5000)
