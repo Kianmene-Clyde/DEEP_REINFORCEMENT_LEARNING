@@ -1,17 +1,3 @@
-#!/usr/bin/env python3
-"""
-gui.py - Flask web GUI for DRL project.
-
-Features:
-- Watch any agent play any environment
-- Play as a human against the AI
-- View game state with visual rendering
-- Select trained models
-
-Usage:
-    python gui.py
-    Then open http://localhost:5000
-"""
 import sys, os, json, copy, time
 import numpy as np
 

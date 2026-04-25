@@ -1,11 +1,11 @@
-"""Base agent interface."""
+"""Interface de l'aegnt basique."""
 from abc import ABC, abstractmethod
 import numpy as np
 from typing import Optional, Any
 
 
 class BaseAgent(ABC):
-    """Abstract base class for all RL agents."""
+    """classe abstraite pour tous nos agents"""
 
     def __init__(self, name: str, action_space_size: int, input_size: Any = None):
         self.name = name

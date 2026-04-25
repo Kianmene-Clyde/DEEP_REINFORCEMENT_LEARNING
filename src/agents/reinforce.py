@@ -6,7 +6,7 @@ from .base_agent import BaseAgent
 from .utils import mask_and_normalize as _safe_probs
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from nn.model import NeuralNetwork
+from neural_network.model import NeuralNetwork
 
 
 class REINFORCEAgent(BaseAgent):

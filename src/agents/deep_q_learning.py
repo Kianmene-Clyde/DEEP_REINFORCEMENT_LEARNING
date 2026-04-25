@@ -1,16 +1,16 @@
-"""Deep Q-Learning (DQN) agent using numpy neural network."""
+"""Deep Q-Learning (DQN)"""
 import numpy as np
 import os
 from typing import Optional, Any
 from .base_agent import BaseAgent
 import sys, pathlib
+
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from nn.model import NeuralNetwork
+from neural_network.model import NeuralNetwork
 from training.replay_buffer import ReplayBuffer
 
 
 class DeepQLearningAgent(BaseAgent):
-    """DQN with target network and experience replay."""
 
     def __init__(self, input_size: int, action_space_size: int,
                  learning_rate: float = 0.001, discount_factor: float = 0.99,
@@ -18,6 +18,7 @@ class DeepQLearningAgent(BaseAgent):
                  epsilon_min: float = 0.01, batch_size: int = 64,
                  buffer_size: int = 50000, target_update: int = 100,
                  hidden_layers=None, seed: Optional[int] = None, **kwargs):
+
         super().__init__("DeepQLearning", action_space_size, input_size)
         if seed is not None:
             np.random.seed(seed)
@@ -51,9 +52,7 @@ class DeepQLearningAgent(BaseAgent):
     def learn(self, state, action, reward, next_state, done):
         if not self.training:
             return
-        self.buffer.push(np.asarray(state, dtype=np.float32),
-                         action, reward,
-                         np.asarray(next_state, dtype=np.float32),
+        self.buffer.push(np.asarray(state, dtype=np.float32), action, reward, np.asarray(next_state, dtype=np.float32),
                          float(done))
         self.step_count += 1
         if len(self.buffer) < self.batch_size:
@@ -65,14 +64,14 @@ class DeepQLearningAgent(BaseAgent):
 
     def _train_step(self):
         states, actions, rewards, next_states, dones = self.buffer.sample(self.batch_size)
-        # Current Q
+        # Table Q courant
         q_vals = self.q_net.forward(states, training=True)
-        # Target Q
+        # Table Q cible
         q_next = self.target_net.predict(next_states)
         targets = q_vals.copy()
         for i in range(self.batch_size):
             targets[i, actions[i]] = rewards[i] + (1 - dones[i]) * self.gamma * np.max(q_next[i])
-        # Loss gradient: dL/dQ = (Q - target) for taken action, 0 otherwise
+        # calcule du gradient de perte
         grad = np.zeros_like(q_vals)
         for i in range(self.batch_size):
             grad[i, actions[i]] = q_vals[i, actions[i]] - targets[i, actions[i]]

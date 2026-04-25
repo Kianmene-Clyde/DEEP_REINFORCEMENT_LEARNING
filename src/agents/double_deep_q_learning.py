@@ -1,21 +1,17 @@
-"""Double Deep Q-Learning variants.
-
-- DoubleDeepQLearningAgent: online updates (no replay buffer)
-- DDQNWithERAgent: + experience replay
-- DDQNWithPERAgent: + prioritized experience replay
-"""
+"""Double Q-Learning profond"""
 import numpy as np
 import os, pickle
 from typing import Optional, Any
 from .base_agent import BaseAgent
 import sys, pathlib
+
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from nn.model import NeuralNetwork
+from neural_network.model import NeuralNetwork
 from training.replay_buffer import ReplayBuffer, PrioritizedReplayBuffer
 
 
 class DoubleDeepQLearningAgent(BaseAgent):
-    """Double DQN with online updates (no replay buffer)."""
+    """Double DQN sans replay buffer"""
 
     def __init__(self, input_size: int, action_space_size: int,
                  learning_rate: float = 0.001, discount_factor: float = 0.99,
@@ -57,16 +53,16 @@ class DoubleDeepQLearningAgent(BaseAgent):
         s = np.atleast_2d(np.asarray(state, dtype=np.float32))
         ns = np.atleast_2d(np.asarray(next_state, dtype=np.float32))
 
-        # Forward with training=True to cache for backward
+        # Propagation avant avec training=True pour mettre en cache pour la rétropropagation
         q_vals = self.q_net.forward(s, training=True)
-        # Use separate predict calls (no cache needed)
+        # Utiliser des appels predict séparés (pas de cache nécessaire)
         best_a = int(np.argmax(self.q_net.predict(ns)[0]))
         q_target_val = self.target_net.predict(ns)[0, best_a]
         target = reward + (0 if done else self.gamma * q_target_val)
 
         grad = np.zeros_like(q_vals)
         grad[0, action] = q_vals[0, action] - target
-        # backward uses the cache from forward(..., training=True) above
+        # backward utilise le cache de forward(..., training=True) ci-dessus
         self.q_net.backward(grad)
 
         self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)
@@ -89,7 +85,7 @@ class DoubleDeepQLearningAgent(BaseAgent):
 
 
 class DDQNWithERAgent(BaseAgent):
-    """Double DQN + Experience Replay."""
+    """Double DQN avec experience replay."""
 
     def __init__(self, input_size: int, action_space_size: int,
                  learning_rate: float = 0.001, discount_factor: float = 0.99,
@@ -167,7 +163,7 @@ class DDQNWithERAgent(BaseAgent):
 
 
 class DDQNWithPERAgent(BaseAgent):
-    """Double DQN + Prioritized Experience Replay."""
+    """Double DQN avec Prioritized Experience Replay."""
 
     def __init__(self, input_size: int, action_space_size: int,
                  learning_rate: float = 0.001, discount_factor: float = 0.99,

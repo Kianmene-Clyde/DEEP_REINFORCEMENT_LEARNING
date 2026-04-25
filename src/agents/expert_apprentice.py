@@ -1,9 +1,4 @@
-"""Expert Apprentice: learn a policy by imitating an expert (e.g. MCTS).
-
-The expert (e.g. MCTS or a heuristic) generates (state, action) pairs,
-and the apprentice neural network learns to imitate these decisions
-via supervised learning (cross-entropy loss on action probabilities).
-"""
+"""Expert Apprenti"""
 import numpy as np
 import os, copy
 from typing import Optional, Any
@@ -11,17 +6,12 @@ from .base_agent import BaseAgent
 from .utils import mask_and_normalize as _safe_probs
 from .mcts import MCTSAgent
 import sys, pathlib
+
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from nn.model import NeuralNetwork
+from neural_network.model import NeuralNetwork
 
 
 class ExpertApprenticeAgent(BaseAgent):
-    """Expert Apprentice (Imitation Learning / DAgger-like).
-    
-    Phase 1 (expert): MCTS generates expert moves
-    Phase 2 (apprentice): Neural net trained on expert data via cross-entropy
-    After enough data, the apprentice can play on its own.
-    """
 
     def __init__(self, input_size: int, action_space_size: int,
                  learning_rate: float = 0.001,
@@ -42,7 +32,7 @@ class ExpertApprenticeAgent(BaseAgent):
         self.data_states = []
         self.data_actions = []
         self._env = None
-        self._use_expert = True  # Start with expert, switch to apprentice
+        self._use_expert = True  # Commencer avec l'expert, puis passer à l'apprenti
 
     def set_env(self, env):
         self._env = env
@@ -50,14 +40,14 @@ class ExpertApprenticeAgent(BaseAgent):
 
     def select_action(self, state: Any, valid_actions: Optional[np.ndarray] = None) -> int:
         if self.training and self._use_expert and self._env is not None:
-            # Use MCTS expert and collect data
+            # Utiliser l'expert MCTS et collecter les données
             self.expert.set_env(self._env)
             action = self.expert.select_action(state, valid_actions)
             self.data_states.append(np.asarray(state, dtype=np.float32).flatten())
             self.data_actions.append(action)
             return action
         else:
-            # Use apprentice network
+            # Utiliser le réseau de l'apprenti
             probs = self.policy_net.predict(np.atleast_2d(state))[0]
             probs = _safe_probs(probs, valid_actions, self.action_space_size)
             if self.training:
@@ -71,23 +61,23 @@ class ExpertApprenticeAgent(BaseAgent):
             self._train_apprentice()
 
     def _train_apprentice(self):
-        """Train the apprentice on collected expert data."""
+        """Entraîner l'apprenti sur les données collectées par l'expert."""
         n = len(self.data_states)
         if n < self.batch_size:
             return
-        # Sample a batch
+        # Échantillonner un lot
         indices = np.random.choice(n, min(n, self.batch_size * 4), replace=False)
         states = np.array([self.data_states[i] for i in indices], dtype=np.float32)
         actions = np.array([self.data_actions[i] for i in indices])
 
-        # Cross-entropy loss
+        # Perte d'entropie croisée
         probs = self.policy_net.forward(states, training=True)
         grad = probs.copy()
         for i in range(len(actions)):
-            grad[i, actions[i]] -= 1.0  # d/d_logit cross_entropy(target, softmax)
+            grad[i, actions[i]] -= 1.0
         self.policy_net.backward(grad)
 
-        # After enough training data, start mixing apprentice decisions
+        # Après avoir collecté assez de données d'entraînement, commencer à mélanger les décisions de l'apprenti
         if n > 1000:
             self._use_expert = (np.random.random() < max(0.1, 1.0 - n / 5000))
 
@@ -101,4 +91,4 @@ class ExpertApprenticeAgent(BaseAgent):
 
     def load(self, filepath: str):
         self.policy_net = NeuralNetwork.load(filepath + '_policy.pkl')
-        self._use_expert = False  # After loading, use apprentice
+        self._use_expert = False  # Après le chargement, utiliser l'apprenti

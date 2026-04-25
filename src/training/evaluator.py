@@ -42,10 +42,11 @@ class Evaluator:
             lengths.append(steps)
             step_times.append(elapsed / max(steps, 1) * 1000)
 
-            # Track wins/losses for games
-            if total_r > 0.5:
+            # Track wins/losses
+            # Use > 0 threshold: any positive total reward = win
+            if total_r > 0:
                 wins += 1
-            elif total_r < -0.5:
+            elif total_r < 0:
                 losses += 1
             else:
                 draws += 1

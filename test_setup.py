@@ -82,7 +82,7 @@ except ImportError as e:
     print(f"  ✗ Erreur import agents : {e}")
 
 try:
-    from nn.model import NeuralNetwork
+    from neural_network.model import NeuralNetwork
     print("  ✓ NeuralNetwork importé")
 except ImportError as e:
     errors.append(f"Import nn : {e}")

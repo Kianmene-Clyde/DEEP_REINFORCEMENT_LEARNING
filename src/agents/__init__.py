@@ -1,4 +1,4 @@
-"""Agents package - all RL algorithms."""
+"""Package d'agents"""
 from .base_agent import BaseAgent
 from .random_agent import RandomAgent
 from .tabular_q_learning import TabularQLearningAgent
