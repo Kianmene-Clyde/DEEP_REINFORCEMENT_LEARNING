@@ -17,10 +17,6 @@ from .ppo import PPOAgent
 from .a2c import A2CAgent
 from .random_rollout import RandomRolloutAgent
 from .mcts import MCTSAgent
-from .expert_apprentice import ExpertApprenticeAgent
-from .alphazero import AlphaZeroAgent
-from .muzero import MuZeroAgent
-from .muzero_stochastic import StochasticMuZeroAgent
 
 __all__ = [
     'BaseAgent',
@@ -36,9 +32,4 @@ __all__ = [
     'PPOAgent',
     'A2CAgent',
     'RandomRolloutAgent',
-    'MCTSAgent',
-    'ExpertApprenticeAgent',
-    'AlphaZeroAgent',
-    'MuZeroAgent',
-    'StochasticMuZeroAgent',
-]
+    'MCTSAgent',]

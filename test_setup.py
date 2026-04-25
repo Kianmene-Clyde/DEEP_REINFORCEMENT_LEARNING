@@ -1,14 +1,3 @@
-#!/usr/bin/env python3
-"""
-test_setup.py — Lance ce script en premier dans PyCharm pour vérifier
-que tout fonctionne. Corrige les erreurs une par une si besoin.
-
-Usage dans PyCharm :
-    Clic droit sur ce fichier → Run 'test_setup'
-    
-Ou dans le terminal PyCharm :
-    python test_setup.py
-"""
 import sys
 import os
 import time
@@ -64,6 +53,7 @@ print("=" * 60)
 
 try:
     from environments import LineWorld, GridWorld, TicTacToe, Quarto
+
     print("  ✓ Environnements importés (LineWorld, GridWorld, TicTacToe, Quarto)")
 except ImportError as e:
     errors.append(f"Import environments : {e}")
@@ -73,16 +63,16 @@ try:
     from agents import (RandomAgent, TabularQLearningAgent, DeepQLearningAgent,
                         DoubleDeepQLearningAgent, DDQNWithERAgent, DDQNWithPERAgent,
                         REINFORCEAgent, REINFORCEMeanBaselineAgent, REINFORCECriticBaselineAgent,
-                        PPOAgent, A2CAgent, RandomRolloutAgent, MCTSAgent,
-                        ExpertApprenticeAgent, AlphaZeroAgent, MuZeroAgent,
-                        StochasticMuZeroAgent)
-    print("  ✓ 17 classes d'agents importées")
+                        PPOAgent, A2CAgent, RandomRolloutAgent, MCTSAgent)
+
+    print("  ✓ 13 classes d'agents importées")
 except ImportError as e:
     errors.append(f"Import agents : {e}")
     print(f"  ✗ Erreur import agents : {e}")
 
 try:
     from neural_network.model import NeuralNetwork
+
     print("  ✓ NeuralNetwork importé")
 except ImportError as e:
     errors.append(f"Import nn : {e}")
@@ -93,6 +83,7 @@ try:
     from training.evaluator import Evaluator
     from training.metrics import Metrics
     from training.replay_buffer import ReplayBuffer, PrioritizedReplayBuffer
+
     print("  ✓ Training infrastructure importée")
 except ImportError as e:
     errors.append(f"Import training : {e}")
@@ -100,6 +91,7 @@ except ImportError as e:
 
 try:
     from utils.plotting import plot_learning_curves, plot_comparison
+
     print("  ✓ Plotting importé")
 except ImportError as e:
     errors.append(f"Import plotting : {e}")
@@ -163,10 +155,6 @@ agents_test = [
     ('A2C', lambda: A2CAgent(obs, act)),
     ('RandomRollout', lambda: RandomRolloutAgent(act, num_rollouts=3, max_rollout_depth=10)),
     ('MCTS', lambda: MCTSAgent(act, num_simulations=5, max_rollout_depth=10)),
-    ('ExpertApprentice', lambda: ExpertApprenticeAgent(obs, act, expert_simulations=5, hidden_layers=[32])),
-    ('AlphaZero', lambda: AlphaZeroAgent(obs, act, num_simulations=5, hidden_layers=[32])),
-    ('MuZero', lambda: MuZeroAgent(obs, act, num_simulations=5, latent_dim=16, hidden_layers=[32])),
-    ('MuZero_Stochastic', lambda: StochasticMuZeroAgent(obs, act, num_simulations=5, latent_dim=16, hidden_layers=[32])),
 ]
 
 passed, failed = 0, 0
@@ -189,11 +177,15 @@ print("\n" + "=" * 60)
 print("ÉTAPE 5 : Agents sur TicTacToe & Quarto")
 print("=" * 60)
 
-for env_name, env_cls, kwargs, obs_size in [
-    ('TicTacToe', TicTacToe, {'opponent_type': 'random'}, 9),
-    ('Quarto', Quarto, {'opponent_type': 'random'}, 33),
+for env_name, env_cls, kwargs in [
+    ('TicTacToe', TicTacToe, {'opponent_type': 'random'}),
+    ('Quarto', Quarto, {'opponent_type': 'random'}),
 ]:
     env = env_cls(**kwargs)
+    obs_size = env.observation_space
+    if isinstance(obs_size, tuple):
+        obs_size = int(np.prod(obs_size))
+
     for agent_name, create_fn in [
         ('DQN', lambda o, a: DeepQLearningAgent(o, a, epsilon_decay=0.99)),
         ('PPO', lambda o, a: PPOAgent(o, a)),
@@ -247,8 +239,10 @@ print("  ✓ PPO save/load")
 for f in ['models/test_tabularql.pkl', 'models/test_dqn_qnet.pkl',
           'models/test_dqn_config.pkl', 'models/test_ppo_actor.pkl',
           'models/test_ppo_critic.pkl']:
-    try: os.remove(f)
-    except: pass
+    try:
+        os.remove(f)
+    except:
+        pass
 
 # ─── ÉTAPE 7 : Tester les métriques et plotting ───
 print("\n" + "=" * 60)
@@ -266,6 +260,7 @@ print("  ✓ Metrics save/load")
 
 try:
     import matplotlib
+
     matplotlib.use('Agg')
     plot_learning_curves({'Test': m}, 'Test', 'results')
     print("  ✓ Plotting fonctionne")
@@ -283,22 +278,23 @@ print("=" * 60)
 try:
     sys.path.insert(0, '.')
     import gui
+
     with gui.app.test_client() as client:
         r = client.get('/')
         assert r.status_code == 200
         print("  ✓ Page d'accueil charge")
-        
+
         r = client.post('/api/new_game',
                         json={'env': 'TicTacToe', 'agent': 'Random'})
         data = r.get_json()
         assert 'board' in data
         print("  ✓ Nouvelle partie TicTacToe + Random")
-        
+
         r = client.post('/api/step')
         data = r.get_json()
         assert 'action' in data
         print("  ✓ Step agent fonctionne")
-        
+
         r = client.post('/api/new_game',
                         json={'env': 'TicTacToe', 'agent': 'Human'})
         data = r.get_json()

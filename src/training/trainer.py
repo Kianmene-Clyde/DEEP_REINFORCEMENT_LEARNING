@@ -53,7 +53,7 @@ class Trainer:
                 next_state, reward, done, info = self.env.step(action)
 
                 # Force done on last step (timeout) so episode-based agents
-                # (REINFORCE, PPO, A2C, AlphaZero, MuZero) trigger their update
+                # (REINFORCE, PPO, A2C) trigger their update
                 if step == self.max_steps - 1 and not done:
                     done = True
 

@@ -1,670 +1,1114 @@
 {
   "LineWorld": {
     "Random": {
-      "avg_reward": -10.739999999999998,
-      "std_reward": 7.682929128919523,
-      "avg_length": 114.55,
-      "avg_step_time_ms": 0.019810553230239773,
+      "avg_reward": -6.369999999999996,
+      "std_reward": 5.4184961013181505,
+      "avg_length": 73.6,
+      "avg_step_time_ms": 0.013639657721872594,
       "win_rate": 0.0,
       "loss_rate": 1.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "baseline",
+      "hyperparams": {},
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.1359090805053711,
+      "seed": 43,
+      "selection_score": -6.524198508488049
     },
     "TabularQL": {
       "avg_reward": 0.2000000000000001,
       "std_reward": 2.7755575615628914e-17,
       "avg_length": 9.0,
-      "avg_step_time_ms": 0.022494792938232422,
-      "win_rate": 0.0,
+      "avg_step_time_ms": 0.01666280958387587,
+      "win_rate": 1.0,
       "loss_rate": 0.0,
-      "draw_rate": 1.0,
-      "num_episodes": 20
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "tabular_value_based",
+      "hyperparams": {
+        "learning_rate": 0.1,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.03745770454406738,
+      "seed": 43,
+      "selection_score": 0.44998347449190795
     },
     "DQN": {
       "avg_reward": 0.2000000000000001,
       "std_reward": 2.7755575615628914e-17,
       "avg_length": 9.0,
-      "avg_step_time_ms": 0.04737642076280383,
-      "win_rate": 0.0,
+      "avg_step_time_ms": 0.039014551374647356,
+      "win_rate": 1.0,
       "loss_rate": 0.0,
-      "draw_rate": 1.0,
-      "num_episodes": 20
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 2.936422824859619,
+      "seed": 43,
+      "selection_score": 0.44996172728280814
     },
     "DoubleDQN": {
       "avg_reward": 0.2000000000000001,
       "std_reward": 2.7755575615628914e-17,
       "avg_length": 9.0,
-      "avg_step_time_ms": 0.04753404193454318,
-      "win_rate": 0.0,
+      "avg_step_time_ms": 0.039001305898030594,
+      "win_rate": 1.0,
       "loss_rate": 0.0,
-      "draw_rate": 1.0,
-      "num_episodes": 20
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 1.015883207321167,
+      "seed": 43,
+      "selection_score": 0.44996174003100403
     },
     "DDQN+ER": {
       "avg_reward": 0.2000000000000001,
       "std_reward": 2.7755575615628914e-17,
       "avg_length": 9.0,
-      "avg_step_time_ms": 0.0388238165113661,
-      "win_rate": 0.0,
+      "avg_step_time_ms": 0.033549467722574874,
+      "win_rate": 1.0,
       "loss_rate": 0.0,
-      "draw_rate": 1.0,
-      "num_episodes": 20
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 2.2935895919799805,
+      "seed": 43,
+      "selection_score": 0.4499670010367363
     },
     "DDQN+PER": {
       "avg_reward": 0.2000000000000001,
       "std_reward": 2.7755575615628914e-17,
       "avg_length": 9.0,
-      "avg_step_time_ms": 0.034589237636990025,
-      "win_rate": 0.0,
+      "avg_step_time_ms": 0.038765536414252386,
+      "win_rate": 1.0,
       "loss_rate": 0.0,
-      "draw_rate": 1.0,
-      "num_episodes": 20
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 3.183849334716797,
+      "seed": 43,
+      "selection_score": 0.4499619669760876
     },
     "REINFORCE": {
       "avg_reward": -20.00000000000001,
       "std_reward": 3.552713678800501e-15,
       "avg_length": 200.0,
-      "avg_step_time_ms": 0.05056065320968628,
+      "avg_step_time_ms": 0.04264509677886963,
       "win_rate": 0.0,
       "loss_rate": 1.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.4747037887573242,
+      "seed": 43,
+      "selection_score": -20.10004176084658
     },
     "REINFORCE+Mean": {
       "avg_reward": -20.00000000000001,
       "std_reward": 3.552713678800501e-15,
       "avg_length": 200.0,
-      "avg_step_time_ms": 0.05466282367706299,
+      "avg_step_time_ms": 0.04003530740737915,
       "win_rate": 0.0,
       "loss_rate": 1.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.4810044765472412,
+      "seed": 43,
+      "selection_score": -20.10003925466202
     },
     "REINFORCE+Critic": {
-      "avg_reward": -20.00000000000001,
-      "std_reward": 3.552713678800501e-15,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.05886441469192505,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "PPO": {
-      "avg_reward": -20.00000000000001,
-      "std_reward": 3.552713678800501e-15,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.0744592547416687,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "A2C": {
-      "avg_reward": -20.00000000000001,
-      "std_reward": 3.552713678800501e-15,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.051641762256622314,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "RandomRollout": {
-      "avg_reward": -0.14500000000000005,
-      "std_reward": 0.44212554778026597,
-      "avg_length": 12.45,
-      "avg_step_time_ms": 15.647716579999102,
-      "win_rate": 0.0,
-      "loss_rate": 0.2,
-      "draw_rate": 0.8,
-      "num_episodes": 20
-    },
-    "MCTS": {
-      "avg_reward": -0.6250000000000002,
-      "std_reward": 0.4559331091289601,
-      "avg_length": 17.25,
-      "avg_step_time_ms": 13.744359766106337,
-      "win_rate": 0.0,
-      "loss_rate": 0.65,
-      "draw_rate": 0.35,
-      "num_episodes": 20
-    },
-    "ExpertApprentice": {
       "avg_reward": 0.2000000000000001,
       "std_reward": 2.7755575615628914e-17,
       "avg_length": 9.0,
-      "avg_step_time_ms": 0.042825274997287326,
-      "win_rate": 0.0,
+      "avg_step_time_ms": 0.0443630748324924,
+      "win_rate": 1.0,
       "loss_rate": 0.0,
-      "draw_rate": 1.0,
-      "num_episodes": 20
-    },
-    "AlphaZero": {
-      "avg_reward": -20.00000000000001,
-      "std_reward": 3.552713678800501e-15,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.05329716205596924,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.17514991760253906,
+      "seed": 43,
+      "selection_score": 0.4499565927981705
     },
-    "MuZero": {
-      "avg_reward": -20.00000000000001,
-      "std_reward": 3.552713678800501e-15,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 1.6572813987731934,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
+    "PPO": {
+      "avg_reward": 0.2000000000000001,
+      "std_reward": 2.7755575615628914e-17,
+      "avg_length": 9.0,
+      "avg_step_time_ms": 0.05554623074001737,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "actor_critic_policy_optimization",
+      "hyperparams": {
+        "learning_rate": 0.003,
+        "discount_factor": 0.95,
+        "clip_ratio": 0.1
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.6746387481689453,
+      "seed": 43,
+      "selection_score": 0.4499459416128046
     },
-    "MuZero_Stochastic": {
-      "avg_reward": -6.77499999999999,
-      "std_reward": 5.548502050103244,
-      "avg_length": 78.2,
-      "avg_step_time_ms": 3.7223572522520385,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
+    "A2C": {
+      "avg_reward": 0.2000000000000001,
+      "std_reward": 2.7755575615628914e-17,
+      "avg_length": 9.0,
+      "avg_step_time_ms": 0.03899998135036892,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "actor_critic",
+      "hyperparams": {
+        "learning_rate": 0.003,
+        "discount_factor": 0.95,
+        "entropy_coef": 0.0
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.24869680404663086,
+      "seed": 43,
+      "selection_score": 0.44996174130583255
+    },
+    "RandomRollout": {
+      "avg_reward": -0.3650000000000001,
+      "std_reward": 0.5022698477910059,
+      "avg_length": 14.65,
+      "avg_step_time_ms": 5.266468786344032,
+      "win_rate": 0.3,
+      "loss_rate": 0.7,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "planning",
+      "hyperparams": {
+        "search_budget": 10,
+        "max_rollout_depth": 25
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 8.740155696868896,
+      "seed": 43,
+      "selection_score": -0.36685791148193214
+    },
+    "MCTS": {
+      "avg_reward": -1.4249999999999994,
+      "std_reward": 1.8280795934531926,
+      "avg_length": 25.25,
+      "avg_step_time_ms": 4.305160232637006,
+      "win_rate": 0.05,
+      "loss_rate": 0.95,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "planning",
+      "hyperparams": {
+        "search_budget": 10,
+        "max_rollout_depth": 25,
+        "exploration_constant": 1.0
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 6.486316204071045,
+      "seed": 43,
+      "selection_score": -1.5274494759102197
     }
   },
   "GridWorld": {
     "Random": {
-      "avg_reward": 8.744499999999999,
-      "std_reward": 3.4889159849443208,
-      "avg_length": 93.45,
-      "avg_step_time_ms": 0.03593471059693988,
+      "avg_reward": 8.886,
+      "std_reward": 3.552633389473223,
+      "avg_length": 78.3,
+      "avg_step_time_ms": 0.03289344229282377,
       "win_rate": 0.9,
       "loss_rate": 0.1,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "baseline",
+      "hyperparams": {},
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.4231119155883789,
+      "seed": 43,
+      "selection_score": 9.065441302074088
     },
     "TabularQL": {
       "avg_reward": 10.629999999999999,
       "std_reward": 1.7763568394002505e-15,
       "avg_length": 8.0,
-      "avg_step_time_ms": 0.039102137088775635,
+      "avg_step_time_ms": 0.03126561641693115,
       "win_rate": 1.0,
       "loss_rate": 0.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "tabular_value_based",
+      "hyperparams": {
+        "learning_rate": 0.1,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.049645185470581055,
+      "seed": 43,
+      "selection_score": 10.879969213198255
     },
     "DQN": {
       "avg_reward": 10.629999999999999,
       "std_reward": 1.7763568394002505e-15,
       "avg_length": 8.0,
-      "avg_step_time_ms": 0.09621977806091309,
+      "avg_step_time_ms": 0.05645453929901123,
       "win_rate": 1.0,
       "loss_rate": 0.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 2.845128059387207,
+      "seed": 43,
+      "selection_score": 10.879945081472384
     },
     "DoubleDQN": {
       "avg_reward": 10.629999999999999,
       "std_reward": 1.7763568394002505e-15,
       "avg_length": 8.0,
-      "avg_step_time_ms": 0.1619681715965271,
+      "avg_step_time_ms": 0.056305527687072754,
       "win_rate": 1.0,
       "loss_rate": 0.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.6354587078094482,
+      "seed": 43,
+      "selection_score": 10.8799452225311
     },
     "DDQN+ER": {
       "avg_reward": 10.629999999999999,
       "std_reward": 1.7763568394002505e-15,
       "avg_length": 8.0,
-      "avg_step_time_ms": 0.06728023290634155,
+      "avg_step_time_ms": 0.05344599485397339,
       "win_rate": 1.0,
       "loss_rate": 0.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 2.244025707244873,
+      "seed": 43,
+      "selection_score": 10.879947933309648
     },
     "DDQN+PER": {
       "avg_reward": 10.629999999999999,
       "std_reward": 1.7763568394002505e-15,
       "avg_length": 8.0,
-      "avg_step_time_ms": 0.07864534854888916,
+      "avg_step_time_ms": 0.056234002113342285,
       "win_rate": 1.0,
       "loss_rate": 0.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 3.1148548126220703,
+      "seed": 43,
+      "selection_score": 10.879945290246352
     },
     "REINFORCE": {
-      "avg_reward": -2.000000000000001,
-      "std_reward": 4.440892098500626e-16,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.10995858907699585,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "REINFORCE+Mean": {
-      "avg_reward": -2.000000000000001,
-      "std_reward": 4.440892098500626e-16,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.08196187019348145,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "REINFORCE+Critic": {
-      "avg_reward": -2.000000000000001,
-      "std_reward": 4.440892098500626e-16,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.08121544122695923,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "PPO": {
-      "avg_reward": -2.000000000000001,
-      "std_reward": 4.440892098500626e-16,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.10474997758865356,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "A2C": {
-      "avg_reward": -2.000000000000001,
-      "std_reward": 4.440892098500626e-16,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.10082417726516724,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "RandomRollout": {
-      "avg_reward": 10.565,
-      "std_reward": 0.04533210782657228,
-      "avg_length": 14.5,
-      "avg_step_time_ms": 107.58761257219051,
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.06256401538848877,
       "win_rate": 1.0,
       "loss_rate": 0.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.22904300689697266,
+      "seed": 43,
+      "selection_score": 10.87993931513022
+    },
+    "REINFORCE+Mean": {
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.06249845027923584,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.23057317733764648,
+      "seed": 43,
+      "selection_score": 10.879939376836745
+    },
+    "REINFORCE+Critic": {
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.05623549222946167,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.22706007957458496,
+      "seed": 43,
+      "selection_score": 10.879945288835572
+    },
+    "PPO": {
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.09367018938064575,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "actor_critic_policy_optimization",
+      "hyperparams": {
+        "learning_rate": 0.003,
+        "discount_factor": 0.95,
+        "clip_ratio": 0.1
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 1.864069938659668,
+      "seed": 43,
+      "selection_score": 10.879910460813681
+    },
+    "A2C": {
+      "avg_reward": 10.629999999999999,
+      "std_reward": 1.7763568394002505e-15,
+      "avg_length": 8.0,
+      "avg_step_time_ms": 0.06250143051147461,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "actor_critic",
+      "hyperparams": {
+        "learning_rate": 0.003,
+        "discount_factor": 0.95,
+        "entropy_coef": 0.0
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.28228163719177246,
+      "seed": 43,
+      "selection_score": 10.879939374031819
+    },
+    "RandomRollout": {
+      "avg_reward": 10.5855,
+      "std_reward": 0.045659062627259626,
+      "avg_length": 12.45,
+      "avg_step_time_ms": 36.983999176996925,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "planning",
+      "hyperparams": {
+        "search_budget": 10,
+        "max_rollout_depth": 25
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 60.73230838775635,
+      "seed": 43,
+      "selection_score": 10.831406244376966
     },
     "MCTS": {
-      "avg_reward": -0.868,
-      "std_reward": 2.4387406586187064,
-      "avg_length": 194.85,
-      "avg_step_time_ms": 53.40974860646061,
-      "win_rate": 0.05,
-      "loss_rate": 0.95,
+      "avg_reward": 10.4955,
+      "std_reward": 0.10433000527173378,
+      "avg_length": 21.45,
+      "avg_step_time_ms": 8.864368707467253,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
       "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "ExpertApprentice": {
-      "avg_reward": -1.3000000000000012,
-      "std_reward": 2.220446049250313e-16,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.06249260902404785,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "AlphaZero": {
-      "avg_reward": -1.900000000000001,
-      "std_reward": 4.440892098500626e-16,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 0.0722726583480835,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "MuZero": {
-      "avg_reward": -2.000000000000001,
-      "std_reward": 4.440892098500626e-16,
-      "avg_length": 200.0,
-      "avg_step_time_ms": 226.49336791038513,
-      "win_rate": 0.0,
-      "loss_rate": 1.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "MuZero_Stochastic": {
-      "avg_reward": -0.09250000000000051,
-      "std_reward": 3.886632057450255,
-      "avg_length": 193.4,
-      "avg_step_time_ms": 3.634183883936134,
-      "win_rate": 0.15,
-      "loss_rate": 0.85,
-      "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "planning",
+      "hyperparams": {
+        "search_budget": 10,
+        "max_rollout_depth": 25,
+        "exploration_constant": 1.0
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 27.553214073181152,
+      "seed": 43,
+      "selection_score": 10.742167770803016
     }
   },
   "TicTacToe": {
     "Random": {
-      "avg_reward": 0.5,
-      "std_reward": 0.8660254037844386,
-      "avg_length": 3.85,
-      "avg_step_time_ms": 0.07569074630737306,
-      "win_rate": 0.75,
-      "loss_rate": 0.25,
-      "draw_rate": 0.0,
-      "num_episodes": 20
+      "avg_reward": 0.45,
+      "std_reward": 0.8046738469715542,
+      "avg_length": 4.35,
+      "avg_step_time_ms": 0.16266584396362305,
+      "win_rate": 0.65,
+      "loss_rate": 0.2,
+      "draw_rate": 0.15,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "baseline",
+      "hyperparams": {},
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.055727243423461914,
+      "seed": 43,
+      "selection_score": 0.5843025460205061
     },
     "DQN": {
-      "avg_reward": 0.0,
-      "std_reward": 0.9486832980505138,
-      "avg_length": 4.3,
-      "avg_step_time_ms": 0.1261359453201294,
-      "win_rate": 0.45,
-      "loss_rate": 0.45,
-      "draw_rate": 0.1,
-      "num_episodes": 20
+      "avg_reward": 0.25,
+      "std_reward": 0.82915619758885,
+      "avg_length": 4.4,
+      "avg_step_time_ms": 0.1599651575088501,
+      "win_rate": 0.5,
+      "loss_rate": 0.25,
+      "draw_rate": 0.25,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.9498300552368164,
+      "seed": 43,
+      "selection_score": 0.34156004805607465
     },
     "DoubleDQN": {
-      "avg_reward": 0.25,
-      "std_reward": 0.9420721840708386,
-      "avg_length": 4.5,
-      "avg_step_time_ms": 0.14741082986195883,
-      "win_rate": 0.6,
+      "avg_reward": 0.15,
+      "std_reward": 0.9096702699330126,
+      "avg_length": 4.45,
+      "avg_step_time_ms": 0.1529196898142497,
+      "win_rate": 0.5,
       "loss_rate": 0.35,
-      "draw_rate": 0.05,
-      "num_episodes": 20
+      "draw_rate": 0.15,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.40465688705444336,
+      "seed": 43,
+      "selection_score": 0.23076099971504888
     },
     "DDQN+ER": {
-      "avg_reward": 0.0,
-      "std_reward": 0.9486832980505138,
-      "avg_length": 4.2,
-      "avg_step_time_ms": 0.11598090330759685,
-      "win_rate": 0.45,
-      "loss_rate": 0.45,
-      "draw_rate": 0.1,
-      "num_episodes": 20
+      "avg_reward": 0.3,
+      "std_reward": 0.8426149773176359,
+      "avg_length": 4.45,
+      "avg_step_time_ms": 0.1617121696472168,
+      "win_rate": 0.55,
+      "loss_rate": 0.25,
+      "draw_rate": 0.2,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 1.0169663429260254,
+      "seed": 43,
+      "selection_score": 0.4039239553016184
     },
     "DDQN+PER": {
-      "avg_reward": 0.1,
-      "std_reward": 0.888819441731559,
-      "avg_length": 4.4,
-      "avg_step_time_ms": 0.11398732662200928,
-      "win_rate": 0.45,
-      "loss_rate": 0.35,
-      "draw_rate": 0.2,
-      "num_episodes": 20
+      "avg_reward": 0.3,
+      "std_reward": 0.7810249675906655,
+      "avg_length": 4.55,
+      "avg_step_time_ms": 0.16762018203735352,
+      "win_rate": 0.5,
+      "loss_rate": 0.2,
+      "draw_rate": 0.3,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.9842112064361572,
+      "seed": 43,
+      "selection_score": 0.39703478267918374
     },
     "REINFORCE": {
-      "avg_reward": -0.1,
-      "std_reward": 0.8888194417315589,
-      "avg_length": 4.35,
-      "avg_step_time_ms": 0.2221214771270752,
-      "win_rate": 0.35,
-      "loss_rate": 0.45,
-      "draw_rate": 0.2,
-      "num_episodes": 20
+      "avg_reward": 0.8,
+      "std_reward": 0.6000000000000001,
+      "avg_length": 4.05,
+      "avg_step_time_ms": 0.14881253242492676,
+      "win_rate": 0.9,
+      "loss_rate": 0.1,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.12987923622131348,
+      "seed": 43,
+      "selection_score": 1.0088612711716036
     },
     "REINFORCE+Mean": {
-      "avg_reward": 0.55,
-      "std_reward": 0.8046738469715542,
-      "avg_length": 4.1,
-      "avg_step_time_ms": 2.0896788438161216,
-      "win_rate": 0.75,
-      "loss_rate": 0.2,
-      "draw_rate": 0.05,
-      "num_episodes": 20
+      "avg_reward": 0.1,
+      "std_reward": 0.8306623862918076,
+      "avg_length": 4.35,
+      "avg_step_time_ms": 0.15205860137939453,
+      "win_rate": 0.4,
+      "loss_rate": 0.3,
+      "draw_rate": 0.3,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.1688833236694336,
+      "seed": 43,
+      "selection_score": 0.1615518257068491
     },
     "REINFORCE+Critic": {
-      "avg_reward": 0.25,
-      "std_reward": 0.9420721840708386,
-      "avg_length": 4.1,
-      "avg_step_time_ms": 0.1976919174194336,
-      "win_rate": 0.6,
-      "loss_rate": 0.35,
-      "draw_rate": 0.05,
-      "num_episodes": 20
+      "avg_reward": 0.5,
+      "std_reward": 0.7416198487095663,
+      "avg_length": 4.15,
+      "avg_step_time_ms": 0.20517587661743164,
+      "win_rate": 0.65,
+      "loss_rate": 0.15,
+      "draw_rate": 0.2,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.14758038520812988,
+      "seed": 43,
+      "selection_score": 0.6398971760009131
     },
     "PPO": {
-      "avg_reward": 0.5,
-      "std_reward": 0.806225774829855,
-      "avg_length": 4.1,
-      "avg_step_time_ms": 0.15842000643412274,
+      "avg_reward": 0.6,
+      "std_reward": 0.66332495807108,
+      "avg_length": 4.0,
+      "avg_step_time_ms": 0.16973813374837238,
       "win_rate": 0.7,
-      "loss_rate": 0.2,
-      "draw_rate": 0.1,
-      "num_episodes": 20
+      "loss_rate": 0.1,
+      "draw_rate": 0.2,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "actor_critic_policy_optimization",
+      "hyperparams": {
+        "learning_rate": 0.003,
+        "discount_factor": 0.95,
+        "clip_ratio": 0.1
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 1.3818683624267578,
+      "seed": 43,
+      "selection_score": 0.7582099705128393
     },
     "A2C": {
-      "avg_reward": 0.25,
-      "std_reward": 0.9420721840708386,
-      "avg_length": 4.45,
-      "avg_step_time_ms": 0.14595826466878253,
-      "win_rate": 0.6,
-      "loss_rate": 0.35,
+      "avg_reward": 0.95,
+      "std_reward": 0.21794494717703372,
+      "avg_length": 4.15,
+      "avg_step_time_ms": 0.20619750022888184,
+      "win_rate": 0.95,
+      "loss_rate": 0.0,
       "draw_rate": 0.05,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "actor_critic",
+      "hyperparams": {
+        "learning_rate": 0.003,
+        "discount_factor": 0.95,
+        "entropy_coef": 0.0
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 0.2455122470855713,
+      "seed": 43,
+      "selection_score": 1.185133077678632
     },
     "RandomRollout": {
-      "avg_reward": 1.0,
-      "std_reward": 0.0,
-      "avg_length": 3.25,
-      "avg_step_time_ms": 43.80380849043529,
-      "win_rate": 1.0,
-      "loss_rate": 0.0,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "MCTS": {
-      "avg_reward": 0.8,
-      "std_reward": 0.6000000000000001,
-      "avg_length": 4.15,
-      "avg_step_time_ms": 8.817588686943054,
-      "win_rate": 0.9,
-      "loss_rate": 0.1,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "ExpertApprentice": {
-      "avg_reward": 0.8,
-      "std_reward": 0.6000000000000001,
-      "avg_length": 3.6,
-      "avg_step_time_ms": 0.11487305164337158,
-      "win_rate": 0.9,
-      "loss_rate": 0.1,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "AlphaZero": {
-      "avg_reward": -0.05,
-      "std_reward": 0.8645808232895291,
-      "avg_length": 4.3,
-      "avg_step_time_ms": 0.1318522294362386,
-      "win_rate": 0.35,
-      "loss_rate": 0.4,
-      "draw_rate": 0.25,
-      "num_episodes": 20
-    },
-    "MuZero": {
-      "avg_reward": 0.35,
-      "std_reward": 0.9096702699330126,
-      "avg_length": 4.25,
-      "avg_step_time_ms": 1.7810297012329102,
-      "win_rate": 0.65,
-      "loss_rate": 0.3,
-      "draw_rate": 0.05,
-      "num_episodes": 20
-    },
-    "MuZero_Stochastic": {
       "avg_reward": 0.2,
       "std_reward": 0.9273618495495705,
-      "avg_length": 4.35,
-      "avg_step_time_ms": 3.899850845336914,
+      "avg_length": 3.75,
+      "avg_step_time_ms": 17.639819582303364,
       "win_rate": 0.55,
       "loss_rate": 0.35,
       "draw_rate": 0.1,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "planning",
+      "hyperparams": {
+        "search_budget": 10,
+        "max_rollout_depth": 25
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 8.67203426361084,
+      "seed": 43,
+      "selection_score": 0.29030108137435473
+    },
+    "MCTS": {
+      "avg_reward": 0.9,
+      "std_reward": 0.4358898943540673,
+      "avg_length": 3.7,
+      "avg_step_time_ms": 2.8103482723236084,
+      "win_rate": 0.95,
+      "loss_rate": 0.05,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "planning",
+      "hyperparams": {
+        "search_budget": 10,
+        "max_rollout_depth": 25,
+        "exploration_constant": 1.0
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 1.166295051574707,
+      "seed": 43,
+      "selection_score": 1.12680338046144
     }
   },
   "Quarto": {
     "Random": {
-      "avg_reward": 0.1,
-      "std_reward": 0.99498743710662,
-      "avg_length": 5.65,
-      "avg_step_time_ms": 0.21140459037962414,
-      "win_rate": 0.55,
-      "loss_rate": 0.45,
+      "avg_reward": 0.4,
+      "std_reward": 0.9165151389911679,
+      "avg_length": 6.4,
+      "avg_step_time_ms": 7.522224897430055,
+      "win_rate": 0.7,
+      "loss_rate": 0.3,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "baseline",
+      "hyperparams": {},
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 5.717405796051025,
+      "seed": 43,
+      "selection_score": 0.5336921711651417
     },
     "DQN": {
-      "avg_reward": 0.0,
-      "std_reward": 1.0,
-      "avg_length": 5.65,
-      "avg_step_time_ms": 0.20672961359932313,
-      "win_rate": 0.5,
-      "loss_rate": 0.5,
-      "draw_rate": 0.0,
-      "num_episodes": 20
+      "avg_reward": 0.25,
+      "std_reward": 0.9420721840708386,
+      "avg_length": 6.85,
+      "avg_step_time_ms": 9.03965826545443,
+      "win_rate": 0.6,
+      "loss_rate": 0.35,
+      "draw_rate": 0.05,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 7.819049119949341,
+      "seed": 43,
+      "selection_score": 0.3532727350829127
     },
     "DoubleDQN": {
       "avg_reward": 0.1,
-      "std_reward": 0.9949874371066201,
-      "avg_length": 5.85,
-      "avg_step_time_ms": 0.21593335128965832,
-      "win_rate": 0.55,
-      "loss_rate": 0.45,
-      "draw_rate": 0.0,
-      "num_episodes": 20
+      "std_reward": 0.9433981132056604,
+      "avg_length": 6.9,
+      "avg_step_time_ms": 7.032524815627506,
+      "win_rate": 0.5,
+      "loss_rate": 0.4,
+      "draw_rate": 0.1,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 6.962073087692261,
+      "seed": 43,
+      "selection_score": 0.17348251996653755
     },
     "DDQN+ER": {
-      "avg_reward": -0.1,
-      "std_reward": 0.9949874371066201,
-      "avg_length": 6.1,
-      "avg_step_time_ms": 0.20847839968545098,
-      "win_rate": 0.45,
-      "loss_rate": 0.55,
-      "draw_rate": 0.0,
-      "num_episodes": 20
+      "avg_reward": 0.15,
+      "std_reward": 0.9630680142129111,
+      "avg_length": 6.75,
+      "avg_step_time_ms": 7.21719604162943,
+      "win_rate": 0.55,
+      "loss_rate": 0.4,
+      "draw_rate": 0.05,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 8.027975797653198,
+      "seed": 43,
+      "selection_score": 0.23576309082115243
     },
     "DDQN+PER": {
-      "avg_reward": -0.4,
-      "std_reward": 0.9165151389911679,
-      "avg_length": 5.75,
-      "avg_step_time_ms": 0.20589805784679593,
-      "win_rate": 0.3,
-      "loss_rate": 0.7,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "REINFORCE": {
-      "avg_reward": -0.1,
-      "std_reward": 0.9949874371066201,
-      "avg_length": 6.15,
-      "avg_step_time_ms": 0.2284720540046692,
-      "win_rate": 0.45,
-      "loss_rate": 0.55,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "REINFORCE+Mean": {
-      "avg_reward": -0.3,
-      "std_reward": 0.9539392014169457,
-      "avg_length": 6.35,
-      "avg_step_time_ms": 0.23734133867990406,
-      "win_rate": 0.35,
-      "loss_rate": 0.65,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "REINFORCE+Critic": {
-      "avg_reward": -0.25,
-      "std_reward": 0.9420721840708386,
-      "avg_length": 6.0,
-      "avg_step_time_ms": 0.22850269363040016,
-      "win_rate": 0.35,
-      "loss_rate": 0.6,
-      "draw_rate": 0.05,
-      "num_episodes": 20
-    },
-    "PPO": {
-      "avg_reward": 0.35,
-      "std_reward": 0.9096702699330126,
-      "avg_length": 5.5,
-      "avg_step_time_ms": 0.25369854200453984,
-      "win_rate": 0.65,
-      "loss_rate": 0.3,
-      "draw_rate": 0.05,
-      "num_episodes": 20
-    },
-    "A2C": {
-      "avg_reward": -0.3,
-      "std_reward": 0.9539392014169455,
-      "avg_length": 5.8,
-      "avg_step_time_ms": 0.22432961634227205,
-      "win_rate": 0.35,
-      "loss_rate": 0.65,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "RandomRollout": {
-      "avg_reward": 0.8,
-      "std_reward": 0.6000000000000001,
-      "avg_length": 4.55,
-      "avg_step_time_ms": 216.10164841016132,
-      "win_rate": 0.9,
-      "loss_rate": 0.1,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "MCTS": {
       "avg_reward": 0.0,
       "std_reward": 1.0,
-      "avg_length": 6.25,
-      "avg_step_time_ms": 31.370158933457873,
+      "avg_length": 6.75,
+      "avg_step_time_ms": 8.37566144409634,
       "win_rate": 0.5,
       "loss_rate": 0.5,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "deep_value_based",
+      "hyperparams": {
+        "learning_rate": 0.001,
+        "discount_factor": 0.95,
+        "epsilon_decay": 0.995
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 7.711556434631348,
+      "seed": 43,
+      "selection_score": 0.0627618828765954
     },
-    "ExpertApprentice": {
-      "avg_reward": 0.1,
-      "std_reward": 0.99498743710662,
-      "avg_length": 5.6,
-      "avg_step_time_ms": 0.2352748172623771,
-      "win_rate": 0.55,
-      "loss_rate": 0.45,
+    "REINFORCE": {
+      "avg_reward": 0.5,
+      "std_reward": 0.8660254037844386,
+      "avg_length": 6.5,
+      "avg_step_time_ms": 9.06796620005653,
+      "win_rate": 0.75,
+      "loss_rate": 0.25,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 6.674896478652954,
+      "seed": 43,
+      "selection_score": 0.6515303872420537
     },
-    "AlphaZero": {
-      "avg_reward": 0.1,
-      "std_reward": 0.99498743710662,
-      "avg_length": 6.25,
-      "avg_step_time_ms": 0.23420360826310654,
-      "win_rate": 0.55,
-      "loss_rate": 0.45,
-      "draw_rate": 0.0,
-      "num_episodes": 20
+    "REINFORCE+Mean": {
+      "avg_reward": 0.5,
+      "std_reward": 0.806225774829855,
+      "avg_length": 6.6,
+      "avg_step_time_ms": 10.22556973355157,
+      "win_rate": 0.7,
+      "loss_rate": 0.2,
+      "draw_rate": 0.1,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 6.217818021774292,
+      "seed": 43,
+      "selection_score": 0.6445195480635882
     },
-    "MuZero": {
-      "avg_reward": 0.1,
-      "std_reward": 0.9949874371066201,
-      "avg_length": 5.75,
-      "avg_step_time_ms": 2.4307234230495633,
-      "win_rate": 0.55,
-      "loss_rate": 0.45,
-      "draw_rate": 0.0,
-      "num_episodes": 20
-    },
-    "MuZero_Stochastic": {
+    "REINFORCE+Critic": {
       "avg_reward": 0.2,
       "std_reward": 0.9797958971132713,
-      "avg_length": 6.2,
-      "avg_step_time_ms": 4.239246291773659,
+      "avg_length": 6.3,
+      "avg_step_time_ms": 7.628220873219625,
       "win_rate": 0.6,
       "loss_rate": 0.4,
       "draw_rate": 0.0,
-      "num_episodes": 20
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "policy_gradient",
+      "hyperparams": {
+        "learning_rate": 0.005,
+        "discount_factor": 0.95,
+        "hidden_layers": [
+          64
+        ]
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 6.014603137969971,
+      "seed": 43,
+      "selection_score": 0.2980470027010829
+    },
+    "PPO": {
+      "avg_reward": 0.4,
+      "std_reward": 0.8602325267042626,
+      "avg_length": 6.55,
+      "avg_step_time_ms": 7.462170961357299,
+      "win_rate": 0.65,
+      "loss_rate": 0.25,
+      "draw_rate": 0.1,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "actor_critic_policy_optimization",
+      "hyperparams": {
+        "learning_rate": 0.003,
+        "discount_factor": 0.95,
+        "clip_ratio": 0.1
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 7.625035285949707,
+      "seed": 43,
+      "selection_score": 0.5267620689774415
+    },
+    "A2C": {
+      "avg_reward": 0.4,
+      "std_reward": 0.9165151389911679,
+      "avg_length": 6.8,
+      "avg_step_time_ms": 7.2619233812604636,
+      "win_rate": 0.7,
+      "loss_rate": 0.3,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "actor_critic",
+      "hyperparams": {
+        "learning_rate": 0.003,
+        "discount_factor": 0.95,
+        "entropy_coef": 0.0
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 5.8611156940460205,
+      "seed": 43,
+      "selection_score": 0.5337231911947877
+    },
+    "RandomRollout": {
+      "avg_reward": 1.0,
+      "std_reward": 0.0,
+      "avg_length": 5.4,
+      "avg_step_time_ms": 3128.774031173615,
+      "win_rate": 1.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "planning",
+      "hyperparams": {
+        "search_budget": 10,
+        "max_rollout_depth": 25
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 1912.4001021385193,
+      "seed": 43,
+      "selection_score": 1.2419512839135851
+    },
+    "MCTS": {
+      "avg_reward": 0.9,
+      "std_reward": 0.4358898943540673,
+      "avg_length": 6.1,
+      "avg_step_time_ms": 204.17824198802313,
+      "win_rate": 0.95,
+      "loss_rate": 0.05,
+      "draw_rate": 0.0,
+      "num_episodes": 20,
+      "status": "OK",
+      "family": "planning",
+      "hyperparams": {
+        "search_budget": 10,
+        "max_rollout_depth": 25,
+        "exploration_constant": 1.0
+      },
+      "config_id": 1,
+      "episodes_trained": 100,
+      "training_time_seconds": 148.4259650707245,
+      "seed": 43,
+      "selection_score": 1.1228172219819816
     }
   }
 }

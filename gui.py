@@ -1,3 +1,17 @@
+#!/usr/bin/env python3
+"""
+gui.py - Flask web GUI for DRL project.
+
+Features:
+- Watch any agent play any environment
+- Play as a human against the AI
+- View game state with visual rendering
+- Select trained models
+
+Usage:
+    python gui.py
+    Then open http://localhost:5000
+"""
 import sys, os, json, copy, time
 import numpy as np
 
@@ -5,8 +19,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 from agents import RandomAgent, DeepQLearningAgent, TabularQLearningAgent, \
     DDQNWithERAgent, DoubleDeepQLearningAgent, REINFORCEAgent, DDQNWithPERAgent, REINFORCEMeanBaselineAgent, \
-    REINFORCECriticBaselineAgent, PPOAgent, StochasticMuZeroAgent, AlphaZeroAgent, ExpertApprenticeAgent, MCTSAgent, \
-    RandomRolloutAgent, A2CAgent, MuZeroAgent
+    REINFORCECriticBaselineAgent, PPOAgent, MCTSAgent, RandomRolloutAgent, A2CAgent
 from environments import LineWorld, GridWorld, TicTacToe, Quarto
 
 from flask import Flask, render_template_string, jsonify, request
@@ -81,10 +94,6 @@ def create_agent(name, env):
         'A2C': lambda: A2CAgent(obs_size, act_size),
         'RandomRollout': lambda: RandomRolloutAgent(act_size, num_rollouts=30),
         'MCTS': lambda: MCTSAgent(act_size, num_simulations=100),
-        'ExpertApprentice': lambda: ExpertApprenticeAgent(obs_size, act_size),
-        'AlphaZero': lambda: AlphaZeroAgent(obs_size, act_size, num_simulations=50),
-        'MuZero': lambda: MuZeroAgent(obs_size, act_size, num_simulations=30),
-        'MuZero_Stochastic': lambda: StochasticMuZeroAgent(obs_size, act_size, num_simulations=30),
         'Human': lambda: None,  # No agent for human mode
     }
 
@@ -492,12 +501,7 @@ HTML_TEMPLATE = """
                 <option value="PPO">PPO</option>
                 <option value="A2C">A2C</option>
                 <option value="RandomRollout">RandomRollout</option>
-                <option value="MCTS" selected>MCTS</option>
-                <option value="ExpertApprentice">ExpertApprentice</option>
-                <option value="AlphaZero">AlphaZero</option>
-                <option value="MuZero">MuZero</option>
-                <option value="MuZero_Stochastic">MuZero Stochastic</option>
-            </select>
+                <option value="MCTS" selected>MCTS</option>            </select>
             <button onclick="newGame()">🔄 New Game</button>
             <button onclick="stepGame()" id="stepBtn" class="btn-blue">⏩ Step</button>
             <button onclick="autoPlay()" id="autoBtn" class="btn-green">▶ Auto Play</button>

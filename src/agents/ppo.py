@@ -1,29 +1,3 @@
-"""PPO A2C-style — conforme à :
-   'Proximal Policy Optimization Algorithms', Schulman et al., 2017.
-
-Éléments clés du papier implémentés ici :
-
-1. Objectif clippé (équation 7) :
-   L^CLIP = E[min(r_t * A_t, clip(r_t, 1-ε, 1+ε) * A_t)]
-
-2. Objectif combiné acteur+critique+entropie (équation 9) :
-   L = E[L^CLIP - c1 * L^VF + c2 * S[π]]
-   avec L^VF = (V(s) - V_targ)²
-
-3. GAE (équations 11-12) :
-   δ_t = r_t + γ * V(s_{t+1}) - V(s_t)
-   A_t = Σ_{l≥0} (γλ)^l * δ_{t+l}
-
-4. Algorithme 1 : collecte T timesteps → K époques de SGD par minibatchs
-   (minibatch size M ≤ T, tirage aléatoire à chaque époque)
-
-Hyperparamètres du papier (Table 3, MuJoCo) :
-   T=2048, lr=3e-4, K=10, M=64, γ=0.99, λ=0.95, ε=0.2
-
-Hyperparamètres du papier (Table 5, Atari) :
-   T=128, lr=2.5e-4, K=3, M=256, γ=0.99, λ=0.95, ε=0.1, c1=1, c2=0.01
-"""
-
 import numpy as np
 import os
 import pickle
@@ -38,44 +12,12 @@ from neural_network.model import NeuralNetwork
 
 
 class PPOAgent(BaseAgent):
-    """PPO avec objectif clippé — Schulman et al. (2017).
 
-    Architecture séparée acteur/critique (sans partage de paramètres),
-    conforme à la Section 6.1 du papier ("We don't share parameters
-    between the policy and value function").
+    def __init__(self, input_size: int, action_space_size: int, learning_rate: float = 3e-4,
+                 discount_factor: float = 0.99, gae_lambda: float = 0.95, clip_ratio: float = 0.2, num_epochs: int = 10,
+                 minibatch_size: int = 64, vf_coef: float = 1.0, entropy_coef: float = 0.01, hidden_layers=None,
+                 seed: Optional[int] = None, **kwargs):
 
-    Paramètres
-    ----------
-    clip_ratio : float
-        ε dans l'équation 7 du papier. Recommandé : 0.2 (MuJoCo), 0.1 (Atari).
-    num_epochs : int
-        K dans l'Algorithme 1. Recommandé : 10 (MuJoCo), 3 (Atari).
-    minibatch_size : int
-        M dans l'Algorithme 1. Recommandé : 64 (MuJoCo), 256 (Atari).
-    vf_coef : float
-        c1 dans l'équation 9.  Recommandé : 1.0.
-    entropy_coef : float
-        c2 dans l'équation 9.  Recommandé : 0.01.
-    gae_lambda : float
-        λ dans l'équation 11.  Recommandé : 0.95.
-    """
-
-    def __init__(
-            self,
-            input_size: int,
-            action_space_size: int,
-            learning_rate: float = 3e-4,  # Table 3 / Table 5 du papier
-            discount_factor: float = 0.99,  # Table 3 / Table 5
-            gae_lambda: float = 0.95,  # Table 3 / Table 5
-            clip_ratio: float = 0.2,  # ε, Table 3 (meilleur résultat Table 1)
-            num_epochs: int = 10,  # K, Table 3 (MuJoCo)
-            minibatch_size: int = 64,  # M, Table 3 (MuJoCo)
-            vf_coef: float = 1.0,  # c1, équation 9
-            entropy_coef: float = 0.01,  # c2, équation 9 / Table 5
-            hidden_layers=None,
-            seed: Optional[int] = None,
-            **kwargs
-    ):
         super().__init__("PPO_A2C", action_space_size, input_size)
         if seed is not None:
             np.random.seed(seed)
