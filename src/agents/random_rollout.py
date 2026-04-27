@@ -1,4 +1,4 @@
-"""Random Rollout agent: evaluates actions by simulating random games."""
+"""Random Rollout"""
 import numpy as np
 import copy
 from typing import Optional, Any
@@ -68,7 +68,7 @@ class RandomRolloutAgent(BaseAgent):
                 _, r, done, _ = env.step(action)
                 total += sign * r
                 if self.is_two_player:
-                    sign = -sign  # alterner la perspective à chaque demi-coup
+                    sign = -sign  # on alterne la perspective à chaque demi-coup
                 if done:
                     break
             except Exception:

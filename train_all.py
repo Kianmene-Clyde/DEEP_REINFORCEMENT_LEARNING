@@ -1,24 +1,3 @@
-"""
-train_all.py - Entraîne tous les agents actuels sur tous les environnements à l'aide d'une recherche par grille intégrée.
-
-Ce fichier centralise l'ensemble du pipeline expérimental :
-1) créer les environnements ;
-2) générer des grilles d'hyperparamètres par famille d'agents ;
-3) entraîner chaque agent sur chaque configuration d'hyperparamètres candidate ;
-4) conserver la meilleure configuration pour chaque agent/environnement ;
-5) classer les agents les mieux optimisés au sein de chaque environnement ;
-6) enregistrer les métriques, les modèles, les résumés CSV et les résumés JSON.
-
-Exemples d'utilisation :
-    python train_all.py
-    python train_all.py --quick
-    python train_all.py --env LineWorld
-    python train_all.py --agent DQN
-    python train_all.py --grid compact --episodes 1000
-    python train_all.py --grid full --episodes 10000
-    python train_all.py --grid none --episodes 10000
-    python train_all.py --quick --max-configs-per-agent 1
-"""
 import argparse
 import csv
 import itertools
@@ -42,7 +21,6 @@ from utils.plotting import plot_learning_curves, plot_comparison, plot_checkpoin
 
 
 # Configuration des environnements
-
 def get_environments():
     return {
         'LineWorld': LineWorld(length=10),
@@ -60,7 +38,6 @@ def get_observation_size(env) -> int:
 
 
 # Définition des familles d'agents et des grilles
-
 AGENT_FAMILIES = {
     'Random': 'baseline',
     'TabularQL': 'tabular_value_based',
@@ -78,8 +55,6 @@ AGENT_FAMILIES = {
 }
 
 # Chaque famille utilise 3 hyperparamètres maximum.
-# Le mode compact est adapté à une soutenance / expérimentation raisonnable.
-# Le mode full est plus long mais donne une analyse plus sérieuse.
 GRID_SPECS = {
     'compact': {
         'baseline': {
@@ -504,7 +479,7 @@ def main():
     metrics_for_best_agents: Dict[str, Dict[str, Any]] = {}
 
     print('\n' + '=' * 80)
-    print('DRL TRAINING WITH INTEGRATED GRID SEARCH')
+    print('ENTRAINEMENT AVEC UN GRID SEARCH')
     print('=' * 80)
     print(f'Grid mode           : {args.grid}')
     print(f'Episodes/config     : {max_episodes}')
@@ -515,7 +490,7 @@ def main():
 
     for env_name, env in envs.items():
         print(f'\n{"=" * 80}')
-        print(f'ENVIRONMENT: {env_name}')
+        print(f'ENVIRONNEMENT: {env_name}')
         print(f'{"=" * 80}')
 
         obs_size = get_observation_size(env)
@@ -525,7 +500,7 @@ def main():
         if args.agent:
             agent_names = [a for a in agent_names if a == args.agent]
             if not agent_names:
-                print(f'  Agent {args.agent} is not available for {env_name}; skipping.')
+                print(f' Cet agent {args.agent} n\'est pas disponible pour l\'environnement: {env_name};')
                 continue
 
         env_best_results: Dict[str, Dict[str, Any]] = {}
@@ -540,7 +515,7 @@ def main():
                 max_configs=args.max_configs_per_agent,
             )
 
-            print(f'\n  Agent: {agent_name} | family={family} | configs={len(configs)}')
+            print(f'\n  Agent: {agent_name} | famille={family} | configs={len(configs)}')
 
             best_result = None
             best_metrics = None
@@ -607,7 +582,7 @@ def main():
             )
 
             print(
-                f'  >>> Best {agent_name} on {env_name}: '
+                f'  >>> Meilleur: {agent_name} dans {env_name}: '
                 f'config={best_result.get("config_id")} | '
                 f'params={best_result.get("hyperparams", {})} | '
                 f'score={best_result.get("selection_score", 0):.4f} | '
@@ -639,7 +614,7 @@ def main():
             reverse=True,
         )
 
-        print(f'\n  BEST TUNED AGENTS FOR {env_name}')
+        print(f'\n  Meilleur agents tuner pour l\'environnement {env_name}')
         for rank, (agent_name, res) in enumerate(ranked, start=1):
             print(
                 f'    #{rank:02d} {agent_name:20s} | '
@@ -671,7 +646,7 @@ def main():
 
     # Global summary
     print(f'\n{"=" * 80}')
-    print('GLOBAL SUMMARY - BEST TUNED AGENTS BY ENVIRONMENT')
+    print('Sommaire Globale - Meuilleur Agent Tuner par environnement')
     print(f'{"=" * 80}')
 
     for env_name, results in all_best_results.items():
@@ -703,7 +678,7 @@ def main():
         pass
 
     total_time = time.time() - total_start
-    print(f'\nTotal running time: {total_time:.1f}s ({total_time / 60:.1f}min)')
+    print(f'\nTemps total d\'éxécution: {total_time:.1f}s ({total_time / 60:.1f}min)')
     print('Results saved to results/')
     print('Grid-search details saved to results/grid_search/')
     print('Best tuned models saved to models/*_best')

@@ -1,4 +1,4 @@
-"""Double Q-Learning profond"""
+"""Double Q-Learning"""
 import numpy as np
 import os, pickle
 from typing import Optional, Any
@@ -62,7 +62,7 @@ class DoubleDeepQLearningAgent(BaseAgent):
 
         grad = np.zeros_like(q_vals)
         grad[0, action] = q_vals[0, action] - target
-        # backward utilise le cache de forward(..., training=True) ci-dessus
+        # backward utilise le cache de forward
         self.q_net.backward(grad)
 
         self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)

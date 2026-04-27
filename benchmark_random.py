@@ -1,10 +1,4 @@
-#!/usr/bin/env python3
-"""
-benchmark_random.py - Calcule le nombre de parties/seconde avec un joueur random.
-
-Usage:
-    python benchmark_random.py
-"""
+"""benchmark_random.py - Calcule le nombre de parties/seconde avec un joueur random."""
 import sys, os, time
 import numpy as np
 

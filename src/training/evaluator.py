@@ -1,11 +1,11 @@
-"""Evaluator: evaluate a trained agent."""
+"""Evaluator: evalue un agent entrainé."""
 import time
 import numpy as np
 from typing import Dict
 
 
 class Evaluator:
-    """Evaluate a trained agent on an environment."""
+    """Evalue un agent entrainé dans un environnement."""
 
     def __init__(self, env, agent, num_episodes: int = 100,
                  max_steps: int = 200):
@@ -15,7 +15,7 @@ class Evaluator:
         self.max_steps = max_steps
 
     def evaluate(self) -> Dict[str, float]:
-        """Run evaluation, return summary stats."""
+        """Execute l'évaluation, retoiurne les stats resumées."""
         if hasattr(self.agent, 'set_training_mode'):
             self.agent.set_training_mode(False)
 
@@ -42,8 +42,8 @@ class Evaluator:
             lengths.append(steps)
             step_times.append(elapsed / max(steps, 1) * 1000)
 
-            # Track wins/losses
-            # Use > 0 threshold: any positive total reward = win
+            # Suivi des victoires/défaites
+            # Seuil > 0 : toute récompense totale positive = une victoire
             if total_r > 0:
                 wins += 1
             elif total_r < 0:

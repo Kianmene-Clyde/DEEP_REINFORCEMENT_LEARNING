@@ -1,16 +1,17 @@
-"""REINFORCE variants: vanilla, mean baseline, critic baseline."""
+"""REINFORCE agents: simple, mean, critic."""
 import numpy as np
 import os, pickle
 from typing import Optional, Any, List
 from .base_agent import BaseAgent
 from .utils import mask_and_normalize as _safe_probs
 import sys, pathlib
+
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from neural_network.model import NeuralNetwork
 
 
 class REINFORCEAgent(BaseAgent):
-    """Vanilla REINFORCE (Williams 1992). Policy gradient with Monte Carlo returns."""
+    """ REINFORCE simple"""
 
     def __init__(self, input_size: int, action_space_size: int,
                  learning_rate: float = 0.001, discount_factor: float = 0.99,
@@ -51,7 +52,6 @@ class REINFORCEAgent(BaseAgent):
         return returns
 
     def _get_baseline(self, returns: np.ndarray) -> np.ndarray:
-        """Override in subclasses."""
         return np.zeros_like(returns)
 
     def _update_policy(self):
@@ -60,7 +60,7 @@ class REINFORCEAgent(BaseAgent):
         returns = self._compute_returns()
         baseline = self._get_baseline(returns)
         advantages = returns - baseline
-        # Normalize advantages
+        # on normalise les avantages
         if np.std(advantages) > 1e-8:
             advantages = (advantages - np.mean(advantages)) / (np.std(advantages) + 1e-8)
 
@@ -68,12 +68,10 @@ class REINFORCEAgent(BaseAgent):
         actions = np.array(self.ep_actions)
         probs = self.policy_net.forward(states, training=True)
 
-        # Policy gradient: minimize L = -sum_t [advantage_t * log pi(a_t|s_t)]
-        # dL/dz = advantage * (p - e_a) for softmax with "externally handled" derivative
-        grad = probs.copy()  # start from probs
+        grad = probs.copy()
         for i in range(len(actions)):
-            grad[i, actions[i]] -= 1.0  # (p - e_a)
-            grad[i] *= advantages[i]    # advantage * (p - e_a) = dL/dz
+            grad[i, actions[i]] -= 1.0
+            grad[i] *= advantages[i]
         self.policy_net.backward(grad)
 
         self.ep_states, self.ep_actions, self.ep_rewards = [], [], []
@@ -87,7 +85,7 @@ class REINFORCEAgent(BaseAgent):
 
 
 class REINFORCEMeanBaselineAgent(REINFORCEAgent):
-    """REINFORCE with running mean reward as baseline."""
+    """REINFORCE mean"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -102,7 +100,7 @@ class REINFORCEMeanBaselineAgent(REINFORCEAgent):
 
 
 class REINFORCECriticBaselineAgent(REINFORCEAgent):
-    """REINFORCE with baseline learned by a critic (value network)."""
+    """REINFORCE critic"""
 
     def __init__(self, input_size: int, action_space_size: int,
                  learning_rate: float = 0.001, critic_lr: float = 0.005,
@@ -119,12 +117,11 @@ class REINFORCECriticBaselineAgent(REINFORCEAgent):
         self.value_net = NeuralNetwork.build_mlp(dims, acts, lr=critic_lr)
 
     def _get_baseline(self, returns: np.ndarray) -> np.ndarray:
-        """Use value network as baseline and train it."""
         states = np.array(self.ep_states, dtype=np.float32)
         values = self.value_net.forward(states, training=True)[:, 0]
-        # Train value net: MSE loss
+        # calcule du MSE
         grad = np.zeros((len(states), 1), dtype=np.float32)
-        grad[:, 0] = values - returns  # d/dv (v - G)^2 = 2(v - G), factor absorbed by lr
+        grad[:, 0] = values - returns
         self.value_net.backward(grad)
         return values
 

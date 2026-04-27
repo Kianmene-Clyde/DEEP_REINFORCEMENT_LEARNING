@@ -1,15 +1,3 @@
-"""Grid World environment - agent navigates a 2D grid.
-
-State encoding (vector):
-- One-hot vector of length `width * height`.
-- Index = x + y * width
-
-Action encoding:
-- 0: Up
-- 1: Down
-- 2: Left
-- 3: Right
-"""
 import numpy as np
 from typing import Tuple, Dict, Any, Optional
 from .base_env import BaseEnvironment
@@ -17,10 +5,21 @@ from .base_env import BaseEnvironment
 
 class GridWorld(BaseEnvironment):
     def __init__(self, width: int = 5, height: int = 5, seed: Optional[int] = None):
+        if width < 2 or height < 2:
+            raise ValueError("GridWorld requires width>=2 and height>=2 (because start is (1,0) and pit is (0,0)).")
+
         self.width = width
         self.height = height
-        self.start_pos = np.array([0, 0], dtype=np.int32)
+
+        # Case (0,0) est éliminatoire
+        self.pit_pos = np.array([0, 0], dtype=np.int32)
+
+        # Point de départ c'est la case (1,0)
+        self.start_pos = np.array([1, 0], dtype=np.int32)
+
+        # La case gagnante reste le coin inférieur droit
         self.goal_pos = np.array([width - 1, height - 1], dtype=np.int32)
+
         self.agent_pos = self.start_pos.copy()
         self._action_space_size = 4
         super().__init__(seed)
@@ -47,6 +46,7 @@ class GridWorld(BaseEnvironment):
     def step(self, action: int) -> Tuple[np.ndarray, float, bool, Dict]:
         old_pos = self.agent_pos.copy()
 
+        # Move
         if action == 0:  # Up
             self.agent_pos[1] = max(0, self.agent_pos[1] - 1)
         elif action == 1:  # Down
@@ -56,23 +56,30 @@ class GridWorld(BaseEnvironment):
         elif action == 3:  # Right
             self.agent_pos[0] = min(self.width - 1, self.agent_pos[0] + 1)
 
+        # La case éliminatoire a la priorité sur tout le reste
+        if np.array_equal(self.agent_pos, self.pit_pos):
+            return self._get_state(), -10.0, True, {"terminal": "pit"}
+
+        # Goal
+        if np.array_equal(self.agent_pos, self.goal_pos):
+            return self._get_state(), 10.0, True, {"terminal": "goal"}
+
         distance = np.sum(np.abs(self.agent_pos - self.goal_pos))
         old_distance = np.sum(np.abs(old_pos - self.goal_pos))
+        reward = (old_distance - distance) * 0.1 - 0.01
+        done = False
 
-        if np.array_equal(self.agent_pos, self.goal_pos):
-            reward = 10.0
-            done = True
-        else:
-            reward = (old_distance - distance) * 0.1 - 0.01
-            done = False
-
-        return self._get_state(), reward, done, {}
+        return self._get_state(), float(reward), done, {}
 
     def render(self) -> None:
         grid = np.zeros((self.height, self.width), dtype=str)
         grid[:] = '.'
+
+        grid[self.pit_pos[1], self.pit_pos[0]] = 'X'
         grid[self.goal_pos[1], self.goal_pos[0]] = 'G'
+
         grid[self.agent_pos[1], self.agent_pos[0]] = 'A'
+
         for row in grid:
             print(' '.join(row))
         print()

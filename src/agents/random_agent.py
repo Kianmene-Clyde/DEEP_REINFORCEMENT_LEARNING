@@ -1,4 +1,4 @@
-"""Random agent - selects actions uniformly at random."""
+"""Random agent."""
 import numpy as np
 from typing import Optional, Any
 from .base_agent import BaseAgent

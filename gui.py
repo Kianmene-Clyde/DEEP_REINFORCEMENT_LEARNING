@@ -1,17 +1,3 @@
-#!/usr/bin/env python3
-"""
-gui.py - Flask web GUI for DRL project.
-
-Features:
-- Watch any agent play any environment
-- Play as a human against the AI
-- View game state with visual rendering
-- Select trained models
-
-Usage:
-    python gui.py
-    Then open http://localhost:5000
-"""
 import sys, os, json, copy, time
 import numpy as np
 
@@ -24,12 +10,9 @@ from environments import LineWorld, GridWorld, TicTacToe, Quarto
 
 from flask import Flask, render_template_string, jsonify, request
 
-
 app = Flask(__name__)
 
-# ─────────────────────────────────────────────────────────────
 # Global game state
-# ─────────────────────────────────────────────────────────────
 game_state = {
     'env': None,
     'env_name': None,
@@ -46,7 +29,6 @@ game_state = {
 
 
 def encode_for_agent(state, env, agent):
-    """Encode state for the agent — tabular agents get an int index, deep agents get a float vector."""
     if agent is not None and hasattr(agent, 'uses_tabular') and agent.uses_tabular:
         if hasattr(env, 'state_to_index'):
             return env.state_to_index(state)
@@ -73,10 +55,10 @@ def create_agent(name, env):
 
     # TabularQL needs the true state space size (not the vector dimension)
     tabular_state_sizes = {
-        'LineWorld': 10,        # 10 positions
-        'GridWorld': 25,        # 5x5 grid
-        'TicTacToe': 3**9,     # 19683 possible board configs
-        'Quarto': obs_size,    # too large but won't crash
+        'LineWorld': 10,  # 10 positions
+        'GridWorld': 25,  # 5x5 grid
+        'TicTacToe': 3 ** 9,  # 19683 possible board configs
+        'Quarto': obs_size,
     }
     tab_size = tabular_state_sizes.get(game_state['env_name'], obs_size)
 
@@ -94,7 +76,7 @@ def create_agent(name, env):
         'A2C': lambda: A2CAgent(obs_size, act_size),
         'RandomRollout': lambda: RandomRolloutAgent(act_size, num_rollouts=30),
         'MCTS': lambda: MCTSAgent(act_size, num_simulations=100),
-        'Human': lambda: None,  # No agent for human mode
+        'Human': lambda: None,
     }
 
     agent = constructors[name]()
@@ -193,9 +175,7 @@ def render_quarto(env, state):
     return f'<div class="quarto">{rows}</div>{piece_info}<p class="small">Available: {avail}</p>'
 
 
-# ─────────────────────────────────────────────────────────────
 # Routes
-# ─────────────────────────────────────────────────────────────
 
 @app.route('/')
 def index():
@@ -352,9 +332,7 @@ def auto_play():
     return jsonify({'steps': steps})
 
 
-# ─────────────────────────────────────────────────────────────
 # HTML Template
-# ─────────────────────────────────────────────────────────────
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>

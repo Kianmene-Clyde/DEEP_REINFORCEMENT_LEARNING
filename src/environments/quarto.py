@@ -20,29 +20,26 @@ import numpy as np
 from typing import Tuple, Dict, Any, Optional, List
 from .base_env import BaseEnvironment
 
-
-# ──────────────────────────────────────────────────────
 # Symboles visuels uniques pour chaque piece
 # Lettre : majuscule=Grande, minuscule=Petite, R/r=Foncee, B/b=Claire
 # Forme  : carre/rond x plein/creux
-# ──────────────────────────────────────────────────────
 PIECE_SYMBOLS = {
-    0:  "b\u25a0",   # Petite Claire Carree Pleine
-    1:  "B\u25a0",   # Grande Claire Carree Pleine
-    2:  "r\u25a0",   # Petite Foncee Carree Pleine
-    3:  "R\u25a0",   # Grande Foncee Carree Pleine
-    4:  "b\u25cf",   # Petite Claire Ronde  Pleine
-    5:  "B\u25cf",   # Grande Claire Ronde  Pleine
-    6:  "r\u25cf",   # Petite Foncee Ronde  Pleine
-    7:  "R\u25cf",   # Grande Foncee Ronde  Pleine
-    8:  "b\u25a1",   # Petite Claire Carree Creuse
-    9:  "B\u25a1",   # Grande Claire Carree Creuse
-    10: "r\u25a1",   # Petite Foncee Carree Creuse
-    11: "R\u25a1",   # Grande Foncee Carree Creuse
-    12: "b\u25cb",   # Petite Claire Ronde  Creuse
-    13: "B\u25cb",   # Grande Claire Ronde  Creuse
-    14: "r\u25cb",   # Petite Foncee Ronde  Creuse
-    15: "R\u25cb",   # Grande Foncee Ronde  Creuse
+    0: "b\u25a0",  # Petite Claire Carree Pleine
+    1: "B\u25a0",  # Grande Claire Carree Pleine
+    2: "r\u25a0",  # Petite Foncee Carree Pleine
+    3: "R\u25a0",  # Grande Foncee Carree Pleine
+    4: "b\u25cf",  # Petite Claire Ronde  Pleine
+    5: "B\u25cf",  # Grande Claire Ronde  Pleine
+    6: "r\u25cf",  # Petite Foncee Ronde  Pleine
+    7: "R\u25cf",  # Grande Foncee Ronde  Pleine
+    8: "b\u25a1",  # Petite Claire Carree Creuse
+    9: "B\u25a1",  # Grande Claire Carree Creuse
+    10: "r\u25a1",  # Petite Foncee Carree Creuse
+    11: "R\u25a1",  # Grande Foncee Carree Creuse
+    12: "b\u25cb",  # Petite Claire Ronde  Creuse
+    13: "B\u25cb",  # Grande Claire Ronde  Creuse
+    14: "r\u25cb",  # Petite Foncee Ronde  Creuse
+    15: "R\u25cb",  # Grande Foncee Ronde  Creuse
 }
 
 PIECE_ATTRS_NAMES = [
@@ -99,7 +96,7 @@ class Quarto(BaseEnvironment):
         # Plateau : 16 cases x 5 valeurs = 80 dimensions
         board_enc = np.zeros(80, dtype=np.float32)
         for i in range(16):
-            board_enc[i*5:(i+1)*5] = self._encode_piece_attrs(self.board[i])
+            board_enc[i * 5:(i + 1) * 5] = self._encode_piece_attrs(self.board[i])
 
         # Piece courante : 5 dimensions
         piece_enc = self._encode_piece_attrs(self.current_piece)
@@ -224,10 +221,10 @@ class Quarto(BaseEnvironment):
 
     def _agent_pick_piece_for_opponent(self) -> int:
         """L'agent choisit une piece pour l'adversaire.
-        
+
         TOUJOURS heuristique : donner la piece la MOINS dangereuse
         pour minimiser les chances de victoire de l'adversaire.
-        
+
         Strategie :
         1. Eliminer les pieces qui permettent a l'adversaire de gagner immediatement
         2. Parmi les restantes, choisir celle avec le moins de lignes dangereuses
@@ -254,7 +251,7 @@ class Quarto(BaseEnvironment):
 
     def _opponent_pick_piece_for_agent(self) -> int:
         """L'adversaire choisit une piece pour l'agent.
-        
+
         En mode 'random' : choix aleatoire.
         En mode 'heuristic' : donner la piece la MOINS dangereuse
         pour minimiser les chances de victoire de l'agent.

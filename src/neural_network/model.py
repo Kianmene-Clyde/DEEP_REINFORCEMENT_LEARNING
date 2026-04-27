@@ -1,23 +1,11 @@
-"""Neural network model using numpy only.
-
-Supports feedforward networks with Dense layers and common activations.
-Used by all deep RL agents in this project.
-"""
+"""Neural network model utilisé par tout nos agents"""
 import numpy as np
 import pickle
 from typing import List, Tuple, Optional, Dict
 
 
 class NeuralNetwork:
-    """Simple feedforward neural network with numpy.
-
-    Supports:
-    - Dense layers with He initialization
-    - Activations: relu, softmax, tanh, sigmoid, linear
-    - Backpropagation with gradient clipping
-    - Adam optimizer (built-in)
-    - Dual-head output (policy + value) via ``build_dual_head``
-    """
+    """feedforward neural network"""
 
     def __init__(self, lr: float = 0.001, clip_grad: float = 1.0):
         self.lr = lr
@@ -29,12 +17,10 @@ class NeuralNetwork:
         self._adam_m: List[Dict] = []
         self._adam_v: List[Dict] = []
 
-    # ------------------------------------------------------------------
-    # Building
-    # ------------------------------------------------------------------
+    # Construction
     def add_dense(self, in_dim: int, out_dim: int, activation: str = 'relu'):
-        """Add a dense layer."""
-        # He initialization for relu, Xavier for others
+        """Ajout d'une couche dense."""
+        # Initialisation He pour relu, Xavier pour les autres
         if activation == 'relu':
             scale = np.sqrt(2.0 / in_dim)
         else:
@@ -48,9 +34,8 @@ class NeuralNetwork:
     @classmethod
     def build_mlp(cls, dims: List[int], activations: Optional[List[str]] = None,
                   lr: float = 0.001) -> 'NeuralNetwork':
-        """Build a MLP from a list of dimensions.
-
-        Example: build_mlp([10, 128, 128, 4], ['relu','relu','linear'])
+        """Créer un MLP à partir d'une liste de dimensions.
+        Exemple : build_mlp([10, 128, 128, 4], [“relu”,'relu',“linear”])
         """
         net = cls(lr=lr)
         if activations is None:
@@ -62,10 +47,8 @@ class NeuralNetwork:
     @classmethod
     def build_dual_head(cls, input_dim: int, hidden: List[int],
                         policy_dim: int, lr: float = 0.001) -> 'NeuralNetwork':
-        """Build a network with shared trunk, policy head (softmax) and value head (tanh).
-
-        The last two layers are the policy and value heads.
-        Forward returns (policy_probs, value).
+        """Construire un neural network avec un tronc commun, une tête de politique (softmax) et une tête de valeur (tanh).
+        Les deux dernières couches correspondent aux têtes de politique et de valeur.
         """
         net = cls(lr=lr)
         prev = input_dim
@@ -80,11 +63,8 @@ class NeuralNetwork:
         net._trunk_len = len(hidden)  # number of shared layers
         return net
 
-    # ------------------------------------------------------------------
     # Forward
-    # ------------------------------------------------------------------
     def forward(self, x: np.ndarray, training: bool = False) -> np.ndarray:
-        """Forward pass. Returns output (or tuple for dual head)."""
         x = np.atleast_2d(x).astype(np.float32)
         if getattr(self, '_dual_head', False):
             return self._forward_dual(x, training)
@@ -126,14 +106,11 @@ class NeuralNetwork:
         return policy, value
 
     def predict(self, x: np.ndarray) -> np.ndarray:
-        """Forward without caching."""
         return self.forward(x, training=False)
 
-    # ------------------------------------------------------------------
     # Backward
-    # ------------------------------------------------------------------
     def backward(self, loss_grad: np.ndarray):
-        """Backpropagate and update weights with Adam."""
+        """Rétropropagation et mise à jour des poids avec Adam"""
         if getattr(self, '_dual_head', False):
             raise RuntimeError("Use backward_dual for dual-head networks")
         self._adam_t += 1
@@ -154,16 +131,16 @@ class NeuralNetwork:
 
         # Policy head grads
         dz_p = policy_grad * self._activate_deriv(policy_cache['z'],
-                                                   self.layers[policy_idx]['act'],
-                                                   self._activate(policy_cache['z'], self.layers[policy_idx]['act']))
+                                                  self.layers[policy_idx]['act'],
+                                                  self._activate(policy_cache['z'], self.layers[policy_idx]['act']))
         dW_p = policy_cache['x'].T @ dz_p / len(policy_grad)
         db_p = np.mean(dz_p, axis=0)
         dx_p = dz_p @ self.layers[policy_idx]['W'].T
 
         # Value head grads
         dz_v = value_grad * self._activate_deriv(value_cache['z'],
-                                                  self.layers[value_idx]['act'],
-                                                  self._activate(value_cache['z'], self.layers[value_idx]['act']))
+                                                 self.layers[value_idx]['act'],
+                                                 self._activate(value_cache['z'], self.layers[value_idx]['act']))
         dW_v = value_cache['x'].T @ dz_v / len(value_grad)
         db_v = np.mean(dz_v, axis=0)
         dx_v = dz_v @ self.layers[value_idx]['W'].T
@@ -178,7 +155,7 @@ class NeuralNetwork:
         self._adam_update(trunk_grads)
 
     def _compute_grads(self, loss_grad: np.ndarray, layer_indices: List[int]) -> Dict:
-        """Compute gradients for specified layers."""
+        """Calculer les gradients pour les couches spécifiées."""
         grads = {}
         dx = loss_grad
         for i in reversed(layer_indices):
@@ -194,9 +171,7 @@ class NeuralNetwork:
             dx = dz @ self.layers[i]['W'].T
         return grads
 
-    # ------------------------------------------------------------------
     # Adam optimizer
-    # ------------------------------------------------------------------
     def _adam_update(self, grads: Dict, beta1=0.9, beta2=0.999, eps=1e-8):
         for i, g in grads.items():
             for key in ('W', 'b'):
@@ -207,9 +182,7 @@ class NeuralNetwork:
                 v_hat = self._adam_v[i][key] / (1 - beta2 ** self._adam_t)
                 self.layers[i][key] -= self.lr * m_hat / (np.sqrt(v_hat) + eps)
 
-    # ------------------------------------------------------------------
     # Activations
-    # ------------------------------------------------------------------
     @staticmethod
     def _activate(z: np.ndarray, act: str) -> np.ndarray:
         if act == 'relu':
@@ -239,22 +212,19 @@ class NeuralNetwork:
             return np.ones_like(z)
         raise ValueError(f"Unknown activation: {act}")
 
-    # ------------------------------------------------------------------
     # Copy / Save / Load
-    # ------------------------------------------------------------------
     def copy(self) -> 'NeuralNetwork':
-        """Deep copy of the network."""
+        """Copie du neural network."""
         import copy
         return copy.deepcopy(self)
 
     def copy_weights_from(self, other: 'NeuralNetwork'):
-        """Copy weights from another network."""
+        """Copier les poids d'un autre réseau."""
         for i in range(len(self.layers)):
             self.layers[i]['W'] = other.layers[i]['W'].copy()
             self.layers[i]['b'] = other.layers[i]['b'].copy()
 
     def soft_update(self, other: 'NeuralNetwork', tau: float = 0.01):
-        """Polyak averaging: self = tau*other + (1-tau)*self."""
         for i in range(len(self.layers)):
             self.layers[i]['W'] = tau * other.layers[i]['W'] + (1 - tau) * self.layers[i]['W']
             self.layers[i]['b'] = tau * other.layers[i]['b'] + (1 - tau) * self.layers[i]['b']

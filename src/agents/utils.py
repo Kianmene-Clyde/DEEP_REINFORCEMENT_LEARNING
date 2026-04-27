@@ -1,13 +1,12 @@
-"""Shared utility functions for agents."""
+"""Fonction utilitaire partagée pour les agents."""
 import numpy as np
 from typing import Optional
 
 
 def mask_and_normalize(probs: np.ndarray, valid_actions: Optional[np.ndarray],
                        action_space_size: int) -> np.ndarray:
-    """Mask invalid actions and safely normalize probability distribution.
-    
-    Handles edge cases where masking leaves near-zero or negative probs.
+    """Masquer les actions non valides et normaliser la distribution de probabilité.
+    Gère les cas limites où le masquage donne lieu à des probabilités proches de zéro ou négatives.
     """
     if valid_actions is not None and len(valid_actions) < action_space_size:
         mask = np.zeros(action_space_size, dtype=np.float32)

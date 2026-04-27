@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 benchmark_analyze_results.py
 

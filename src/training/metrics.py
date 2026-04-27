@@ -1,4 +1,4 @@
-"""Metrics collection for training and evaluation."""
+"""Collection des métriques pour l'entrainement et l'évaluation."""
 import numpy as np
 import json
 import os
@@ -6,7 +6,7 @@ from typing import Dict, List, Optional
 
 
 class Metrics:
-    """Collects and stores training metrics."""
+    """Stocker les métriques d'entrainement."""
 
     def __init__(self):
         self.episode_rewards: List[float] = []
@@ -22,7 +22,7 @@ class Metrics:
 
     def add_checkpoint(self, episode: int, eval_reward: float, eval_length: float,
                        avg_step_time: float):
-        """Store checkpoint metrics after evaluation."""
+        """Stocker les métriques des checkpoints après l'évaluation."""
         self.checkpoint_metrics[episode] = {
             'avg_reward': eval_reward,
             'avg_length': eval_length,
@@ -45,7 +45,7 @@ class Metrics:
         return float(np.mean(self.step_times)) * 1000  # ms
 
     def get_windowed_rewards(self, window: int = 100) -> List[float]:
-        """Running average of rewards."""
+        """Calculer la moyenne des rewards."""
         if len(self.episode_rewards) < window:
             return [np.mean(self.episode_rewards[:i+1])
                     for i in range(len(self.episode_rewards))]

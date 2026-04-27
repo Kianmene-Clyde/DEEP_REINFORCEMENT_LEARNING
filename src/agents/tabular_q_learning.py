@@ -6,8 +6,6 @@ from .base_agent import BaseAgent
 
 
 class TabularQLearningAgent(BaseAgent):
-    """Q-Learning with a lookup table. Works only on discrete, small state spaces."""
-
     def __init__(self, state_space_size: int, action_space_size: int,
                  learning_rate: float = 0.1, discount_factor: float = 0.99,
                  epsilon: float = 0.1, epsilon_decay: float = 0.999,
@@ -47,7 +45,8 @@ class TabularQLearningAgent(BaseAgent):
         self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)
 
     def save(self, filepath: str):
-        import os; os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
+        import os;
+        os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
         with open(filepath + '.pkl', 'wb') as f:
             pickle.dump({'q_table': self.q_table, 'epsilon': self.epsilon}, f)
 

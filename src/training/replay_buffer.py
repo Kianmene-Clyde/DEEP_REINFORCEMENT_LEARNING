@@ -1,11 +1,9 @@
-"""Replay buffers for experience replay."""
+"""Replay buffers pour la relecture des expérimentations."""
 import numpy as np
 from typing import Tuple
 
 
 class ReplayBuffer:
-    """Standard experience replay buffer."""
-
     def __init__(self, capacity: int = 50000):
         self.capacity = capacity
         self.buffer = []
@@ -59,7 +57,7 @@ class PrioritizedReplayBuffer:
 
         indices = np.random.choice(n, batch_size, p=probs, replace=False)
 
-        # Importance sampling weights
+        # Poids d'échantillonnage par importance
         self.beta = min(1.0, self.beta + self.beta_increment)
         weights = (n * probs[indices]) ** (-self.beta)
         weights = weights / (weights.max() + 1e-8)

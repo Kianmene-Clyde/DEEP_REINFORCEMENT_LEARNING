@@ -112,7 +112,7 @@ class MCTSAgent(BaseAgent):
             if not node.is_terminal:
                 reward_acc += self._rollout(sim_env)
 
-            # ── 4. Rétropropagation ───────────────────────────────────
+            # Rétropropagation
             current = node
             val = reward_acc
             while current is not None:

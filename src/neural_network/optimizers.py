@@ -1,9 +1,9 @@
-"""Standalone optimizers (Adam is also built into NeuralNetwork)."""
+"""Adam Optimizer."""
 import numpy as np
 
 
 class Adam:
-    """Adam optimizer for external use."""
+    """Adam optimizer pour une utilisation externe."""
     def __init__(self, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8):
         self.lr = lr
         self.beta1 = beta1

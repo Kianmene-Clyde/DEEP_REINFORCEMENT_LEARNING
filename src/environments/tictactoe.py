@@ -1,7 +1,7 @@
-"""TicTacToe environment - agent plays X against configurable opponent.
+"""Environnement TicTacToe : l'agent joue avec X contre un adversaire.
 
-State encoding: flat array of 9 values: 0=empty, 1=agent(X), -1=opponent(O)
-Action encoding: board position 0-8 (row*3 + col)
+Codage de l'état : tableau plat de 9 valeurs : 0 = vide, 1 = agent (X), -1 = adversaire (O)
+Codage de l'action : position sur le plateau 0-8
 """
 import numpy as np
 from typing import Tuple, Dict, Any, Optional
@@ -21,7 +21,7 @@ class TicTacToe(BaseEnvironment):
         return self.board.copy()
 
     def state_to_index(self, state: Any) -> int:
-        """Convert board to unique index (for tabular agents). 3^9 = 19683 states."""
+        """Convertir la table en index unique (pour les agents tabulaires)."""
         s = np.asarray(state, dtype=np.int32) + 1  # map -1,0,1 -> 0,1,2
         idx = 0
         for i in range(9):
