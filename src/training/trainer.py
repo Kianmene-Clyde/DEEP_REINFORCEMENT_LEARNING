@@ -1,4 +1,4 @@
-"""Trainer: runs training loops and collects metrics."""
+"""Trainer: Execute les boucles d'entrainement et stocks les métriques."""
 import time
 import numpy as np
 from typing import Optional, List
@@ -6,7 +6,7 @@ from .metrics import Metrics
 
 
 class Trainer:
-    """Train an agent on an environment with metrics collection."""
+    """Entraine un agent dans un environnement et collecte les métriques."""
 
     CHECKPOINTS = [1000, 10000, 100000]
 
@@ -25,7 +25,7 @@ class Trainer:
         self.checkpoints = checkpoints if checkpoints is not None else self.CHECKPOINTS
         self.verbose = verbose
 
-        # Give env reference to planning agents
+        # Reference d'environnement pour les agents de planning
         if hasattr(agent, 'set_env'):
             agent.set_env(env)
 
@@ -52,8 +52,7 @@ class Trainer:
                 action = self.agent.select_action(encoded, valid)
                 next_state, reward, done, info = self.env.step(action)
 
-                # Force done on last step (timeout) so episode-based agents
-                # (REINFORCE, PPO, A2C) trigger their update
+                # Forcer la fin à la dernière étape (délai d'attente) pour les agents basés sur les épisodes
                 if step == self.max_steps - 1 and not done:
                     done = True
 
@@ -69,7 +68,7 @@ class Trainer:
             avg_step = elapsed / max(steps, 1)
             metrics.add_episode(total_reward, steps, avg_step)
 
-            # Checkpoint evaluation
+            # Checkpoint d'évaluation
             for cp in self.checkpoints:
                 if ep == cp and cp not in done_checkpoints:
                     done_checkpoints.add(cp)
@@ -85,7 +84,7 @@ class Trainer:
                 print(f"  Episode {ep:>8d}/{self.max_episodes}  "
                       f"avg_reward(100)={avg_r:.4f}")
 
-        # Final evaluation
+        # Evaluation Finale
         eval_r, eval_l, eval_t = self._evaluate()
         metrics.add_checkpoint(self.max_episodes, eval_r, eval_l, eval_t)
         if self.verbose:

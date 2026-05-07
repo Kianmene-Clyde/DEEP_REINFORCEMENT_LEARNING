@@ -1,0 +1,39 @@
+environment,rank,agent,score,avg_reward,win_rate,time_ms,params,status
+LineWorld,1,TabularQL,0.45,0.2,1.0,0.009,"{'learning_rate': 0.3, 'discount_factor': 0.95, 'epsilon_decay': 0.999}",complete
+LineWorld,2,DoubleDQN,0.45,0.2,1.0,0.016,"{'learning_rate': 0.0005, 'discount_factor': 0.99, 'epsilon_decay': 0.99}",complete
+LineWorld,3,DDQN+PER,0.45,0.2,1.0,0.016,"{'learning_rate': 0.0005, 'discount_factor': 0.95, 'epsilon_decay': 0.99}",complete
+LineWorld,4,DDQN+ER,0.45,0.2,1.0,0.017,"{'learning_rate': 0.001, 'discount_factor': 0.95, 'epsilon_decay': 0.998}",complete
+LineWorld,5,DQN,0.45,0.2,1.0,0.017,"{'learning_rate': 0.0005, 'discount_factor': 0.99, 'epsilon_decay': 0.995}",complete
+LineWorld,6,A2C,0.45,0.2,1.0,0.018,"{'learning_rate': 0.003, 'discount_factor': 0.95, 'entropy_coef': 0.0}",complete
+LineWorld,7,REINFORCE+Critic,0.45,0.2,1.0,0.018,"{'learning_rate': 0.005, 'discount_factor': 0.99, 'hidden_layers': [64]}",complete
+LineWorld,8,REINFORCE,0.45,0.2,1.0,0.02,"{'learning_rate': 0.005, 'discount_factor': 0.99, 'hidden_layers': [64]}",complete
+LineWorld,9,PPO,0.45,0.2,1.0,0.024,"{'learning_rate': 0.001, 'discount_factor': 0.95, 'clip_ratio': 0.2}",complete
+LineWorld,10,REINFORCE+Mean,0.45,0.2,1.0,0.028,"{'learning_rate': 0.005, 'discount_factor': 0.99, 'hidden_layers': [128, 128]}",complete
+LineWorld,11,RandomRollout,0.2767,0.0835,0.85,12.162,"{'search_budget': 50, 'max_rollout_depth': 25}",complete
+LineWorld,12,MCTS,0.0628,-0.0465,0.61,4.625,"{'search_budget': 50, 'max_rollout_depth': 25, 'exploration_constant': 2.0}",complete
+LineWorld,13,Random,-8.0706,-7.909,0.005,0.045,{},complete
+GridWorld,1,TabularQL,10.88,10.63,1.0,0.014,"{'learning_rate': 0.1, 'discount_factor': 0.99, 'epsilon_decay': 0.995}",complete
+GridWorld,2,DoubleDQN,10.88,10.63,1.0,0.025,"{'learning_rate': 0.0005, 'discount_factor': 0.99, 'epsilon_decay': 0.998}",complete
+GridWorld,3,DDQN+ER,10.88,10.63,1.0,0.026,"{'learning_rate': 0.001, 'discount_factor': 0.95, 'epsilon_decay': 0.995}",complete
+GridWorld,4,DDQN+PER,10.88,10.63,1.0,0.026,"{'learning_rate': 0.0001, 'discount_factor': 0.95, 'epsilon_decay': 0.99}",complete
+GridWorld,5,DQN,10.88,10.63,1.0,0.026,"{'learning_rate': 0.0005, 'discount_factor': 0.95, 'epsilon_decay': 0.99}",complete
+GridWorld,6,REINFORCE,10.88,10.63,1.0,0.027,"{'learning_rate': 0.0003, 'discount_factor': 0.95, 'hidden_layers': [64]}",complete
+GridWorld,7,REINFORCE+Critic,10.88,10.63,1.0,0.027,"{'learning_rate': 0.0003, 'discount_factor': 0.99, 'hidden_layers': [128]}",complete
+GridWorld,8,REINFORCE+Mean,10.88,10.63,1.0,0.027,"{'learning_rate': 0.001, 'discount_factor': 0.95, 'hidden_layers': [64]}",complete
+GridWorld,9,PPO,10.88,10.63,1.0,0.043,"{'learning_rate': 0.003, 'discount_factor': 0.99, 'clip_ratio': 0.3}",complete
+GridWorld,10,A2C,10.8799,10.63,1.0,0.054,"{'learning_rate': 0.0007, 'discount_factor': 0.95, 'entropy_coef': 0.02}",complete
+GridWorld,11,RandomRollout,10.8567,10.6112,1.0,70.074,"{'search_budget': 50, 'max_rollout_depth': 25}",complete
+GridWorld,12,MCTS,10.8003,10.5544,1.0,28.778,"{'search_budget': 50, 'max_rollout_depth': 25, 'exploration_constant': 2.0}",complete
+GridWorld,13,Random,8.2916,8.1379,0.845,0.015,{},complete
+TicTacToe,1,REINFORCE+Mean,1.2181,0.975,0.985,0.054,"{'learning_rate': 0.001, 'discount_factor': 0.99, 'hidden_layers': [128, 128]}",complete
+TicTacToe,2,REINFORCE,1.2123,0.97,0.985,0.049,"{'learning_rate': 0.001, 'discount_factor': 0.95, 'hidden_layers': [128]}",complete
+TicTacToe,3,PPO,1.1858,0.95,0.955,0.069,"{'learning_rate': 0.0003, 'discount_factor': 0.95, 'clip_ratio': 0.1}",complete
+TicTacToe,4,A2C,1.1218,0.895,0.945,0.058,"{'learning_rate': 0.001, 'discount_factor': 0.95, 'entropy_coef': 0.02}",complete
+TicTacToe,5,MCTS,1.0225,0.815,0.88,0.998,"{'search_budget': 10, 'max_rollout_depth': 50, 'exploration_constant': 2.0}",complete
+TicTacToe,6,REINFORCE+Critic,0.8717,0.69,0.795,0.052,"{'learning_rate': 0.001, 'discount_factor': 0.99, 'hidden_layers': [64]}",complete
+TicTacToe,7,RandomRollout,0.8063,0.64,0.74,7.133,"{'search_budget': 10, 'max_rollout_depth': 25}",complete
+TicTacToe,8,DDQN+PER,0.6819,0.54,0.63,0.048,"{'learning_rate': 0.0005, 'discount_factor': 0.99, 'epsilon_decay': 0.995}",complete
+TicTacToe,9,DoubleDQN,0.6352,0.5,0.615,0.088,"{'learning_rate': 0.001, 'discount_factor': 0.99, 'epsilon_decay': 0.995}",complete
+TicTacToe,10,DQN,0.6096,0.48,0.59,0.073,"{'learning_rate': 0.0001, 'discount_factor': 0.95, 'epsilon_decay': 0.99}",complete
+TicTacToe,11,DDQN+ER,0.5963,0.465,0.615,0.09,"{'learning_rate': 0.0001, 'discount_factor': 0.99, 'epsilon_decay': 0.998}",complete
+TicTacToe,12,Random,0.2011,0.125,0.485,0.053,{},complete

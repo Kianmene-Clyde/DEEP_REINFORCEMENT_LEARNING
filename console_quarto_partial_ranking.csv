@@ -1,0 +1,12 @@
+environment,agent,config,score,avg_reward,win_rate,time_ms,params,status,rank
+Quarto,RandomRollout,1,1.2288,0.99,0.99,2245.226,"{'search_budget': 10, 'max_rollout_depth': 25}",partial_current_ranking,1
+Quarto,DoubleDQN,11,0.9947,0.79,,,"{'learning_rate': 0.0005, 'discount_factor': 0.99, 'epsilon_decay': 0.995}",partial_current_ranking,2
+Quarto,REINFORCE+Mean,5,0.9775,0.775,,,"{'learning_rate': 0.005, 'discount_factor': 0.99, 'hidden_layers': [128]}",partial_current_ranking,3
+Quarto,DDQN+ER,2,0.8582,0.675,,,"{'learning_rate': 0.001, 'discount_factor': 0.95, 'epsilon_decay': 0.995}",partial_current_ranking,4
+Quarto,DDQN+PER,3,0.8457,0.665,,,"{'learning_rate': 0.001, 'discount_factor': 0.95, 'epsilon_decay': 0.998}",partial_current_ranking,5
+Quarto,A2C,14,0.8401,0.66,,,"{'learning_rate': 0.0007, 'discount_factor': 0.95, 'entropy_coef': 0.01}",partial_current_ranking,6
+Quarto,DQN,6,0.822,0.645,,,"{'learning_rate': 0.001, 'discount_factor': 0.99, 'epsilon_decay': 0.998}",partial_current_ranking,7
+Quarto,REINFORCE+Critic,12,0.8054,0.63,,,"{'learning_rate': 0.001, 'discount_factor': 0.99, 'hidden_layers': [128, 128]}",partial_current_ranking,8
+Quarto,REINFORCE,16,0.8047,0.63,,,"{'learning_rate': 0.0003, 'discount_factor': 0.99, 'hidden_layers': [64]}",partial_current_ranking,9
+Quarto,PPO,10,0.7448,0.58,,,"{'learning_rate': 0.001, 'discount_factor': 0.99, 'clip_ratio': 0.1}",partial_current_ranking,10
+Quarto,Random,1,0.3043,0.205,,,{},partial_current_ranking,11

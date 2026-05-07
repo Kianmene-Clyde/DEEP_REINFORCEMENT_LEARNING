@@ -1,4 +1,4 @@
-"""Double Q-Learning profond"""
+"""Double Q-Learning"""
 import numpy as np
 import os, pickle
 from typing import Optional, Any
@@ -55,14 +55,13 @@ class DoubleDeepQLearningAgent(BaseAgent):
 
         # Propagation avant avec training=True pour mettre en cache pour la rétropropagation
         q_vals = self.q_net.forward(s, training=True)
-        # Utiliser des appels predict séparés (pas de cache nécessaire)
+        # Utiliser des appels predict séparés, une pour choisir l'action, l'autre pour l'évalué
         best_a = int(np.argmax(self.q_net.predict(ns)[0]))
         q_target_val = self.target_net.predict(ns)[0, best_a]
         target = reward + (0 if done else self.gamma * q_target_val)
 
         grad = np.zeros_like(q_vals)
         grad[0, action] = q_vals[0, action] - target
-        # backward utilise le cache de forward(..., training=True) ci-dessus
         self.q_net.backward(grad)
 
         self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)

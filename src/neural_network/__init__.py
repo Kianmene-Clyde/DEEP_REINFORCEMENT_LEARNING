@@ -1,4 +1,4 @@
-"""Minimal neural network framework built on numpy."""
+"""Neural Network"""
 from .model import NeuralNetwork
 from .optimizers import Adam
 

@@ -1,8 +1,3 @@
-"""TicTacToe environment - agent plays X against configurable opponent.
-
-State encoding: flat array of 9 values: 0=empty, 1=agent(X), -1=opponent(O)
-Action encoding: board position 0-8 (row*3 + col)
-"""
 import numpy as np
 from typing import Tuple, Dict, Any, Optional
 from .base_env import BaseEnvironment
@@ -21,8 +16,8 @@ class TicTacToe(BaseEnvironment):
         return self.board.copy()
 
     def state_to_index(self, state: Any) -> int:
-        """Convert board to unique index (for tabular agents). 3^9 = 19683 states."""
-        s = np.asarray(state, dtype=np.int32) + 1  # map -1,0,1 -> 0,1,2
+        """Convertir la table en index unique pour les agents tabulaires."""
+        s = np.asarray(state, dtype=np.int32) + 1
         idx = 0
         for i in range(9):
             idx += int(s[i]) * (3 ** i)
@@ -43,7 +38,7 @@ class TicTacToe(BaseEnvironment):
         if self._is_full():
             return self._get_state(), 0.0, True, {}
 
-        # Opponent move
+        # l'adversaire joue
         opp_action = self._opponent_move()
         self.board[opp_action] = -1.0
         w = self._check_winner()
@@ -77,24 +72,24 @@ class TicTacToe(BaseEnvironment):
         return int(np.random.choice(valid))
 
     def _heuristic_move(self, valid: np.ndarray) -> int:
-        # Win if possible
+        # Gagner si possible
         for a in valid:
             self.board[a] = -1.0
             if self._check_winner() == -1:
                 self.board[a] = 0
                 return int(a)
             self.board[a] = 0
-        # Block agent
+        # Blocker l'agent
         for a in valid:
             self.board[a] = 1.0
             if self._check_winner() == 1:
                 self.board[a] = 0
                 return int(a)
             self.board[a] = 0
-        # Center
+        # Centre
         if 4 in valid:
             return 4
-        # Corner
+        # Coin
         corners = np.array([0, 2, 6, 8])
         avail = valid[np.isin(valid, corners)]
         if len(avail) > 0:

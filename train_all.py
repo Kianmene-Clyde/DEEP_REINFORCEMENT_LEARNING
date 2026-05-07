@@ -1,24 +1,3 @@
-"""
-train_all.py - Entraîne tous les agents actuels sur tous les environnements à l'aide d'une recherche par grille intégrée.
-
-Ce fichier centralise l'ensemble du pipeline expérimental :
-1) créer les environnements ;
-2) générer des grilles d'hyperparamètres par famille d'agents ;
-3) entraîner chaque agent sur chaque configuration d'hyperparamètres candidate ;
-4) conserver la meilleure configuration pour chaque agent/environnement ;
-5) classer les agents les mieux optimisés au sein de chaque environnement ;
-6) enregistrer les métriques, les modèles, les résumés CSV et les résumés JSON.
-
-Exemples d'utilisation :
-    python train_all.py
-    python train_all.py --quick
-    python train_all.py --env LineWorld
-    python train_all.py --agent DQN
-    python train_all.py --grid compact --episodes 1000
-    python train_all.py --grid full --episodes 10000
-    python train_all.py --grid none --episodes 10000
-    python train_all.py --quick --max-configs-per-agent 1
-"""
 import argparse
 import csv
 import itertools
@@ -42,7 +21,6 @@ from utils.plotting import plot_learning_curves, plot_comparison, plot_checkpoin
 
 
 # Configuration des environnements
-
 def get_environments():
     return {
         'LineWorld': LineWorld(length=10),
@@ -60,7 +38,6 @@ def get_observation_size(env) -> int:
 
 
 # Définition des familles d'agents et des grilles
-
 AGENT_FAMILIES = {
     'Random': 'baseline',
     'TabularQL': 'tabular_value_based',
@@ -75,11 +52,13 @@ AGENT_FAMILIES = {
     'A2C': 'actor_critic',
     'RandomRollout': 'planning',
     'MCTS': 'planning',
+    'ExpertApprentice': 'hybrid_planning',
+    'AlphaZero': 'hybrid_planning',
+    'MuZero': 'hybrid_planning',
+    'MuZero_Stochastic': 'hybrid_planning',
 }
 
 # Chaque famille utilise 3 hyperparamètres maximum.
-# Le mode compact est adapté à une soutenance / expérimentation raisonnable.
-# Le mode full est plus long mais donne une analyse plus sérieuse.
 GRID_SPECS = {
     'compact': {
         'baseline': {
@@ -114,6 +93,11 @@ GRID_SPECS = {
             'search_budget': [10, 30],
             'max_rollout_depth': [25, 50],
             'exploration_constant': [1.0, 1.41],
+        },
+        'hybrid_planning': {
+            'num_simulations': [20, 50],
+            'learning_rate': [0.001, 0.003],
+            'hidden_layers': [[64], [128]],
         },
     },
     'full': {
@@ -150,6 +134,11 @@ GRID_SPECS = {
             'max_rollout_depth': [25, 50],
             'exploration_constant': [1.0, 1.41, 2.0],
         },
+        'hybrid_planning': {
+            'num_simulations': [20, 30, 50],
+            'learning_rate': [0.001, 0.003],
+            'hidden_layers': [[64], [128], [128, 128]],
+        },
     },
     'none': {
         'baseline': {'fixed': [{}]},
@@ -183,6 +172,11 @@ GRID_SPECS = {
             'max_rollout_depth': [50],
             'exploration_constant': [1.41],
         },
+        'hybrid_planning': {
+            'num_simulations': [30],
+            'learning_rate': [0.001],
+            'hidden_layers': [[128]],
+        },
     },
 }
 
@@ -200,6 +194,10 @@ AGENT_ORDER = [
     'A2C',
     'RandomRollout',
     'MCTS',
+    'ExpertApprentice',
+    'AlphaZero',
+    'MuZero',
+    'MuZero_Stochastic',
 ]
 
 
@@ -275,6 +273,48 @@ def build_agent(agent_name: str, env_name: str, obs_size: int, action_size: int,
         if seed is not None:
             mcts_kwargs['seed'] = seed
         return MCTSAgent(action_size, **mcts_kwargs)
+
+    if agent_name == 'ExpertApprentice':
+        ea_kwargs = {
+            'expert_simulations': int(kwargs.get('num_simulations', 30)),
+            'hidden_layers': kwargs.get('hidden_layers', [128]),
+            'learning_rate': float(kwargs.get('learning_rate', 0.001)),
+        }
+        if seed is not None:
+            ea_kwargs['seed'] = seed
+        return ExpertApprenticeAgent(obs_size, action_size, **ea_kwargs)
+
+    if agent_name == 'AlphaZero':
+        az_kwargs = {
+            'num_simulations': int(kwargs.get('num_simulations', 30)),
+            'hidden_layers': kwargs.get('hidden_layers', [128]),
+            'learning_rate': float(kwargs.get('learning_rate', 0.001)),
+        }
+        if seed is not None:
+            az_kwargs['seed'] = seed
+        return AlphaZeroAgent(obs_size, action_size, **az_kwargs)
+
+    if agent_name == 'MuZero':
+        mz_kwargs = {
+            'num_simulations': int(kwargs.get('num_simulations', 20)),
+            'hidden_layers': kwargs.get('hidden_layers', [128]),
+            'learning_rate': float(kwargs.get('learning_rate', 0.001)),
+            'latent_dim': 64,
+        }
+        if seed is not None:
+            mz_kwargs['seed'] = seed
+        return MuZeroAgent(obs_size, action_size, **mz_kwargs)
+
+    if agent_name == 'MuZero_Stochastic':
+        mzs_kwargs = {
+            'num_simulations': int(kwargs.get('num_simulations', 20)),
+            'hidden_layers': kwargs.get('hidden_layers', [128]),
+            'learning_rate': float(kwargs.get('learning_rate', 0.001)),
+            'latent_dim': 64,
+        }
+        if seed is not None:
+            mzs_kwargs['seed'] = seed
+        return StochasticMuZeroAgent(obs_size, action_size, **mzs_kwargs)
 
     raise ValueError(f'Unknown agent: {agent_name}')
 
@@ -459,19 +499,31 @@ def train_one_configuration(env, env_name: str, agent_name: str, agent,
 
 
 def main():
-    parser = argparse.ArgumentParser(description='DRL training pipeline with integrated grid search')
-    parser.add_argument('--quick', action='store_true', help='Quick test mode: 100 episodes, 20 eval episodes')
-    parser.add_argument('--env', type=str, default=None, help='Train only this environment')
-    parser.add_argument('--agent', type=str, default=None, help='Train only this agent')
-    parser.add_argument('--episodes', type=int, default=None, help='Training episodes per configuration')
-    parser.add_argument('--eval-episodes', type=int, default=None, help='Evaluation episodes per configuration')
-    parser.add_argument('--max-steps', type=int, default=200, help='Maximum steps per episode')
-    parser.add_argument('--seed', type=int, default=42, help='Random seed for reproducibility')
+    parser = argparse.ArgumentParser(description='Pipeline d\'entrainement avec un grid search')
+    parser.add_argument('--quick', action='store_true',
+                        help='Mode de test rapide : 100 épisodes d’entraînement, 20 épisodes d’évaluation')
+
+    parser.add_argument('--env', type=str, default=None, help='Entraîner uniquement cet environnement')
+
+    parser.add_argument('--agent', type=str, default=None, help='Entraîner uniquement cet agent')
+
+    parser.add_argument('--episodes', type=int, default=None, help='Nombre d’épisodes d’entraînement par configuration')
+
+    parser.add_argument('--eval-episodes', type=int, default=None,
+                        help='Nombre d’épisodes d’évaluation par configuration')
+
+    parser.add_argument('--max-steps', type=int, default=200, help='Nombre maximal d’étapes par épisode')
+
+    parser.add_argument('--seed', type=int, default=42, help='Graine aléatoire pour garantir la reproductibilité')
+
     parser.add_argument('--grid', choices=['compact', 'full', 'none'], default='compact',
-                        help='Hyperparameter grid size. compact is the recommended default.')
+                        help='Taille de la grille d’hyperparamètres. compact est la valeur par défaut recommandée.')
+
     parser.add_argument('--max-configs-per-agent', type=int, default=None,
-                        help='Optional cap on tested configurations per agent; useful for debugging.')
-    parser.add_argument('--quiet', action='store_true', help='Reduce per-episode logs')
+                        help='Limite optionnelle du nombre de configurations testées par agent ; utile pour le débogage.')
+
+    parser.add_argument('--quiet', action='store_true', help='Réduire les logs affichés à chaque épisode')
+
     args = parser.parse_args()
 
     np.random.seed(args.seed)
@@ -504,7 +556,7 @@ def main():
     metrics_for_best_agents: Dict[str, Dict[str, Any]] = {}
 
     print('\n' + '=' * 80)
-    print('DRL TRAINING WITH INTEGRATED GRID SEARCH')
+    print('ENTRAINEMENT AVEC UN GRID SEARCH')
     print('=' * 80)
     print(f'Grid mode           : {args.grid}')
     print(f'Episodes/config     : {max_episodes}')
@@ -515,7 +567,7 @@ def main():
 
     for env_name, env in envs.items():
         print(f'\n{"=" * 80}')
-        print(f'ENVIRONMENT: {env_name}')
+        print(f'ENVIRONNEMENT: {env_name}')
         print(f'{"=" * 80}')
 
         obs_size = get_observation_size(env)
@@ -525,7 +577,7 @@ def main():
         if args.agent:
             agent_names = [a for a in agent_names if a == args.agent]
             if not agent_names:
-                print(f'  Agent {args.agent} is not available for {env_name}; skipping.')
+                print(f' Cet agent {args.agent} n\'est pas disponible pour l\'environnement: {env_name};')
                 continue
 
         env_best_results: Dict[str, Dict[str, Any]] = {}
@@ -540,7 +592,7 @@ def main():
                 max_configs=args.max_configs_per_agent,
             )
 
-            print(f'\n  Agent: {agent_name} | family={family} | configs={len(configs)}')
+            print(f'\n  Agent: {agent_name} | famille={family} | configs={len(configs)}')
 
             best_result = None
             best_metrics = None
@@ -607,7 +659,7 @@ def main():
             )
 
             print(
-                f'  >>> Best {agent_name} on {env_name}: '
+                f'  >>> Meilleur: {agent_name} dans {env_name}: '
                 f'config={best_result.get("config_id")} | '
                 f'params={best_result.get("hyperparams", {})} | '
                 f'score={best_result.get("selection_score", 0):.4f} | '
@@ -639,7 +691,7 @@ def main():
             reverse=True,
         )
 
-        print(f'\n  BEST TUNED AGENTS FOR {env_name}')
+        print(f'\n  Meilleur agents tuner pour l\'environnement {env_name}')
         for rank, (agent_name, res) in enumerate(ranked, start=1):
             print(
                 f'    #{rank:02d} {agent_name:20s} | '
@@ -671,7 +723,7 @@ def main():
 
     # Global summary
     print(f'\n{"=" * 80}')
-    print('GLOBAL SUMMARY - BEST TUNED AGENTS BY ENVIRONMENT')
+    print('Sommaire Globale - Meuilleur Agent Tuner par environnement')
     print(f'{"=" * 80}')
 
     for env_name, results in all_best_results.items():
@@ -703,7 +755,7 @@ def main():
         pass
 
     total_time = time.time() - total_start
-    print(f'\nTotal running time: {total_time:.1f}s ({total_time / 60:.1f}min)')
+    print(f'\nTemps total d\'éxécution: {total_time:.1f}s ({total_time / 60:.1f}min)')
     print('Results saved to results/')
     print('Grid-search details saved to results/grid_search/')
     print('Best tuned models saved to models/*_best')

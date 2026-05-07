@@ -92,8 +92,7 @@ class A2CAgent(BaseAgent):
         actions = np.array(self.ep_actions, dtype=np.int32)
         returns = self._compute_returns()
 
-        # critic
-        # Forward avec cache pour backward
+        # Forward critic
         values = self.critic.forward(states, training=True)[:, 0]
         advantages = returns - values
 
@@ -103,7 +102,7 @@ class A2CAgent(BaseAgent):
         self.critic.backward(cgrad)
 
         # Acteur
-        # Forward avec cache pour backward
+        # Forward pour prédire les probabilités
         probs = self.actor.forward(states, training=True)
 
         # Gradient de la loss acteur :

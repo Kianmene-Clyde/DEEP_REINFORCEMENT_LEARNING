@@ -1,4 +1,4 @@
-"""Interface de l'aegnt basique."""
+"""Interface de l'agent basique."""
 from abc import ABC, abstractmethod
 import numpy as np
 from typing import Optional, Any

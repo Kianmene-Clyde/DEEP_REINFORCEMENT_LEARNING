@@ -1,48 +1,24 @@
-"""Environnement Quarto - jeu de strategie sur plateau 4x4.
-
-Encodage de l'etat (101 dimensions) :
-  Pour chaque case du plateau (16 cases x 5 valeurs = 80) :
-    [occupee, taille, couleur, forme, remplissage]
-    occupee=0 -> case vide (les 4 attrs sont a 0)
-    occupee=1 -> piece presente, attrs en binaire (0 ou 1)
-  Piece courante (5 valeurs) :
-    [a_piece, taille, couleur, forme, remplissage]
-  Disponibilite des pieces (16 valeurs) :
-    1.0 = disponible, 0.0 = utilisee
-
-Attributs binaires des pieces (chaque piece 0-15 = 4 bits) :
-  bit 0 : Taille      (0=Petite, 1=Grande)
-  bit 1 : Couleur     (0=Claire, 1=Foncee)
-  bit 2 : Forme       (0=Carree, 1=Ronde)
-  bit 3 : Remplissage (0=Pleine, 1=Creuse)
-"""
 import numpy as np
 from typing import Tuple, Dict, Any, Optional, List
 from .base_env import BaseEnvironment
 
-
-# ──────────────────────────────────────────────────────
-# Symboles visuels uniques pour chaque piece
-# Lettre : majuscule=Grande, minuscule=Petite, R/r=Foncee, B/b=Claire
-# Forme  : carre/rond x plein/creux
-# ──────────────────────────────────────────────────────
 PIECE_SYMBOLS = {
-    0:  "b\u25a0",   # Petite Claire Carree Pleine
-    1:  "B\u25a0",   # Grande Claire Carree Pleine
-    2:  "r\u25a0",   # Petite Foncee Carree Pleine
-    3:  "R\u25a0",   # Grande Foncee Carree Pleine
-    4:  "b\u25cf",   # Petite Claire Ronde  Pleine
-    5:  "B\u25cf",   # Grande Claire Ronde  Pleine
-    6:  "r\u25cf",   # Petite Foncee Ronde  Pleine
-    7:  "R\u25cf",   # Grande Foncee Ronde  Pleine
-    8:  "b\u25a1",   # Petite Claire Carree Creuse
-    9:  "B\u25a1",   # Grande Claire Carree Creuse
-    10: "r\u25a1",   # Petite Foncee Carree Creuse
-    11: "R\u25a1",   # Grande Foncee Carree Creuse
-    12: "b\u25cb",   # Petite Claire Ronde  Creuse
-    13: "B\u25cb",   # Grande Claire Ronde  Creuse
-    14: "r\u25cb",   # Petite Foncee Ronde  Creuse
-    15: "R\u25cb",   # Grande Foncee Ronde  Creuse
+    0: "b\u25a0",  # Petite Claire Carree Pleine
+    1: "B\u25a0",  # Grande Claire Carree Pleine
+    2: "r\u25a0",  # Petite Foncee Carree Pleine
+    3: "R\u25a0",  # Grande Foncee Carree Pleine
+    4: "b\u25cf",  # Petite Claire Ronde  Pleine
+    5: "B\u25cf",  # Grande Claire Ronde  Pleine
+    6: "r\u25cf",  # Petite Foncee Ronde  Pleine
+    7: "R\u25cf",  # Grande Foncee Ronde  Pleine
+    8: "b\u25a1",  # Petite Claire Carree Creuse
+    9: "B\u25a1",  # Grande Claire Carree Creuse
+    10: "r\u25a1",  # Petite Foncee Carree Creuse
+    11: "R\u25a1",  # Grande Foncee Carree Creuse
+    12: "b\u25cb",  # Petite Claire Ronde  Creuse
+    13: "B\u25cb",  # Grande Claire Ronde  Creuse
+    14: "r\u25cb",  # Petite Foncee Ronde  Creuse
+    15: "R\u25cb",  # Grande Foncee Ronde  Creuse
 }
 
 PIECE_ATTRS_NAMES = [
@@ -66,7 +42,7 @@ class Quarto(BaseEnvironment):
         self._done = False
         super().__init__(seed)
 
-    # ──── Utilitaires pieces ────
+    # Utilitaires pieces
 
     @staticmethod
     def piece_symbol(piece_id: int) -> str:
@@ -81,7 +57,7 @@ class Quarto(BaseEnvironment):
         attrs = [(piece_id >> b) & 1 for b in range(4)]
         return ", ".join(PIECE_ATTRS_NAMES[i][attrs[i]] for i in range(4))
 
-    # ──── Encodage de l'etat (101 dimensions) ────
+    # Encodage de l'etat (101 dimensions)
 
     def _encode_piece_attrs(self, piece_id: int) -> np.ndarray:
         """Encode une piece en 5 valeurs : [occupee, taille, couleur, forme, remplissage]."""
@@ -99,7 +75,7 @@ class Quarto(BaseEnvironment):
         # Plateau : 16 cases x 5 valeurs = 80 dimensions
         board_enc = np.zeros(80, dtype=np.float32)
         for i in range(16):
-            board_enc[i*5:(i+1)*5] = self._encode_piece_attrs(self.board[i])
+            board_enc[i * 5:(i + 1) * 5] = self._encode_piece_attrs(self.board[i])
 
         # Piece courante : 5 dimensions
         piece_enc = self._encode_piece_attrs(self.current_piece)
@@ -120,8 +96,6 @@ class Quarto(BaseEnvironment):
         self.available[piece] = False
         return self._get_state()
 
-    # ──── Step ────
-
     def step(self, action: int) -> Tuple[np.ndarray, float, bool, Dict]:
         if self._done:
             return self._get_state(), 0.0, True, {}
@@ -132,7 +106,7 @@ class Quarto(BaseEnvironment):
         if self.current_piece < 0:
             return self._get_state(), -1.0, True, {"error": "aucune piece"}
 
-        # 1. L'agent place sa piece
+        # L'agent place sa piece
         self.board[pos] = self.current_piece
         if self._check_win():
             self._done = True
@@ -142,14 +116,14 @@ class Quarto(BaseEnvironment):
             self._done = True
             return self._get_state(), 0.0, True, {"result": "draw"}
 
-        # 2. L'agent choisit une piece pour l'adversaire (TOUJOURS heuristique)
+        # L'agent choisit une piece pour l'adversaire
         opp_piece = self._agent_pick_piece_for_opponent()
         if opp_piece < 0:
             self._done = True
             return self._get_state(), 0.0, True, {"result": "draw"}
         self.available[opp_piece] = False
 
-        # 3. L'adversaire place sa piece
+        # L'adversaire place sa piece
         opp_pos = self._opponent_place(opp_piece)
         if opp_pos is not None:
             self.board[opp_pos] = opp_piece
@@ -161,7 +135,7 @@ class Quarto(BaseEnvironment):
             self._done = True
             return self._get_state(), 0.0, True, {"result": "draw"}
 
-        # 4. L'adversaire choisit une piece pour l'agent (selon opponent_type)
+        # L'adversaire choisit une piece pour l'agent
         agent_piece = self._opponent_pick_piece_for_agent()
         if agent_piece < 0:
             self._done = True
@@ -171,7 +145,7 @@ class Quarto(BaseEnvironment):
 
         return self._get_state(), 0.0, False, {}
 
-    # ──── Verification de victoire ────
+    # Verification de victoire
 
     def _get_lines(self) -> List[np.ndarray]:
         b = self.board.reshape(4, 4)
@@ -205,7 +179,6 @@ class Quarto(BaseEnvironment):
         return False
 
     def _count_dangerous_lines(self, piece: int) -> int:
-        """Score de dangerosite : combien de lignes cette piece pourrait aider a completer."""
         danger = 0
         piece_attrs = self.ATTRS[piece]
         for line in self._get_lines():
@@ -217,48 +190,31 @@ class Quarto(BaseEnvironment):
             for attr in range(4):
                 vals = set(filled_attrs[:, attr])
                 if len(vals) == 1 and piece_attrs[attr] == list(vals)[0]:
-                    danger += len(filled) ** 2  # 3 pieces = 9, 2 pieces = 4
+                    danger += len(filled) ** 2
         return danger
 
-    # ──── Choix de piece : AGENT pour l'adversaire ────
-
+    # Choix de piece : AGENT pour l'adversaire
     def _agent_pick_piece_for_opponent(self) -> int:
-        """L'agent choisit une piece pour l'adversaire.
-        
-        TOUJOURS heuristique : donner la piece la MOINS dangereuse
-        pour minimiser les chances de victoire de l'adversaire.
-        
-        Strategie :
-        1. Eliminer les pieces qui permettent a l'adversaire de gagner immediatement
-        2. Parmi les restantes, choisir celle avec le moins de lignes dangereuses
-        """
         avail = np.where(self.available)[0]
         if len(avail) == 0:
             return -1
 
-        # Niveau 1 : eliminer les pieces qui donnent la victoire
+        # eliminer les pieces qui donnent la victoire
         safe = [int(p) for p in avail if not self._would_piece_win_somewhere(int(p))]
         candidates = safe if safe else [int(p) for p in avail]
 
         if len(candidates) == 1:
             return candidates[0]
 
-        # Niveau 2 : choisir la moins dangereuse
+        # choisir la moins dangereuse
         scored = [(p, self._count_dangerous_lines(p)) for p in candidates]
         scored.sort(key=lambda x: x[1])
         best_score = scored[0][1]
         best = [p for p, s in scored if s == best_score]
         return int(np.random.choice(best))
 
-    # ──── Choix de piece : ADVERSAIRE pour l'agent ────
-
+    # Choix de piece : ADVERSAIRE pour l'agent
     def _opponent_pick_piece_for_agent(self) -> int:
-        """L'adversaire choisit une piece pour l'agent.
-        
-        En mode 'random' : choix aleatoire.
-        En mode 'heuristic' : donner la piece la MOINS dangereuse
-        pour minimiser les chances de victoire de l'agent.
-        """
         avail = np.where(self.available)[0]
         if len(avail) == 0:
             return -1
@@ -266,7 +222,7 @@ class Quarto(BaseEnvironment):
         if self.opponent_type == "random":
             return int(np.random.choice(avail))
 
-        # Mode heuristic : meme logique que l'agent
+        # Mode heuristic avec la meme logique que l'agent
         safe = [int(p) for p in avail if not self._would_piece_win_somewhere(int(p))]
         candidates = safe if safe else [int(p) for p in avail]
 
@@ -279,7 +235,7 @@ class Quarto(BaseEnvironment):
         best = [p for p, s in scored if s == best_score]
         return int(np.random.choice(best))
 
-    # ──── Placement de l'adversaire ────
+    # Placement de l'adversaire
 
     def _opponent_place(self, piece: int) -> Optional[int]:
         empty = np.where(self.board == -1)[0]
@@ -299,7 +255,7 @@ class Quarto(BaseEnvironment):
             self.board[pos] = -1
         return int(np.random.choice(empty))
 
-    # ──── Affichage ────
+    # Affichage
 
     def render(self) -> None:
         b = self.board.reshape(4, 4)

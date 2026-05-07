@@ -1,4 +1,4 @@
-"""Training infrastructure: Trainer, Evaluator, Metrics."""
+"""Infrastructure de l'entrainement: Trainer, Evaluator, Metrics."""
 from .trainer import Trainer
 from .evaluator import Evaluator
 from .metrics import Metrics

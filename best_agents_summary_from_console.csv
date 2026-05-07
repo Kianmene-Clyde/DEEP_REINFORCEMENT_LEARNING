@@ -1,0 +1,5 @@
+environment,rank,agent,score,avg_reward,win_rate,time_ms,params,status,completeness,config
+LineWorld,1,TabularQL,0.45,0.2,1.0,0.009,"{'learning_rate': 0.3, 'discount_factor': 0.95, 'epsilon_decay': 0.999}",complete,complete,
+GridWorld,1,TabularQL,10.88,10.63,1.0,0.014,"{'learning_rate': 0.1, 'discount_factor': 0.99, 'epsilon_decay': 0.995}",complete,complete,
+TicTacToe,1,REINFORCE+Mean,1.2181,0.975,0.985,0.054,"{'learning_rate': 0.001, 'discount_factor': 0.99, 'hidden_layers': [128, 128]}",complete,complete,
+Quarto,1,RandomRollout,1.2288,0.99,0.99,2245.226,"{'search_budget': 10, 'max_rollout_depth': 25}",partial_current_ranking,partial,1.0

@@ -1,22 +1,9 @@
-"""Line World environment - agent moves on a 1D line.
-
-State encoding (vector):
-- One-hot vector of length `length`, with 1 at the current position.
-
-Action encoding:
-- 0: Left
-- 1: Right
-"""
 import numpy as np
 from typing import Tuple, Dict, Any, Optional
 from .base_env import BaseEnvironment
 
 
 class LineWorld(BaseEnvironment):
-    """
-    Simple 1D environment where agent moves left/right on a line.
-    Goal is to reach the right end of the line.
-    """
 
     def __init__(self, length: int = 10, seed: Optional[int] = None):
         self.length = length
