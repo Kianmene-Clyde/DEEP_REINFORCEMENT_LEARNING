@@ -1,0 +1,22 @@
+{
+  "environment": "GridWorld",
+  "agent": "MuZero",
+  "seed": 42,
+  "status": "OK",
+  "avg_reward": -0.09999999999999985,
+  "std_reward": 0.0,
+  "avg_length": 30.0,
+  "avg_step_time_ms": 2.207476667212581,
+  "win_rate": 0.0,
+  "loss_rate": 0.0,
+  "draw_rate": 0.0,
+  "success_rate": 0.0,
+  "timeout_rate": 1.0,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 3,
+  "evaluation_seed": 2000042,
+  "decision_count": 90,
+  "episodes_trained": 4,
+  "training_time_seconds": 0.2022760999680031,
+  "transitions": 91
+}

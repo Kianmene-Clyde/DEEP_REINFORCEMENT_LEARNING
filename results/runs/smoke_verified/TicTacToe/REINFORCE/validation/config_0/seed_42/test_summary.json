@@ -1,0 +1,22 @@
+{
+  "environment": "TicTacToe",
+  "agent": "REINFORCE",
+  "seed": 42,
+  "status": "OK",
+  "avg_reward": 0.6666666666666666,
+  "std_reward": 0.5773502691896258,
+  "avg_length": 4.666666666666667,
+  "avg_step_time_ms": 0.24048571503954008,
+  "win_rate": 0.6666666666666666,
+  "loss_rate": 0.0,
+  "draw_rate": 0.3333333333333333,
+  "success_rate": 0.6666666666666666,
+  "timeout_rate": 0.0,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 3,
+  "evaluation_seed": 2000042,
+  "decision_count": 14,
+  "episodes_trained": 4,
+  "training_time_seconds": 0.012986899993848056,
+  "transitions": 17
+}

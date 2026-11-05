@@ -1,0 +1,22 @@
+{
+  "environment": "Quarto",
+  "agent": "MuZero_Stochastic",
+  "seed": 42,
+  "status": "OK",
+  "avg_reward": -0.6666666666666666,
+  "std_reward": 0.5773502691896258,
+  "avg_length": 7.333333333333333,
+  "avg_step_time_ms": 6.122322727936658,
+  "win_rate": 0.0,
+  "loss_rate": 0.6666666666666666,
+  "draw_rate": 0.3333333333333333,
+  "success_rate": 0.0,
+  "timeout_rate": 0.0,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 3,
+  "evaluation_seed": 2000042,
+  "decision_count": 22,
+  "episodes_trained": 4,
+  "training_time_seconds": 0.25913400000717957,
+  "transitions": 26
+}

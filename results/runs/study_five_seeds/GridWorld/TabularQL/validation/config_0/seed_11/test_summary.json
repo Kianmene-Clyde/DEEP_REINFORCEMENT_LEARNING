@@ -1,0 +1,22 @@
+{
+  "environment": "GridWorld",
+  "agent": "TabularQL",
+  "seed": 11,
+  "status": "OK",
+  "avg_reward": 10.539999999999996,
+  "std_reward": 3.570611593983174e-15,
+  "avg_length": 7.0,
+  "avg_step_time_ms": 0.010314143021657531,
+  "win_rate": 1.0,
+  "loss_rate": 0.0,
+  "draw_rate": 0.0,
+  "success_rate": 1.0,
+  "timeout_rate": 0.0,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 100,
+  "evaluation_seed": 2000011,
+  "decision_count": 700,
+  "episodes_trained": 1000,
+  "training_time_seconds": 0.6177976000471972,
+  "transitions": 7187
+}

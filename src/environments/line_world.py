@@ -4,9 +4,10 @@ from .base_env import BaseEnvironment
 
 
 class LineWorld(BaseEnvironment):
-
     def __init__(self, length: int = 10, seed: Optional[int] = None):
         self.length = length
+        if length < 2:
+            raise ValueError("LineWorld requires length >= 2")
         self.position = 0
         self._action_space_size = 2
         super().__init__(seed)
@@ -22,11 +23,14 @@ class LineWorld(BaseEnvironment):
         state_arr = np.asarray(state)
         return int(np.argmax(state_arr))
 
-    def reset(self) -> np.ndarray:
+    def reset(self, seed=None) -> np.ndarray:
+        self.reseed(seed)
+        self._done = False
         self.position = 0
         return self._get_state()
 
     def step(self, action: int) -> Tuple[np.ndarray, float, bool, Dict]:
+        self._validate_action(action)
         if action == 0:
             self.position = max(0, self.position - 1)
         elif action == 1:
@@ -34,12 +38,13 @@ class LineWorld(BaseEnvironment):
 
         reward = 1.0 if self.position == self.length - 1 else -0.1
         done = self.position == self.length - 1
-        return self._get_state(), reward, done, {}
+        self._done = done
+        return self._get_state(), reward, done, {"outcome": "success", "terminal": "goal"} if done else {}
 
     def render(self) -> None:
-        line = ['_'] * self.length
-        line[self.position] = 'G'
-        print(''.join(line))
+        line = ["_"] * self.length
+        line[self.position] = "G"
+        print("".join(line))
 
     @property
     def observation_space(self) -> int:
@@ -50,4 +55,4 @@ class LineWorld(BaseEnvironment):
         return self._action_space_size
 
     def get_valid_actions(self, state: Any) -> np.ndarray:
-        return np.array([0, 1], dtype=np.int32)
+        return np.array([] if self._done else [0, 1], dtype=np.int32)

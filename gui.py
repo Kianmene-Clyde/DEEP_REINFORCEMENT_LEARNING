@@ -1,266 +1,188 @@
-import sys, os, json, copy, time
+"""Local Flask demonstrations backed by validated, versioned run checkpoints."""
+
+import json
+import os
+import secrets
+import time
+from pathlib import Path
+from collections import OrderedDict
 import numpy as np
+from flask import Flask, render_template_string, jsonify, request, session
+from werkzeug.local import LocalProxy
+from src.registry import (
+    AGENT_ORDER,
+    PURE_PLANNING,
+    ALGORITHM_NOTES,
+    available_agents_for_env,
+    make_environment,
+    build_agent,
+)
+from src.training.evaluator import encode_state
+from src.training.checkpoints import load_checkpoint
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
-
-from agents import RandomAgent, DeepQLearningAgent, TabularQLearningAgent, \
-    DDQNWithERAgent, DoubleDeepQLearningAgent, REINFORCEAgent, DDQNWithPERAgent, REINFORCEMeanBaselineAgent, \
-    REINFORCECriticBaselineAgent, PPOAgent, MCTSAgent, RandomRolloutAgent, A2CAgent, \
-    ExpertApprenticeAgent, AlphaZeroAgent, MuZeroAgent, StochasticMuZeroAgent
-from environments import LineWorld, GridWorld, TicTacToe, Quarto
-
-from flask import Flask, render_template_string, jsonify, request
-
+ROOT = Path(__file__).resolve().parent
 app = Flask(__name__)
-
-GUI_AGENT_OPTIONS = [
-    'Human',
-    'Random',
-    'TabularQL',
-    'DQN',
-    'DoubleDQN',
-    'DDQN+ER',
-    'DDQN+PER',
-    'REINFORCE',
-    'REINFORCE+Mean',
-    'REINFORCE+Critic',
-    'PPO',
-    'A2C',
-    'RandomRollout',
-    'MCTS',
-    'ExpertApprentice',
-    'AlphaZero',
-    'MuZero',
-    'MuZero_Stochastic',
-]
-
+app.secret_key = secrets.token_hex(32)
+app.config["MODEL_RUN_DIRECTORY"] = os.environ.get("DRL_RUN_DIR")
+GUI_AGENT_OPTIONS = ["Human"] + AGENT_ORDER
 GUI_AGENTS_BY_ENV = {
-    'LineWorld': list(GUI_AGENT_OPTIONS),
-    'GridWorld': list(GUI_AGENT_OPTIONS),
-    'TicTacToe': [x for x in GUI_AGENT_OPTIONS if x != 'TabularQL'],
-    'Quarto': [x for x in GUI_AGENT_OPTIONS if x != 'TabularQL'],
+    name: ["Human"] + available_agents_for_env(name)
+    for name in ["LineWorld", "GridWorld", "TicTacToe", "Quarto"]
 }
-
-# Global game state
-game_state = {
-    'env': None,
-    'env_name': None,
-    'agent': None,
-    'agent_name': None,
-    'state': None,
-    'done': False,
-    'reward': 0.0,
-    'total_reward': 0.0,
-    'step': 0,
-    'history': [],
-    'mode': 'watch',  # 'watch' or 'human'
-}
+_games = OrderedDict()
 
 
-def encode_for_agent(state, env, agent):
-    if agent is not None and hasattr(agent, 'uses_tabular') and agent.uses_tabular:
-        if hasattr(env, 'state_to_index'):
-            return env.state_to_index(state)
-        # Fallback: argmax of one-hot
-        return int(np.argmax(np.asarray(state)))
-    return np.asarray(state, dtype=np.float32).flatten()
+def _current_game():
+    identifier = session.get("game_id")
+    if identifier is None:
+        identifier = secrets.token_hex(16)
+        session["game_id"] = identifier
+    if identifier not in _games:
+        _games[identifier] = {"env": None, "done": True}
+    _games.move_to_end(identifier)
+    while len(_games) > 64:
+        _games.popitem(last=False)
+    return _games[identifier]
+
+
+game_state = LocalProxy(_current_game)
+encode_for_agent = encode_state
 
 
 def create_env(name):
-    envs = {
-        'LineWorld': lambda: LineWorld(length=10),
-        'GridWorld': lambda: GridWorld(width=5, height=5),
-        'TicTacToe': lambda: TicTacToe(opponent_type='random'),
-        'Quarto': lambda: Quarto(opponent_type='random'),
-    }
-    return envs[name]()
+    return make_environment(name, seed=42)
 
 
-def _sanitize_name(name: str) -> str:
-    return ''.join(ch if ch.isalnum() or ch in '._-' else '_' for ch in name)
-
-
-def _tabular_state_size(env_name, obs_size):
-    tabular_state_sizes = {
-        'LineWorld': 10,
-        'GridWorld': 25,
-        'TicTacToe': 3 ** 9,
-        'Quarto': obs_size,
-    }
-    return tabular_state_sizes.get(env_name, obs_size)
-
-
-def _model_path_candidates(env_name, agent_name):
-    base = f'{env_name}_{agent_name}'
-    sanitized = _sanitize_name(base)
-    names = [
-        f'{sanitized}_best',
-        f'{base}_best',
-        sanitized,
-        base,
-    ]
-    seen = set()
-    candidates = []
-    for name in names:
-        if name not in seen:
-            candidates.append(os.path.join('models', name))
-            seen.add(name)
-    return candidates
-
-
-def _network_io(net):
-    if not hasattr(net, 'layers') or len(net.layers) == 0:
-        return None, None
-    return int(net.layers[0]['W'].shape[0]), int(net.layers[-1]['W'].shape[1])
-
-
-def _is_agent_model_compatible(agent, env_name, obs_size, act_size, tab_size):
-    if hasattr(agent, 'q_table'):
-        return tuple(agent.q_table.shape) == (int(tab_size), int(act_size))
-
-    if hasattr(agent, 'q_net'):
-        in_dim, out_dim = _network_io(agent.q_net)
-        return in_dim == int(obs_size) and out_dim == int(act_size)
-
-    if hasattr(agent, 'policy_net'):
-        in_dim, out_dim = _network_io(agent.policy_net)
-        if in_dim != int(obs_size) or out_dim != int(act_size):
-            return False
-        if hasattr(agent, 'value_net'):
-            v_in, v_out = _network_io(agent.value_net)
-            return v_in == int(obs_size) and v_out == 1
-        return True
-
-    if hasattr(agent, 'actor'):
-        a_in, a_out = _network_io(agent.actor)
-        if a_in != int(obs_size) or a_out != int(act_size):
-            return False
-        if hasattr(agent, 'critic'):
-            c_in, c_out = _network_io(agent.critic)
-            return c_in == int(obs_size) and c_out == 1
-        return True
-
-    return True
-
-
-def create_agent(name, env):
-    env_name = game_state['env_name']
-    if env_name is None:
-        raise ValueError('Environment name must be set before creating the agent')
-
-    if name not in GUI_AGENTS_BY_ENV.get(env_name, []):
-        raise ValueError(f'Agent {name} is not supported for {env_name}')
-
-    obs_size = env.observation_space
-    if isinstance(obs_size, tuple):
-        obs_size = int(np.prod(obs_size))
-    act_size = int(env.action_space)
-    tab_size = _tabular_state_size(env_name, obs_size)
-
-    constructors = {
-        'Random': lambda: RandomAgent(act_size),
-        'TabularQL': lambda: TabularQLearningAgent(tab_size, act_size),
-        'DQN': lambda: DeepQLearningAgent(obs_size, act_size),
-        'DoubleDQN': lambda: DoubleDeepQLearningAgent(obs_size, act_size),
-        'DDQN+ER': lambda: DDQNWithERAgent(obs_size, act_size),
-        'DDQN+PER': lambda: DDQNWithPERAgent(obs_size, act_size),
-        'REINFORCE': lambda: REINFORCEAgent(obs_size, act_size),
-        'REINFORCE+Mean': lambda: REINFORCEMeanBaselineAgent(obs_size, act_size),
-        'REINFORCE+Critic': lambda: REINFORCECriticBaselineAgent(obs_size, act_size),
-        'PPO': lambda: PPOAgent(obs_size, act_size),
-        'A2C': lambda: A2CAgent(obs_size, act_size),
-        'RandomRollout': lambda: RandomRolloutAgent(act_size, num_rollouts=30),
-        'MCTS': lambda: MCTSAgent(act_size, num_simulations=100),
-        'ExpertApprentice': lambda: ExpertApprenticeAgent(obs_size, act_size, expert_simulations=30, hidden_layers=[128]),
-        'AlphaZero': lambda: AlphaZeroAgent(obs_size, act_size, num_simulations=30, hidden_layers=[128]),
-        'MuZero': lambda: MuZeroAgent(obs_size, act_size, num_simulations=20, hidden_layers=[128], latent_dim=64),
-        'MuZero_Stochastic': lambda: StochasticMuZeroAgent(obs_size, act_size, num_simulations=20, hidden_layers=[128], latent_dim=64),
-        'Human': lambda: None,
-    }
-
-    if name == 'Human':
+def create_agent(name, env, env_name=None):
+    env_name = env_name or game_state["env_name"]
+    if name not in GUI_AGENTS_BY_ENV[env_name]:
+        raise ValueError("Agent unavailable for this environment")
+    if name == "Human":
         return None
-
-    def _prepare_agent(agent_obj):
-        agent_obj.set_training_mode(False)
-        if hasattr(agent_obj, 'set_env'):
-            agent_obj.set_env(env)
-        agent_obj._loaded_model_path = None
-        agent_obj._model_load_error = None
-        return agent_obj
-
-    agent = _prepare_agent(constructors[name]())
-
-    last_error = None
-    for model_path in _model_path_candidates(env_name, name):
-        candidate = _prepare_agent(constructors[name]())
-        try:
-            candidate.load(model_path)
-            if _is_agent_model_compatible(candidate, env_name, obs_size, act_size, tab_size):
-                candidate._loaded_model_path = model_path
-                print(f'  Loaded model: {model_path}')
-                return candidate
-            last_error = f'Incompatible model dimensions for {model_path}'
-        except Exception as exc:
-            last_error = str(exc)
-
-    if last_error:
-        agent._model_load_error = last_error
-        print(f'  No compatible saved model for {name}, using untrained agent')
-
+    if name in PURE_PLANNING:
+        agent = build_agent(
+            name,
+            env_name,
+            env.observation_space,
+            env.action_space,
+            {"num_rollouts": 8, "num_simulations": 30, "max_rollout_depth": 30},
+            seed=42,
+        )
+        agent._loaded_model_path = None
+        agent._model_status = (
+            "Baseline aléatoire" if name == "Random" else "Planification avec simulateur, sans entraînement"
+        )
+    else:
+        configured = app.config.get("MODEL_RUN_DIRECTORY")
+        manifests = (
+            [Path(configured) / "manifest.json"]
+            if configured
+            else sorted(
+                (ROOT / "results" / "runs").glob("*/manifest.json"),
+                key=lambda p: p.stat().st_mtime,
+                reverse=True,
+            )
+        )
+        agent = None
+        errors = []
+        for path in manifests:
+            try:
+                manifest = json.loads(path.read_text(encoding="utf-8"))
+                if manifest.get("protocol_version") != 2 or manifest.get("status") != "complete":
+                    continue
+                matching = [
+                    m for m in manifest["models"] if m["environment"] == env_name and m["agent"] == name
+                ]
+                for model in matching:
+                    checkpoint = (path.parent / model["checkpoint"]).resolve()
+                    if not checkpoint.is_relative_to(path.parent.resolve()):
+                        raise ValueError("Checkpoint outside run directory")
+                    candidate, metadata = load_checkpoint(
+                        checkpoint,
+                        environment=env_name,
+                        observation_size=env.observation_space,
+                        action_size=env.action_space,
+                    )
+                    if metadata["agent"] != name:
+                        raise ValueError("Checkpoint agent mismatch")
+                    agent = candidate
+                    agent._loaded_model_path = str(checkpoint)
+                    agent._model_status = (
+                        f"{agent.name} · seed {metadata['seed']} · "
+                        f"{metadata['episodes_trained']} épisodes · "
+                        "vérification courte"
+                        if manifest.get("interpretation", "").startswith("smoke")
+                        and metadata["episodes_trained"] < 100
+                        else f"{agent.name} · seed {metadata['seed']} · {metadata['episodes_trained']} épisodes"
+                    )
+                    break
+                if agent is not None:
+                    break
+            except (ValueError, OSError, KeyError, TypeError) as exc:
+                errors.append(str(exc))
+        if agent is None:
+            raise FileNotFoundError(
+                f"Aucun modèle versionné compatible pour {env_name}/{name}. "
+                f'Exécuter : python train_all.py --env {env_name} --agent "{name}"'
+            )
+    agent.set_training_mode(False)
+    if hasattr(agent, "set_env"):
+        agent.set_env(env)
     return agent
 
 
 def render_state_html(env, env_name, state):
     """Render environment state as HTML."""
-    if env_name == 'LineWorld':
+    if env_name == "LineWorld":
         return render_line_world(env, state)
-    elif env_name == 'GridWorld':
+    elif env_name == "GridWorld":
         return render_grid_world(env, state)
-    elif env_name == 'TicTacToe':
+    elif env_name == "TicTacToe":
         return render_tictactoe(env, state)
-    elif env_name == 'Quarto':
+    elif env_name == "Quarto":
         return render_quarto(env, state)
-    return '<p>Environnement Inconnu</p>'
+    return "<p>Environnement Inconnu</p>"
 
 
 def render_line_world(env, state):
-    pos = int(np.argmax(state[:env.length]))
-    cells = ''
+    pos = int(np.argmax(state[: env.length]))
+    cells = ""
     for i in range(env.length):
-        cls = 'agent' if i == pos else ('goal' if i == env.length - 1 else 'empty')
-        label = 'A' if i == pos else ('G' if i == env.length - 1 else '')
+        cls = "agent" if i == pos else ("goal" if i == env.length - 1 else "empty")
+        label = "A" if i == pos else ("G" if i == env.length - 1 else "")
         cells += f'<div class="cell {cls}">{label}</div>'
     return f'<div class="line-world">{cells}</div>'
 
 
 def render_grid_world(env, state):
-    rows = ''
-    pit_pos = getattr(env, 'pit_pos', getattr(env, 'trap_pos', None))
+    rows = ""
+    pit_pos = getattr(env, "pit_pos", getattr(env, "trap_pos", None))
     for y in range(env.height):
-        cells = ''
+        cells = ""
         for x in range(env.width):
             is_agent = np.array_equal(env.agent_pos, [x, y])
             is_goal = np.array_equal(env.goal_pos, [x, y])
             is_pit = pit_pos is not None and np.array_equal(pit_pos, [x, y])
-            cls = 'agent' if is_agent else ('goal' if is_goal else ('pit' if is_pit else 'empty'))
-            label = 'A' if is_agent else ('G' if is_goal else ('X' if is_pit else ''))
+            cls = "agent" if is_agent else ("goal" if is_goal else ("pit" if is_pit else "empty"))
+            label = "A" if is_agent else ("G" if is_goal else ("X" if is_pit else ""))
             cells += f'<div class="cell {cls}">{label}</div>'
         rows += f'<div class="grid-row">{cells}</div>'
     return f'<div class="grid-world">{rows}</div>'
 
 
 def render_tictactoe(env, state):
-    sym = {0: '', 1: 'X', -1: 'O'}
+    sym = {0: "", 1: "X", -1: "O"}
     board = env.board.reshape(3, 3)
-    rows = ''
+    rows = ""
     for i in range(3):
-        cells = ''
+        cells = ""
         for j in range(3):
             val = int(board[i, j])
             action_idx = i * 3 + j
-            cls = 'x-cell' if val == 1 else ('o-cell' if val == -1 else 'empty-cell')
-            click = f'onclick="humanAction({action_idx})"' if val == 0 and game_state['mode'] == 'human' else ''
+            cls = "x-cell" if val == 1 else ("o-cell" if val == -1 else "empty-cell")
+            click = (
+                f'onclick="humanAction({action_idx})"' if val == 0 and game_state["mode"] == "human" else ""
+            )
             cells += f'<div class="ttt-cell {cls}" {click}>{sym[val]}</div>'
         rows += f'<div class="ttt-row">{cells}</div>'
     return f'<div class="tictactoe">{rows}</div>'
@@ -268,243 +190,224 @@ def render_tictactoe(env, state):
 
 def _quarto_piece_html(piece_id: int, env, compact: bool = False) -> str:
     attrs = [(piece_id >> b) & 1 for b in range(4)]
-    size_cls = 'large' if attrs[0] else 'small'
-    color_cls = 'dark' if attrs[1] else 'light'
-    shape_cls = 'round' if attrs[2] else 'square'
-    fill_cls = 'hollow' if attrs[3] else 'solid'
-    piece_cls = 'mini' if compact else 'board'
-    symbol = env.piece_symbol(piece_id) if hasattr(env, 'piece_symbol') else str(piece_id)
-    desc = env.piece_description(piece_id) if hasattr(env, 'piece_description') else f'Piece {piece_id}'
-    tone_label = '' if compact else ('Claire' if attrs[1] == 0 else 'Sombre')
-    label = f'<div class="q-piece-id">#{piece_id}</div>' if not compact else ''
-    tone_badge = f'<div class="q-piece-tone {color_cls}">{tone_label}</div>' if tone_label else ''
+    size_cls = "large" if attrs[0] else "small"
+    color_cls = "dark" if attrs[1] else "light"
+    shape_cls = "round" if attrs[2] else "square"
+    fill_cls = "hollow" if attrs[3] else "solid"
+    piece_cls = "mini" if compact else "board"
+    symbol = env.piece_symbol(piece_id) if hasattr(env, "piece_symbol") else str(piece_id)
+    desc = env.piece_description(piece_id) if hasattr(env, "piece_description") else f"Piece {piece_id}"
+    tone_label = "" if compact else ("Claire" if attrs[1] == 0 else "Sombre")
+    label = f'<div class="q-piece-id">#{piece_id}</div>' if not compact else ""
+    tone_badge = f'<div class="q-piece-tone {color_cls}">{tone_label}</div>' if tone_label else ""
     return (
-        f'<div class="q-piece-wrap {piece_cls}" title="Piece #{piece_id} — {desc}">' 
-        f'{label}'
-        f'{tone_badge}'
+        f'<div class="q-piece-wrap {piece_cls}" title="Piece #{piece_id} — {desc}">'
+        f"{label}"
+        f"{tone_badge}"
         f'<div class="q-piece {piece_cls} {shape_cls} {fill_cls} {size_cls} {color_cls}"></div>'
         f'<div class="q-piece-symbol">{symbol}</div>'
-        f'</div>'
+        f"</div>"
     )
 
 
 def render_quarto(env, state):
     board = env.board.reshape(4, 4)
-    rows = ''
+    rows = ""
     for i in range(4):
-        cells = ''
+        cells = ""
         for j in range(4):
             val = int(board[i, j])
             action_idx = i * 4 + j
             if val == -1:
-                content = ''
-                cls = 'empty-cell'
-                click = f'onclick="humanAction({action_idx})"' if game_state['mode'] == 'human' else ''
+                content = ""
+                cls = "empty-cell"
+                click = f'onclick="humanAction({action_idx})"' if game_state["mode"] == "human" else ""
             else:
                 content = _quarto_piece_html(val, env, compact=False)
-                cls = 'filled-cell'
-                click = ''
+                cls = "filled-cell"
+                click = ""
             cells += f'<div class="q-cell {cls}" {click}>{content}</div>'
         rows += f'<div class="q-row">{cells}</div>'
 
-    piece_info = ''
+    piece_info = ""
     if env.current_piece >= 0:
-        desc = env.piece_description(env.current_piece) if hasattr(env, 'piece_description') else ''
+        desc = env.piece_description(env.current_piece) if hasattr(env, "piece_description") else ""
         piece_info = (
             '<div class="q-current-piece">'
             '<span class="q-current-label">Pièce à poser:</span>'
-            f'{_quarto_piece_html(int(env.current_piece), env, compact=False)}'
+            f"{_quarto_piece_html(int(env.current_piece), env, compact=False)}"
             f'<span class="q-current-desc">Piece #{int(env.current_piece)} — {desc}</span>'
-            '</div>'
+            "</div>"
             '<p class="q-current-hint">Sélectionner une cellule vide pour positionner la pièce.</p>'
         )
 
     avail = [int(x) for x in np.where(env.available)[0]]
-    avail_html = ''.join(_quarto_piece_html(p, env, compact=True) for p in avail)
+    avail_html = "".join(_quarto_piece_html(p, env, compact=True) for p in avail)
     available_section = (
-        '<div class="q-available-block">'
-        '<p class="q-available-title">Pièces disponible:</p>'
-        f'<div class="q-available-list">{avail_html}</div>'
-        '<p class="q-available-hint">Clique sur une case vide pour placer la pièce</p>'
-        '</div>'
-    ) if avail else ''
+        (
+            '<div class="q-available-block">'
+            '<p class="q-available-title">Pièces disponible:</p>'
+            f'<div class="q-available-list">{avail_html}</div>'
+            '<p class="q-available-hint">Clique sur une case vide pour placer la pièce</p>'
+            "</div>"
+        )
+        if avail
+        else ""
+    )
 
     return f'<div class="quarto">{rows}</div>{piece_info}{available_section}'
 
 
 # Routes
+RULES = {
+    "LineWorld": "Atteindre la case 9. +1 au but, -0,1 par déplacement intermédiaire.",
+    "GridWorld": "Atteindre (4,4), éviter le piège (0,0). Départ en (1,0).",
+    "TicTacToe": "Vous jouez X contre un adversaire aléatoire. Aligner trois symboles.",
+    "Quarto": "Placer la pièce imposée. Aligner quatre pièces partageant un attribut. "
+    "Le choix de la pièce donnée à l’adversaire est automatique et heuristique.",
+}
 
-@app.route('/')
+
+@app.route("/")
 def index():
-    return render_template_string(HTML_TEMPLATE)
+    return render_template_string(HTML_TEMPLATE, agents_by_env=GUI_AGENTS_BY_ENV)
 
 
-@app.route('/api/new_game', methods=['POST'])
+@app.route("/api/new_game", methods=["POST"])
 def new_game():
-    data = request.json
-    env_name = data.get('env', 'LineWorld')
-    agent_name = data.get('agent', 'Random')
-
+    data = request.get_json(silent=True) or {}
+    if not isinstance(data, dict):
+        return jsonify(error="Un objet JSON est requis"), 400
+    env_name, agent_name = data.get("env", "LineWorld"), data.get("agent", "Random")
+    if (
+        not isinstance(env_name, str)
+        or not isinstance(agent_name, str)
+        or env_name not in GUI_AGENTS_BY_ENV
+        or agent_name not in GUI_AGENTS_BY_ENV[env_name]
+    ):
+        return jsonify(error="Environnement ou agent inconnu"), 400
     try:
         env = create_env(env_name)
-        game_state['env'] = env
-        game_state['env_name'] = env_name
-        game_state['agent_name'] = agent_name
-        game_state['mode'] = 'human' if agent_name == 'Human' else 'watch'
-        game_state['agent'] = create_agent(agent_name, env)
-        game_state['state'] = env.reset()
-        game_state['done'] = False
-        game_state['reward'] = 0.0
-        game_state['total_reward'] = 0.0
-        game_state['step'] = 0
-        game_state['history'] = []
-    except Exception as exc:
-        return jsonify({'error': str(exc)})
+        agent = create_agent(agent_name, env, env_name)
+        state = env.reset(seed=42)
+    except (ValueError, FileNotFoundError, OSError) as exc:
+        return jsonify(error=str(exc)), 409
+    game_state.clear()
+    game_state.update(
+        env=env,
+        env_name=env_name,
+        agent=agent,
+        agent_name=agent_name,
+        state=state,
+        done=False,
+        reward=0.0,
+        total_reward=0.0,
+        step=0,
+        history=[],
+        mode="human" if agent is None else "watch",
+    )
+    status = "Joueur humain" if agent is None else agent._model_status
+    return jsonify(
+        board=render_state_html(env, env_name, state),
+        info=f"{env_name} · {status}",
+        model_status=status,
+        algorithm_notes=ALGORITHM_NOTES.get(agent_name, ""),
+        rules=RULES[env_name],
+        done=False,
+        reward=0,
+        total_reward=0,
+        step=0,
+        mode=game_state["mode"],
+        valid_actions=env.get_valid_actions(state).tolist(),
+    )
 
-    info = f'New game: {env_name} | Agent: {agent_name}'
-    if game_state['agent'] is not None and getattr(game_state['agent'], '_loaded_model_path', None):
-        info += f' | Model: {game_state["agent"]._loaded_model_path}'
 
-    return jsonify({
-        'board': render_state_html(env, env_name, game_state['state']),
-        'info': info,
-        'done': False,
-        'reward': 0,
-        'total_reward': 0,
-        'step': 0,
-        'mode': game_state['mode'],
-        'valid_actions': env.get_valid_actions(game_state['state']).tolist(),
-    })
+def _take_action(human_action=None):
+    if game_state.get("env") is None or game_state["done"]:
+        return {"error": "Aucune partie active"}, 409
+    env = game_state["env"]
+    valid = env.get_valid_actions(game_state["state"])
+    t0 = time.perf_counter()
+    if human_action is None:
+        if game_state["agent"] is None:
+            return {"error": "Cette partie attend une action humaine"}, 409
+        encoded = encode_state(game_state["state"], env, game_state["agent"])
+        action = game_state["agent"].select_action(encoded, valid)
+    else:
+        if game_state["agent"] is not None:
+            return {"error": "Cette partie utilise un agent automatique"}, 409
+        action = human_action
+    elapsed = (time.perf_counter() - t0) * 1000
+    if not isinstance(action, (int, np.integer)) or action not in valid:
+        return {"error": "Action invalide", "valid_actions": valid.tolist()}, 400
+    state, reward, terminated, info = env.step(int(action))
+    game_state["step"] += 1
+    truncated = not terminated and game_state["step"] >= 200
+    done = bool(terminated or truncated)
+    outcome = info.get("outcome", "unknown") if terminated else ("timeout" if truncated else None)
+    game_state.update(
+        state=state, done=done, reward=float(reward), total_reward=game_state["total_reward"] + float(reward)
+    )
+    game_state["history"].append({"action": int(action), "reward": float(reward), "outcome": outcome})
+    return {
+        "board": render_state_html(env, game_state["env_name"], state),
+        "action": int(action),
+        "reward": float(reward),
+        "total_reward": float(game_state["total_reward"]),
+        "done": done,
+        "terminated": bool(terminated),
+        "truncated": truncated,
+        "outcome": outcome,
+        "step": game_state["step"],
+        "action_time_ms": round(elapsed, 3),
+        "info": json.dumps(info, ensure_ascii=False),
+        "mode": game_state["mode"],
+        "valid_actions": env.get_valid_actions(state).tolist() if not done else [],
+    }, 200
 
 
-@app.route('/api/step', methods=['POST'])
+@app.route("/api/step", methods=["POST"])
 def step():
-    """Agent takes one step."""
-    if game_state['env'] is None or game_state['done']:
-        return jsonify({'error': 'No active game or game is done'})
-
-    env = game_state['env']
-    state = game_state['state']
-    valid = env.get_valid_actions(state)
-
-    if len(valid) == 0:
-        game_state['done'] = True
-        return jsonify({
-            'board': render_state_html(env, game_state['env_name'], state),
-            'done': True, 'reward': 0, 'total_reward': game_state['total_reward'],
-            'step': game_state['step'], 'info': 'No valid actions',
-        })
-
-    agent = game_state['agent']
-    encoded = encode_for_agent(state, env, agent)
-    t0 = time.time()
-    action = agent.select_action(encoded, valid)
-    action_time = (time.time() - t0) * 1000
-
-    next_state, reward, done, info = env.step(action)
-    game_state['state'] = next_state
-    game_state['done'] = done
-    game_state['reward'] = reward
-    game_state['total_reward'] += reward
-    game_state['step'] += 1
-    game_state['history'].append({
-        'action': int(action), 'reward': float(reward), 'done': done
-    })
-
-    return jsonify({
-        'board': render_state_html(env, game_state['env_name'], next_state),
-        'action': int(action),
-        'reward': float(reward),
-        'total_reward': float(game_state['total_reward']),
-        'done': done,
-        'step': game_state['step'],
-        'action_time_ms': round(action_time, 2),
-        'info': json.dumps(info) if info else '',
-        'valid_actions': env.get_valid_actions(next_state).tolist() if not done else [],
-    })
+    result, status = _take_action()
+    return jsonify(result), status
 
 
-@app.route('/api/human_action', methods=['POST'])
+@app.route("/api/human_action", methods=["POST"])
 def human_action():
-    """Human player takes an action."""
-    if game_state['env'] is None or game_state['done']:
-        return jsonify({'error': 'No active game or game is done'})
-
-    data = request.json
-    action = int(data.get('action', 0))
-    env = game_state['env']
-    valid = env.get_valid_actions(game_state['state'])
-
-    if action not in valid:
-        return jsonify({'error': 'Invalid action', 'valid_actions': valid.tolist()})
-
-    next_state, reward, done, info = env.step(action)
-    game_state['state'] = next_state
-    game_state['done'] = done
-    game_state['reward'] = reward
-    game_state['total_reward'] += reward
-    game_state['step'] += 1
-
-    return jsonify({
-        'board': render_state_html(env, game_state['env_name'], next_state),
-        'action': action,
-        'reward': float(reward),
-        'total_reward': float(game_state['total_reward']),
-        'done': done,
-        'step': game_state['step'],
-        'info': json.dumps(info) if info else '',
-        'valid_actions': env.get_valid_actions(next_state).tolist() if not done else [],
-    })
+    data = request.get_json(silent=True) or {}
+    if not isinstance(data, dict):
+        return jsonify(error="Un objet JSON est requis"), 400
+    action = data.get("action")
+    if isinstance(action, bool) or not isinstance(action, int):
+        return jsonify(error="Une action entière est requise"), 400
+    result, status = _take_action(action)
+    return jsonify(result), status
 
 
-@app.route('/api/auto_play', methods=['POST'])
+@app.route("/api/auto_play", methods=["POST"])
 def auto_play():
-    """Play a complete game automatically, return all steps."""
-    if game_state['env'] is None:
-        return jsonify({'error': 'No active game'})
-
-    steps = []
-    max_steps = 200
-    while not game_state['done'] and game_state['step'] < max_steps:
-        env = game_state['env']
-        state = game_state['state']
-        valid = env.get_valid_actions(state)
-        if len(valid) == 0:
-            break
-
-        agent = game_state['agent']
-        encoded = encode_for_agent(state, env, agent)
-        action = agent.select_action(encoded, valid)
-        next_state, reward, done, info = env.step(action)
-
-        game_state['state'] = next_state
-        game_state['done'] = done
-        game_state['total_reward'] += reward
-        game_state['step'] += 1
-
-        steps.append({
-            'board': render_state_html(env, game_state['env_name'], next_state),
-            'action': int(action),
-            'reward': float(reward),
-            'total_reward': float(game_state['total_reward']),
-            'done': done,
-            'step': game_state['step'],
-        })
-        if done:
-            break
-
-    return jsonify({'steps': steps})
+    if game_state.get("env") is None or game_state.get("mode") == "human":
+        return jsonify(error="Une partie automatique est requise"), 409
+    records = []
+    while not game_state["done"]:
+        result, status = _take_action()
+        if status != 200:
+            return jsonify(result), status
+        records.append(result)
+    return jsonify(steps=records)
 
 
 # HTML Template
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DRL Project - Game GUI</title>
     <style>
+        button:focus-visible, select:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -691,6 +594,7 @@ HTML_TEMPLATE = """
     </style>
 </head>
 <body>
+    <div class="container"><p id="modelStatus" role="status">Choisir un environnement et un agent.</p><p id="rules"></p></div>
     <div class="container">
         <h1>🎮 Deep Reinforcement Learning - Game GUI</h1>
         
@@ -749,12 +653,7 @@ HTML_TEMPLATE = """
             'ArrowUp': '↑', 'ArrowDown': '↓',
         };
 
-        const AGENTS_BY_ENV = {
-            'LineWorld': ['Human', 'Random', 'TabularQL', 'DQN', 'DoubleDQN', 'DDQN+ER', 'DDQN+PER', 'REINFORCE', 'REINFORCE+Mean', 'REINFORCE+Critic', 'PPO', 'A2C', 'RandomRollout', 'MCTS', 'ExpertApprentice', 'AlphaZero', 'MuZero', 'MuZero_Stochastic'],
-            'GridWorld': ['Human', 'Random', 'TabularQL', 'DQN', 'DoubleDQN', 'DDQN+ER', 'DDQN+PER', 'REINFORCE', 'REINFORCE+Mean', 'REINFORCE+Critic', 'PPO', 'A2C', 'RandomRollout', 'MCTS', 'ExpertApprentice', 'AlphaZero', 'MuZero', 'MuZero_Stochastic'],
-            'TicTacToe': ['Human', 'Random', 'DQN', 'DoubleDQN', 'DDQN+ER', 'DDQN+PER', 'REINFORCE', 'REINFORCE+Mean', 'REINFORCE+Critic', 'PPO', 'A2C', 'RandomRollout', 'MCTS', 'ExpertApprentice', 'AlphaZero', 'MuZero', 'MuZero_Stochastic'],
-            'Quarto': ['Human', 'Random', 'DQN', 'DoubleDQN', 'DDQN+ER', 'DDQN+PER', 'REINFORCE', 'REINFORCE+Mean', 'REINFORCE+Critic', 'PPO', 'A2C', 'RandomRollout', 'MCTS', 'ExpertApprentice', 'AlphaZero', 'MuZero', 'MuZero_Stochastic'],
-        };
+        const AGENTS_BY_ENV = {{ agents_by_env | tojson }};
 
         function refreshAgentOptions() {
             const env = document.getElementById('envSelect').value;
@@ -766,7 +665,8 @@ HTML_TEMPLATE = """
             for (const agent of options) {
                 const option = document.createElement('option');
                 option.value = agent;
-                option.textContent = agent === 'Human' ? '👤 Human' : agent;
+                option.textContent = agent === 'Human' ? '👤 Human' :
+                    ({AlphaZero: 'AlphaZero inspiré', MuZero: 'MuZero prototype', MuZero_Stochastic: 'Planification gaussienne expérimentale'})[agent] || agent;
                 if (agent === 'MCTS' && previous === '') {
                     option.selected = true;
                 }
@@ -867,8 +767,6 @@ HTML_TEMPLATE = """
             stopAuto();
             const env = document.getElementById('envSelect').value;
             const agent = document.getElementById('agentSelect').value;
-            currentEnv = env;
-            gameDone = false;
             const res = await fetch('/api/new_game', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -881,6 +779,8 @@ HTML_TEMPLATE = """
                 log('ERROR: ' + data.error);
                 return;
             }
+            currentEnv = env;
+            gameDone = false;
             currentMode = data.mode || '';
             updateUI(data);
             buildActionButtons();
@@ -891,6 +791,7 @@ HTML_TEMPLATE = """
             const res = await fetch('/api/step', {method: 'POST'});
             const data = await res.json();
             updateUI(data);
+            if (data.error) return;
             if (data.action !== undefined) {
                 log('Step ' + data.step + ': action=' + data.action + 
                     ' reward=' + data.reward.toFixed(3) +
@@ -915,7 +816,7 @@ HTML_TEMPLATE = """
         function autoStep() {
             if (!autoPlaying) return;
             stepGame().then(() => {
-                autoTimer = setTimeout(autoStep, 500);
+                if (autoPlaying) autoTimer = setTimeout(autoStep, 500);
             });
         }
         
@@ -932,16 +833,19 @@ HTML_TEMPLATE = """
                 body: JSON.stringify({action})
             }).then(r => r.json()).then(data => {
                 updateUI(data);
+                if (data.error) return;
                 log('Human action=' + action + ' reward=' + data.reward.toFixed(3));
                 if (data.done) {
-                    let result = data.total_reward > 0 ? '🎉 WIN!' :
-                                 data.total_reward < 0 ? '😞 LOSS' : '🤝 DRAW';
+                    let result = data.outcome || 'Partie terminée';
                     log('GAME OVER! ' + result + ' (total: ' + data.total_reward.toFixed(3) + ')');
                 }
             });
         }
         
         function updateUI(data) {
+            if (data.error) { document.getElementById('message').textContent = data.error; stopAuto(); return; }
+            if (data.model_status) document.getElementById('modelStatus').textContent = data.model_status + (data.algorithm_notes ? ' · ' + data.algorithm_notes : '');
+            if (data.rules) document.getElementById('rules').textContent = data.rules;
             if (data.board) document.getElementById('board').innerHTML = data.board;
             if (data.step !== undefined) document.getElementById('stepCount').textContent = data.step;
             if (data.reward !== undefined) document.getElementById('lastReward').textContent = data.reward.toFixed(3);
@@ -953,10 +857,9 @@ HTML_TEMPLATE = """
             if (data.done) {
                 gameDone = true;
                 document.getElementById('message').textContent = 
-                    data.total_reward > 0 ? '🎉 Victory!' : 
-                    data.total_reward < 0 ? '😞 Defeat' : '🤝 Draw / Game Over';
+                    ({success:'Objectif atteint',win:'Victoire',failure:'Échec',loss:'Défaite',draw:'Match nul',timeout:'Limite de 200 actions atteinte'})[data.outcome] || 'Partie terminée';
                 document.getElementById('message').style.color = 
-                    data.total_reward > 0 ? '#2ecc71' : data.total_reward < 0 ? '#e94560' : '#f39c12';
+                    ['success','win'].includes(data.outcome) ? '#2ecc71' : '#f39c12';
             } else {
                 document.getElementById('message').textContent = '';
             }
@@ -968,7 +871,8 @@ HTML_TEMPLATE = """
         
         function log(msg) {
             const el = document.getElementById('log');
-            el.innerHTML += msg + '<br>';
+            el.appendChild(document.createTextNode(msg));
+            el.appendChild(document.createElement('br'));
             el.scrollTop = el.scrollHeight;
         }
 
@@ -979,7 +883,7 @@ HTML_TEMPLATE = """
 </html>
 """
 
-if __name__ == '__main__':
-    print('Démarrage de la GUI : http://localhost:5000')
-    print('Ctrl+C pour arrêter')
-    app.run(debug=False, host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    print("Démarrage de la GUI : http://localhost:5000")
+    print("Ctrl+C pour arrêter")
+    app.run(debug=False, host="127.0.0.1", port=5000, threaded=False)

@@ -1,26 +1,32 @@
 import numpy as np
 import os
-import pickle
 from typing import Optional, Any
 from .base_agent import BaseAgent
-from .utils import mask_and_normalize as _safe_probs
-import sys
-import pathlib
+from .utils import mask_and_normalize as _safe_probs, action_mask, masked_batch
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from neural_network.model import NeuralNetwork
+from ..neural_network.model import NeuralNetwork
 
 
 class PPOAgent(BaseAgent):
+    def __init__(
+        self,
+        input_size: int,
+        action_space_size: int,
+        learning_rate: float = 3e-4,
+        discount_factor: float = 0.99,
+        gae_lambda: float = 0.95,
+        clip_ratio: float = 0.2,
+        num_epochs: int = 10,
+        minibatch_size: int = 64,
+        vf_coef: float = 1.0,
+        entropy_coef: float = 0.01,
+        hidden_layers=None,
+        seed: Optional[int] = None,
+        **kwargs,
+    ):
 
-    def __init__(self, input_size: int, action_space_size: int, learning_rate: float = 3e-4,
-                 discount_factor: float = 0.99, gae_lambda: float = 0.95, clip_ratio: float = 0.2, num_epochs: int = 10,
-                 minibatch_size: int = 64, vf_coef: float = 1.0, entropy_coef: float = 0.01, hidden_layers=None,
-                 seed: Optional[int] = None, **kwargs):
-
-        super().__init__("PPO_A2C", action_space_size, input_size)
-        if seed is not None:
-            np.random.seed(seed)
+        super().__init__("PPO-Clip", action_space_size, input_size)
+        self.rng = np.random.default_rng(seed)
 
         self.gamma = discount_factor
         self.gae_lambda = gae_lambda
@@ -34,18 +40,19 @@ class PPOAgent(BaseAgent):
 
         # Réseau acteur avec sortie softmax
         dims_a = [input_size] + h + [action_space_size]
-        acts_a = ['relu'] * len(h) + ['softmax']
-        self.actor = NeuralNetwork.build_mlp(dims_a, acts_a, lr=learning_rate)
+        acts_a = ["relu"] * len(h) + ["softmax"]
+        self.actor = NeuralNetwork.build_mlp(dims_a, acts_a, lr=learning_rate, rng=self.rng)
 
         # Réseau critique avec sortie linéaire
         dims_c = [input_size] + h + [1]
-        acts_c = ['relu'] * len(h) + ['linear']
-        self.critic = NeuralNetwork.build_mlp(dims_c, acts_c, lr=learning_rate)
+        acts_c = ["relu"] * len(h) + ["linear"]
+        self.critic = NeuralNetwork.build_mlp(dims_c, acts_c, lr=learning_rate, rng=self.rng)
 
         # Buffers de l'épisode courant
         self.ep_states = []
         self.ep_actions = []
         self.ep_rewards = []
+        self.ep_masks = []
         self.ep_log_probs = []  # log π_old(a|s)
         self.ep_values = []  # V(s_t) estimé au moment de la collecte
 
@@ -59,8 +66,9 @@ class PPOAgent(BaseAgent):
         if not self.training:
             return int(np.argmax(probs))
 
-        action = int(np.random.choice(self.action_space_size, p=probs))
-        self.ep_states.append(np.asarray(state, dtype=np.float32))
+        action = int(self.rng.choice(self.action_space_size, p=probs))
+        self.ep_states.append(np.asarray(state, dtype=np.float32).copy())
+        self.ep_masks.append(action_mask(valid_actions, self.action_space_size))
         self.ep_actions.append(action)
         self.ep_log_probs.append(float(np.log(probs[action] + 1e-8)))
         self.ep_values.append(float(value))
@@ -70,14 +78,17 @@ class PPOAgent(BaseAgent):
         if not self.training:
             return
         self.ep_rewards.append(reward)
+        self._bootstrap_value = (
+            float(self.critic.predict(np.atleast_2d(next_state))[0, 0]) if self._transition_truncated else 0.0
+        )
         if done:
             self._update()
 
-    def _compute_gae(self, rewards, values):
+    def _compute_gae(self, rewards, values, bootstrap_value=0.0):
         T = len(rewards)
         advantages = np.zeros(T, dtype=np.float32)
         gae = 0.0
-        next_value = 0.0
+        next_value = bootstrap_value
         for t in reversed(range(T)):
             delta = rewards[t] + self.gamma * next_value - values[t]
             gae = delta + self.gamma * self.gae_lambda * gae
@@ -95,11 +106,9 @@ class PPOAgent(BaseAgent):
 
         # calcule du gradient
         effective_weight = np.where(
-            (advantages >= 0) & (ratio > 1 + clip_ratio), 0.0,
-            np.where(
-                (advantages < 0) & (ratio < 1 - clip_ratio), 0.0,
-                advantages
-            )
+            (advantages >= 0) & (ratio > 1 + clip_ratio),
+            0.0,
+            np.where((advantages < 0) & (ratio < 1 - clip_ratio), 0.0, advantages * ratio),
         )
 
         grad = new_probs.copy()
@@ -125,7 +134,7 @@ class PPOAgent(BaseAgent):
         values = np.array(self.ep_values, dtype=np.float32)
         rewards = np.array(self.ep_rewards, dtype=np.float32)
 
-        returns, advantages = self._compute_gae(rewards, values)
+        returns, advantages = self._compute_gae(rewards, values, getattr(self, "_bootstrap_value", 0.0))
 
         # Normalisation des advantages
         if np.std(advantages) > 1e-8:
@@ -136,10 +145,10 @@ class PPOAgent(BaseAgent):
 
         for _ in range(self.num_epochs):
             # Mélange aléatoire des indices à chaque époque
-            indices = np.random.permutation(T)
+            indices = self.rng.permutation(T)
 
             for start in range(0, T, minibatch_size):
-                mb_idx = indices[start: start + minibatch_size]
+                mb_idx = indices[start : start + minibatch_size]
                 if len(mb_idx) == 0:
                     continue
 
@@ -151,6 +160,7 @@ class PPOAgent(BaseAgent):
 
                 # Acteur
                 new_probs = self.actor.forward(mb_states, training=True)
+                new_probs = masked_batch(new_probs, np.array(self.ep_masks)[mb_idx])
 
                 # Gradient objectif clippé
                 actor_grad = self._clip_policy_gradient(
@@ -170,14 +180,15 @@ class PPOAgent(BaseAgent):
 
         # Réinitialisation des buffers
         self.ep_states, self.ep_actions, self.ep_rewards = [], [], []
+        self.ep_masks = []
         self.ep_log_probs, self.ep_values = [], []
 
     # Sauvegarde / Chargement
     def save(self, filepath: str):
-        os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
-        self.actor.save(filepath + '_actor.pkl')
-        self.critic.save(filepath + '_critic.pkl')
+        os.makedirs(os.path.dirname(filepath) or ".", exist_ok=True)
+        self.actor.save(filepath + "_actor.pkl")
+        self.critic.save(filepath + "_critic.pkl")
 
     def load(self, filepath: str):
-        self.actor = NeuralNetwork.load(filepath + '_actor.pkl')
-        self.critic = NeuralNetwork.load(filepath + '_critic.pkl')
+        self.actor = NeuralNetwork.load(filepath + "_actor.pkl")
+        self.critic = NeuralNetwork.load(filepath + "_critic.pkl")

@@ -1,0 +1,22 @@
+{
+  "environment": "LineWorld",
+  "agent": "TabularQL",
+  "seed": 101,
+  "status": "OK",
+  "avg_reward": 0.2000000000000001,
+  "std_reward": 2.7895403077993544e-17,
+  "avg_length": 9.0,
+  "avg_step_time_ms": 0.015157666849619193,
+  "win_rate": 1.0,
+  "loss_rate": 0.0,
+  "draw_rate": 0.0,
+  "success_rate": 1.0,
+  "timeout_rate": 0.0,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 100,
+  "evaluation_seed": 2000101,
+  "decision_count": 900,
+  "episodes_trained": 1000,
+  "training_time_seconds": 1.3825236001430312,
+  "transitions": 9502
+}

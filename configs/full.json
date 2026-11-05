@@ -1,0 +1,14 @@
+{
+  "episodes": 10000,
+  "eval_episodes": 200,
+  "max_steps": 200,
+  "seeds": [11, 23, 37, 53, 71],
+  "checkpoints": [1000, 10000, 100000],
+  "time_budget_seconds": null,
+  "agent_params": {
+    "hidden_layers": [128, 128], "batch_size": 64,
+    "train_batch_size": 64, "num_simulations": 50,
+    "search_budget": 50, "num_rollouts": 20, "expert_simulations": 50,
+    "max_rollout_depth": 50
+  }
+}

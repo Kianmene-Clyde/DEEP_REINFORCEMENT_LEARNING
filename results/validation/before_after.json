@@ -1,0 +1,20 @@
+{
+  "quarto_200_positions": {
+    "before_seconds": 0.06626639999740291,
+    "after_seconds": 0.004807299992535263,
+    "speedup": 13.784536039003358,
+    "statistic": "median of 7 executions, identical inputs; results equivalent"
+  },
+  "smoothing_10000": {
+    "before_seconds": 0.08401089999824762,
+    "after_seconds": 0.00038949999725446105,
+    "speedup": 215.68909009096384,
+    "statistic": "median of 7 executions, identical inputs; results equivalent"
+  },
+  "delayed_goal": {
+    "return": -4.799999999999995,
+    "old_win_rate": 0.0,
+    "corrected_win_rate": 1.0,
+    "terminal": "goal"
+  }
+}

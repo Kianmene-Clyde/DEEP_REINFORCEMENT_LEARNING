@@ -1,0 +1,51 @@
+{
+  "episode_rewards": [
+    -3.0000000000000013,
+    -3.0000000000000013,
+    -1.9000000000000012,
+    -1.8000000000000012
+  ],
+  "episode_lengths": [
+    30,
+    30,
+    30,
+    29
+  ],
+  "step_times": [
+    0.00018555666708076993,
+    0.00010126666553939382,
+    6.153666666553666e-05,
+    7.076551766407772e-05
+  ],
+  "episode_outcomes": [
+    "timeout",
+    "timeout",
+    "success",
+    "success"
+  ],
+  "episode_truncated": [
+    true,
+    true,
+    false,
+    false
+  ],
+  "training_time_seconds": 0.020213399984641,
+  "transitions": 119,
+  "checkpoint_metrics": {
+    "4": {
+      "avg_reward": -3.0000000000000013,
+      "std_reward": 0.0,
+      "avg_length": 30.0,
+      "avg_step_time_ms": 0.04965111163781128,
+      "win_rate": 0.0,
+      "loss_rate": 0.0,
+      "draw_rate": 0.0,
+      "success_rate": 0.0,
+      "timeout_rate": 1.0,
+      "unknown_outcome_rate": 0.0,
+      "num_episodes": 3,
+      "evaluation_seed": 1000042,
+      "decision_count": 90
+    }
+  }
+}

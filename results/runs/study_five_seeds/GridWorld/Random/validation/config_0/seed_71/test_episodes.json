@@ -1,0 +1,802 @@
+[
+  {
+    "seed": 711716495,
+    "reward": 10.2,
+    "length": 41,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3588725311,
+    "reward": -10.12,
+    "length": 13,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3056254965,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 791164089,
+    "reward": -10.35,
+    "length": 36,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1370609081,
+    "reward": 10.34,
+    "length": 27,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 4257986079,
+    "reward": -10.04,
+    "length": 5,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3510227945,
+    "reward": -10.06,
+    "length": 7,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 812808762,
+    "reward": -10.01,
+    "length": 2,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2586172450,
+    "reward": -10.52,
+    "length": 53,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 642299153,
+    "reward": -10.15,
+    "length": 16,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1195938484,
+    "reward": -10.02,
+    "length": 3,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3241197548,
+    "reward": 10.23,
+    "length": 38,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1328419046,
+    "reward": -10.05,
+    "length": 6,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2814842174,
+    "reward": -10.26,
+    "length": 27,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2785941533,
+    "reward": 10.19,
+    "length": 42,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 968463220,
+    "reward": -0.7999999999999995,
+    "length": 100,
+    "terminated": false,
+    "truncated": true,
+    "outcome": "timeout"
+  },
+  {
+    "seed": 1731299829,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1917977624,
+    "reward": -10.02,
+    "length": 3,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3321573219,
+    "reward": 10.44,
+    "length": 17,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2485945740,
+    "reward": -10.49,
+    "length": 50,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3659880414,
+    "reward": -10.05,
+    "length": 6,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 160586071,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 564617722,
+    "reward": -10.52,
+    "length": 53,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2155978209,
+    "reward": -10.01,
+    "length": 2,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2326506400,
+    "reward": 10.43,
+    "length": 18,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 4022390208,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3822511399,
+    "reward": -10.04,
+    "length": 5,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1861959991,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3977823326,
+    "reward": -10.05,
+    "length": 6,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 272248069,
+    "reward": -10.02,
+    "length": 3,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3074954065,
+    "reward": -10.07,
+    "length": 8,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3782351045,
+    "reward": 10.41,
+    "length": 20,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 633930583,
+    "reward": 10.16,
+    "length": 45,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2463905886,
+    "reward": -10.02,
+    "length": 3,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3868103700,
+    "reward": -10.13,
+    "length": 14,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2038662246,
+    "reward": -10.02,
+    "length": 3,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3549216076,
+    "reward": 10.25,
+    "length": 36,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1194020097,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 57422143,
+    "reward": 10.3,
+    "length": 31,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3170283717,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3743333570,
+    "reward": -10.31,
+    "length": 32,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1392279643,
+    "reward": -10.03,
+    "length": 4,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2322269204,
+    "reward": 10.23,
+    "length": 38,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3451008093,
+    "reward": -10.06,
+    "length": 7,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2069821508,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1724022109,
+    "reward": -10.03,
+    "length": 4,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1015094324,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 854857353,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2691152685,
+    "reward": 10.3,
+    "length": 31,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 922670525,
+    "reward": -10.02,
+    "length": 3,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1617193953,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1812892339,
+    "reward": -10.27,
+    "length": 28,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 4174794681,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 703252258,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 317957526,
+    "reward": -10.45,
+    "length": 46,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2799840748,
+    "reward": -10.22,
+    "length": 23,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2406702566,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3303367591,
+    "reward": -10.19,
+    "length": 20,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2243639032,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2335021096,
+    "reward": -10.08,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3551708481,
+    "reward": 10.07,
+    "length": 54,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3862546498,
+    "reward": -10.01,
+    "length": 2,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2936856188,
+    "reward": -10.44,
+    "length": 45,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3487949870,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1779551565,
+    "reward": -10.29,
+    "length": 30,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2925130730,
+    "reward": -10.29,
+    "length": 30,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1170351544,
+    "reward": -10.6,
+    "length": 61,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2188937196,
+    "reward": -10.03,
+    "length": 4,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3374936230,
+    "reward": -10.04,
+    "length": 5,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3930600675,
+    "reward": 9.82,
+    "length": 79,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 677902013,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2929294601,
+    "reward": -10.04,
+    "length": 5,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1940190172,
+    "reward": -10.04,
+    "length": 5,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2263801413,
+    "reward": -10.24,
+    "length": 25,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3284548274,
+    "reward": -10.03,
+    "length": 4,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3741869417,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 723629103,
+    "reward": -10.04,
+    "length": 5,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1703141517,
+    "reward": 10.3,
+    "length": 31,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 4079685827,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2302135139,
+    "reward": -10.82,
+    "length": 83,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 586965006,
+    "reward": -10.209999999999999,
+    "length": 22,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3803957897,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 875180963,
+    "reward": -10.02,
+    "length": 3,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1750133971,
+    "reward": -10.08,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1193452905,
+    "reward": -10.07,
+    "length": 8,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2011630183,
+    "reward": -10.04,
+    "length": 5,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1079467442,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1217129742,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2883409583,
+    "reward": -0.5999999999999992,
+    "length": 100,
+    "terminated": false,
+    "truncated": true,
+    "outcome": "timeout"
+  },
+  {
+    "seed": 3889060102,
+    "reward": -10.36,
+    "length": 37,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2064111300,
+    "reward": -10.11,
+    "length": 12,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 1174248442,
+    "reward": -10.19,
+    "length": 20,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 4029138150,
+    "reward": 10.31,
+    "length": 30,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3227344461,
+    "reward": -10.02,
+    "length": 3,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 3152443482,
+    "reward": -10.209999999999999,
+    "length": 22,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 217411019,
+    "reward": -10.16,
+    "length": 17,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 4062183043,
+    "reward": 10.370000000000001,
+    "length": 24,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 564444739,
+    "reward": -10.0,
+    "length": 1,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 2810812381,
+    "reward": -10.209999999999999,
+    "length": 22,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "failure"
+  },
+  {
+    "seed": 419442242,
+    "reward": 10.42,
+    "length": 19,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  }
+]

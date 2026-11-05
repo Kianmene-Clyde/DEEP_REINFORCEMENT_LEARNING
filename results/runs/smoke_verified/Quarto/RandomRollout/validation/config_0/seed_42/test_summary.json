@@ -1,0 +1,22 @@
+{
+  "environment": "Quarto",
+  "agent": "RandomRollout",
+  "seed": 42,
+  "status": "OK",
+  "avg_reward": 1.0,
+  "std_reward": 0.0,
+  "avg_length": 5.0,
+  "avg_step_time_ms": 378.88590666407254,
+  "win_rate": 1.0,
+  "loss_rate": 0.0,
+  "draw_rate": 0.0,
+  "success_rate": 1.0,
+  "timeout_rate": 0.0,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 3,
+  "evaluation_seed": 2000042,
+  "decision_count": 15,
+  "episodes_trained": 0,
+  "training_time_seconds": 0.0,
+  "transitions": 0
+}

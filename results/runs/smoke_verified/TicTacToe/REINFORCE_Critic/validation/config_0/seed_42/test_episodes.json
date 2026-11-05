@@ -1,0 +1,26 @@
+[
+  {
+    "seed": 2826526961,
+    "reward": 0.0,
+    "length": 5,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "draw"
+  },
+  {
+    "seed": 534776844,
+    "reward": 1.0,
+    "length": 5,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "win"
+  },
+  {
+    "seed": 108922187,
+    "reward": -1.0,
+    "length": 3,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "loss"
+  }
+]

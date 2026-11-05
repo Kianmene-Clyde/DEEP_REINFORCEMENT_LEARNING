@@ -1,0 +1,25 @@
+{
+  "episodes": 1000,
+  "eval_episodes": 100,
+  "max_steps": 100,
+  "seeds": [
+    101,
+    211,
+    307,
+    419,
+    523
+  ],
+  "checkpoints": [
+    1000
+  ],
+  "time_budget_seconds": 600,
+  "agent_params": {
+    "hidden_layers": [
+      32
+    ],
+    "batch_size": 32,
+    "epsilon_decay": 0.9995,
+    "num_epochs": 4,
+    "tmax": 20
+  }
+}

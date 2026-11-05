@@ -1,0 +1,16 @@
+{
+  "delayed_goal_evaluation": {
+    "avg_reward": -4.799999999999995,
+    "std_reward": 0.0,
+    "avg_length": 59.0,
+    "avg_step_time_ms": 0.22543082802982653,
+    "win_rate": 0.0,
+    "loss_rate": 1.0,
+    "draw_rate": 0.0,
+    "num_episodes": 1
+  },
+  "quarto_100_checks_seconds": 0.006791199994040653,
+  "smoothing_10000_seconds": 0.27968890000192914,
+  "curve_sum": 4.169129240226857,
+  "quarto_result": true
+}

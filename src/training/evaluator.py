@@ -1,68 +1,86 @@
-"""Evaluator: evalue un agent entrainé."""
+"""Isolated policy evaluation with explicit outcomes and decision-only latency."""
+
+import copy
 import time
 import numpy as np
-from typing import Dict
+
+
+def encode_state(state, env, agent):
+    if getattr(agent, "uses_tabular", False):
+        return env.state_to_index(state)
+    return np.asarray(state, dtype=np.float32).flatten()
 
 
 class Evaluator:
-    """Evalue un agent entrainé dans un environnement."""
+    def __init__(self, env, agent, num_episodes=100, max_steps=200, seed=1000000, deadline=None):
+        if num_episodes < 1 or max_steps < 1:
+            raise ValueError("Evaluation episode and step budgets must be positive")
+        self.env, self.agent = env, agent
+        self.num_episodes, self.max_steps, self.seed = num_episodes, max_steps, int(seed)
+        self.deadline = deadline
 
-    def __init__(self, env, agent, num_episodes: int = 100,
-                 max_steps: int = 200):
-        self.env = env
-        self.agent = agent
-        self.num_episodes = num_episodes
-        self.max_steps = max_steps
-
-    def evaluate(self) -> Dict[str, float]:
-        """Execute l'évaluation, retoiurne les stats resumées."""
-        if hasattr(self.agent, 'set_training_mode'):
-            self.agent.set_training_mode(False)
-
-        rewards, lengths, step_times = [], [], []
-        wins, losses, draws = 0, 0, 0
-
-        for _ in range(self.num_episodes):
-            state = self.env.reset()
-            total_r = 0.0
+    def evaluate(self):
+        # Includes RNGs/buffers: evaluation cannot perturb subsequent training.
+        env, agent = copy.deepcopy(self.env), copy.deepcopy(self.agent)
+        agent.set_training_mode(False)
+        if hasattr(agent, "set_env"):
+            agent.set_env(env)
+        records, decision_seconds = [], []
+        for episode in range(self.num_episodes):
+            seed = int(np.random.SeedSequence([self.seed, episode]).generate_state(1)[0])
+            state = env.reset(seed=seed)
+            agent.rng = np.random.default_rng(np.random.SeedSequence([self.seed, episode, 1]))
+            total, terminated, info = 0.0, False, {}
             steps = 0
-            t0 = time.time()
             for _ in range(self.max_steps):
-                valid = self.env.get_valid_actions(state)
-                s = self._encode(state)
-                action = self.agent.select_action(s, valid)
-                next_state, reward, done, info = self.env.step(action)
-                state = next_state
-                total_r += reward
+                if self.deadline is not None and time.perf_counter() > self.deadline:
+                    raise TimeoutError("Evaluation time budget exhausted")
+                valid = env.get_valid_actions(state)
+                if len(valid) == 0:
+                    raise RuntimeError("Nonterminal state has no legal actions")
+                encoded = encode_state(state, env, agent)
+                t0 = time.perf_counter()
+                action = agent.select_action(encoded, valid)
+                decision_seconds.append(time.perf_counter() - t0)
+                if action not in valid:
+                    raise RuntimeError(f"Agent selected illegal action {action}")
+                state, reward, terminated, info = env.step(action)
+                total += reward
                 steps += 1
-                if done:
+                if terminated:
                     break
-            elapsed = time.time() - t0
-            rewards.append(total_r)
-            lengths.append(steps)
-            step_times.append(elapsed / max(steps, 1) * 1000)
+            records.append(
+                {
+                    "seed": seed,
+                    "reward": float(total),
+                    "length": steps,
+                    "terminated": bool(terminated),
+                    "truncated": not bool(terminated),
+                    "outcome": info.get("outcome", "unknown") if terminated else "timeout",
+                }
+            )
+        rewards = np.array([r["reward"] for r in records])
+        outcomes = [r["outcome"] for r in records]
 
-            # Suivi des victoires/défaites
-            # Seuil > 0 : toute récompense totale positive = une victoire
-            if total_r > 0:
-                wins += 1
-            elif total_r < 0:
-                losses += 1
-            else:
-                draws += 1
+        def rate(choices):
+            return sum(o in choices for o in outcomes) / len(outcomes)
 
+        self.episodes = records
         return {
-            'avg_reward': float(np.mean(rewards)),
-            'std_reward': float(np.std(rewards)),
-            'avg_length': float(np.mean(lengths)),
-            'avg_step_time_ms': float(np.mean(step_times)),
-            'win_rate': wins / self.num_episodes,
-            'loss_rate': losses / self.num_episodes,
-            'draw_rate': draws / self.num_episodes,
-            'num_episodes': self.num_episodes,
+            "avg_reward": float(rewards.mean()),
+            "std_reward": float(rewards.std(ddof=1)) if len(rewards) > 1 else 0.0,
+            "avg_length": float(np.mean([r["length"] for r in records])),
+            "avg_step_time_ms": float(np.mean(decision_seconds)) * 1000,
+            "win_rate": rate({"win", "success"}),
+            "loss_rate": rate({"loss", "failure"}),
+            "draw_rate": rate({"draw"}),
+            "success_rate": rate({"success", "win"}),
+            "timeout_rate": rate({"timeout"}),
+            "unknown_outcome_rate": rate({"unknown"}),
+            "num_episodes": len(records),
+            "evaluation_seed": self.seed,
+            "decision_count": len(decision_seconds),
         }
 
     def _encode(self, state):
-        if hasattr(self.env, 'state_to_index') and hasattr(self.agent, 'uses_tabular') and self.agent.uses_tabular:
-            return self.env.state_to_index(state)
-        return np.asarray(state, dtype=np.float32).flatten()
+        return encode_state(state, self.env, self.agent)

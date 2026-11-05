@@ -1,0 +1,22 @@
+{
+  "environment": "LineWorld",
+  "agent": "Random",
+  "seed": 23,
+  "status": "OK",
+  "avg_reward": -6.001999999999992,
+  "std_reward": 3.4090189352671603,
+  "avg_length": 67.61,
+  "avg_step_time_ms": 0.052604156253078224,
+  "win_rate": 0.69,
+  "loss_rate": 0.0,
+  "draw_rate": 0.0,
+  "success_rate": 0.69,
+  "timeout_rate": 0.31,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 100,
+  "evaluation_seed": 2000023,
+  "decision_count": 6761,
+  "episodes_trained": 0,
+  "training_time_seconds": 0.0,
+  "transitions": 0
+}

@@ -2,23 +2,27 @@ import numpy as np
 import os
 from typing import Optional, Any
 from .base_agent import BaseAgent
-from .utils import mask_and_normalize as _safe_probs
-import sys
-import pathlib
+from .utils import mask_and_normalize as _safe_probs, action_mask, masked_batch
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from neural_network.model import NeuralNetwork
+from ..neural_network.model import NeuralNetwork
 
 
 class A2CAgent(BaseAgent):
-
-    def __init__(self, input_size: int, action_space_size: int, learning_rate: float = 0.0007,
-                 discount_factor: float = 0.99, entropy_coef: float = 0.01, tmax: int = 20, hidden_layers=None,
-                 seed: Optional[int] = None, **kwargs):
+    def __init__(
+        self,
+        input_size: int,
+        action_space_size: int,
+        learning_rate: float = 0.0007,
+        discount_factor: float = 0.99,
+        entropy_coef: float = 0.01,
+        tmax: int = 20,
+        hidden_layers=None,
+        seed: Optional[int] = None,
+        **kwargs,
+    ):
 
         super().__init__("A2C", action_space_size, input_size)
-        if seed is not None:
-            np.random.seed(seed)
+        self.rng = np.random.default_rng(seed)
 
         self.gamma = discount_factor
         self.entropy_coef = entropy_coef
@@ -28,18 +32,19 @@ class A2CAgent(BaseAgent):
 
         # Réseau actor — sortie softmax
         dims_a = [input_size] + h + [action_space_size]
-        acts_a = ['relu'] * len(h) + ['softmax']
-        self.actor = NeuralNetwork.build_mlp(dims_a, acts_a, lr=learning_rate)
+        acts_a = ["relu"] * len(h) + ["softmax"]
+        self.actor = NeuralNetwork.build_mlp(dims_a, acts_a, lr=learning_rate, rng=self.rng)
 
         # Réseau critic — sortie linéaire
         dims_c = [input_size] + h + [1]
-        acts_c = ['relu'] * len(h) + ['linear']
-        self.critic = NeuralNetwork.build_mlp(dims_c, acts_c, lr=learning_rate)
+        acts_c = ["relu"] * len(h) + ["linear"]
+        self.critic = NeuralNetwork.build_mlp(dims_c, acts_c, lr=learning_rate, rng=self.rng)
 
         # Buffers de l'épisode courant
         self.ep_states = []
         self.ep_actions = []
         self.ep_rewards = []
+        self.ep_masks = []
         self._last_done = False
 
     def select_action(self, state: Any, valid_actions: Optional[np.ndarray] = None) -> int:
@@ -49,8 +54,9 @@ class A2CAgent(BaseAgent):
         probs = _safe_probs(probs, valid_actions, self.action_space_size)
         if not self.training:
             return int(np.argmax(probs))
-        action = int(np.random.choice(self.action_space_size, p=probs))
-        self.ep_states.append(np.asarray(state, dtype=np.float32))
+        action = int(self.rng.choice(self.action_space_size, p=probs))
+        self.ep_states.append(np.asarray(state, dtype=np.float32).copy())
+        self.ep_masks.append(action_mask(valid_actions, self.action_space_size))
         self.ep_actions.append(action)
         return action
 
@@ -58,7 +64,7 @@ class A2CAgent(BaseAgent):
         if not self.training:
             return
         self.ep_rewards.append(float(reward))
-        self._last_done = bool(done)
+        self._last_done = bool(done) and not self._transition_truncated
         self._last_next_state = np.asarray(next_state, dtype=np.float32)
 
         # Mise à jour toutes les tmax steps ou en fin d'épisode
@@ -73,11 +79,7 @@ class A2CAgent(BaseAgent):
             R = 0.0  # épisode terminal : pas de bootstrap
         else:
             # Bootstrap sur la valeur du dernier état non-terminal
-            R = float(
-                self.critic.predict(
-                    np.atleast_2d(self._last_next_state)
-                )[0, 0]
-            )
+            R = float(self.critic.predict(np.atleast_2d(self._last_next_state))[0, 0])
 
         for t in reversed(range(T)):
             R = self.ep_rewards[t] + self.gamma * R
@@ -104,6 +106,7 @@ class A2CAgent(BaseAgent):
         # Acteur
         # Forward pour prédire les probabilités
         probs = self.actor.forward(states, training=True)
+        probs = masked_batch(probs, np.array(self.ep_masks))
 
         # Gradient de la loss acteur :
         agrad = probs.copy()
@@ -119,12 +122,13 @@ class A2CAgent(BaseAgent):
 
         # Réinitialisation des buffers
         self.ep_states, self.ep_actions, self.ep_rewards = [], [], []
+        self.ep_masks = []
 
     def save(self, filepath: str):
-        os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
-        self.actor.save(filepath + '_actor.pkl')
-        self.critic.save(filepath + '_critic.pkl')
+        os.makedirs(os.path.dirname(filepath) or ".", exist_ok=True)
+        self.actor.save(filepath + "_actor.pkl")
+        self.critic.save(filepath + "_critic.pkl")
 
     def load(self, filepath: str):
-        self.actor = NeuralNetwork.load(filepath + '_actor.pkl')
-        self.critic = NeuralNetwork.load(filepath + '_critic.pkl')
+        self.actor = NeuralNetwork.load(filepath + "_actor.pkl")
+        self.critic = NeuralNetwork.load(filepath + "_critic.pkl")

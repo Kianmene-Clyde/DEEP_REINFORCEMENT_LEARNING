@@ -1,0 +1,30 @@
+{
+  "episodes": 4,
+  "eval_episodes": 3,
+  "max_steps": 30,
+  "seeds": [
+    42
+  ],
+  "checkpoints": [],
+  "time_budget_seconds": 300,
+  "agent_params": {
+    "hidden_layers": [
+      16
+    ],
+    "batch_size": 4,
+    "train_batch_size": 4,
+    "latent_dim": 8,
+    "unroll_steps": 2,
+    "num_simulations": 4,
+    "search_budget": 2,
+    "num_rollouts": 2,
+    "expert_simulations": 4,
+    "max_rollout_depth": 10,
+    "max_search_depth": 5,
+    "num_epochs": 2
+  },
+  "opponent": "random",
+  "quiet": true,
+  "profile": "smoke",
+  "grid": "none"
+}

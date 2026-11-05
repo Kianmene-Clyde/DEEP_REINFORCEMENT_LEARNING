@@ -1,0 +1,5 @@
+environment,agent,seed,status,avg_reward,std_reward,avg_length,avg_step_time_ms,win_rate,loss_rate,draw_rate,success_rate,timeout_rate,unknown_outcome_rate,num_episodes,evaluation_seed,decision_count,episodes_trained,training_time_seconds,transitions
+LineWorld,DQN,42,OK,-3.0000000000000013,0.0,30.0,0.12396777795705324,0.0,0.0,0.0,0.0,1.0,0.0,3,2000042,90,4,0.12494940000760835,114
+LineWorld,PPO,42,OK,-3.0000000000000013,0.0,30.0,0.2302766657925935,0.0,0.0,0.0,0.0,1.0,0.0,3,2000042,90,4,0.054974400001810864,111
+LineWorld,MuZero,42,OK,-3.0000000000000013,0.0,30.0,2.3229511118390493,0.0,0.0,0.0,0.0,1.0,0.0,3,2000042,90,4,0.2482977000036044,101
+LineWorld,MuZero_Stochastic,42,OK,-3.0000000000000013,0.0,30.0,1.1729611122670272,0.0,0.0,0.0,0.0,1.0,0.0,3,2000042,90,4,0.22555500002636109,120

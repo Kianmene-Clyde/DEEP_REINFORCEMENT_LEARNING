@@ -6,7 +6,9 @@ from .base_env import BaseEnvironment
 class GridWorld(BaseEnvironment):
     def __init__(self, width: int = 5, height: int = 5, seed: Optional[int] = None):
         if width < 2 or height < 2:
-            raise ValueError("GridWorld requires width>=2 and height>=2 (because start is (1,0) and pit is (0,0)).")
+            raise ValueError(
+                "GridWorld requires width>=2 and height>=2 (because start is (1,0) and pit is (0,0))."
+            )
 
         self.width = width
         self.height = height
@@ -39,11 +41,14 @@ class GridWorld(BaseEnvironment):
             return int(state_arr)
         return int(np.argmax(state_arr))
 
-    def reset(self) -> np.ndarray:
+    def reset(self, seed=None) -> np.ndarray:
+        self.reseed(seed)
+        self._done = False
         self.agent_pos = self.start_pos.copy()
         return self._get_state()
 
     def step(self, action: int) -> Tuple[np.ndarray, float, bool, Dict]:
+        self._validate_action(action)
         old_pos = self.agent_pos.copy()
 
         # Move
@@ -58,11 +63,13 @@ class GridWorld(BaseEnvironment):
 
         # La case éliminatoire a la priorité sur tout le reste
         if np.array_equal(self.agent_pos, self.pit_pos):
-            return self._get_state(), -10.0, True, {"terminal": "pit"}
+            self._done = True
+            return self._get_state(), -10.0, True, {"terminal": "pit", "outcome": "failure"}
 
         # Goal
         if np.array_equal(self.agent_pos, self.goal_pos):
-            return self._get_state(), 10.0, True, {"terminal": "goal"}
+            self._done = True
+            return self._get_state(), 10.0, True, {"terminal": "goal", "outcome": "success"}
 
         distance = np.sum(np.abs(self.agent_pos - self.goal_pos))
         old_distance = np.sum(np.abs(old_pos - self.goal_pos))
@@ -73,15 +80,15 @@ class GridWorld(BaseEnvironment):
 
     def render(self) -> None:
         grid = np.zeros((self.height, self.width), dtype=str)
-        grid[:] = '.'
+        grid[:] = "."
 
-        grid[self.pit_pos[1], self.pit_pos[0]] = 'X'
-        grid[self.goal_pos[1], self.goal_pos[0]] = 'G'
+        grid[self.pit_pos[1], self.pit_pos[0]] = "X"
+        grid[self.goal_pos[1], self.goal_pos[0]] = "G"
 
-        grid[self.agent_pos[1], self.agent_pos[0]] = 'A'
+        grid[self.agent_pos[1], self.agent_pos[0]] = "A"
 
         for row in grid:
-            print(' '.join(row))
+            print(" ".join(row))
         print()
 
     @property
@@ -93,4 +100,4 @@ class GridWorld(BaseEnvironment):
         return self._action_space_size
 
     def get_valid_actions(self, state: Any) -> np.ndarray:
-        return np.arange(self._action_space_size, dtype=np.int32)
+        return np.arange(0 if self._done else self._action_space_size, dtype=np.int32)

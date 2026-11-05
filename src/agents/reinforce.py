@@ -1,38 +1,45 @@
 """REINFORCE agents: simple, mean, critic."""
-import numpy as np
-import os, pickle
-from typing import Optional, Any, List
-from .base_agent import BaseAgent
-from .utils import mask_and_normalize as _safe_probs
-import sys, pathlib
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from neural_network.model import NeuralNetwork
+import numpy as np
+import os
+from typing import Optional, Any
+from .base_agent import BaseAgent
+from .utils import mask_and_normalize as _safe_probs, action_mask, masked_batch
+
+from ..neural_network.model import NeuralNetwork
 
 
 class REINFORCEAgent(BaseAgent):
-    """ REINFORCE simple"""
+    """REINFORCE simple"""
 
-    def __init__(self, input_size: int, action_space_size: int,
-                 learning_rate: float = 0.001, discount_factor: float = 0.99,
-                 hidden_layers=None, seed: Optional[int] = None, **kwargs):
+    def __init__(
+        self,
+        input_size: int,
+        action_space_size: int,
+        learning_rate: float = 0.001,
+        discount_factor: float = 0.99,
+        hidden_layers=None,
+        seed: Optional[int] = None,
+        **kwargs,
+    ):
         super().__init__("REINFORCE", action_space_size, input_size)
-        if seed is not None:
-            np.random.seed(seed)
+        self.rng = np.random.default_rng(seed)
         self.gamma = discount_factor
         h = hidden_layers or [128, 128]
         dims = [input_size] + h + [action_space_size]
-        acts = ['relu'] * len(h) + ['softmax']
-        self.policy_net = NeuralNetwork.build_mlp(dims, acts, lr=learning_rate)
+        acts = ["relu"] * len(h) + ["softmax"]
+        self.policy_net = NeuralNetwork.build_mlp(dims, acts, lr=learning_rate, rng=self.rng)
         self.ep_states, self.ep_actions, self.ep_rewards = [], [], []
+        self.ep_masks = []
 
     def select_action(self, state: Any, valid_actions: Optional[np.ndarray] = None) -> int:
         probs = self.policy_net.predict(np.atleast_2d(state))[0]
         probs = _safe_probs(probs, valid_actions, self.action_space_size)
         if not self.training:
             return int(np.argmax(probs))
-        action = int(np.random.choice(self.action_space_size, p=probs))
-        self.ep_states.append(np.asarray(state, dtype=np.float32))
+        action = int(self.rng.choice(self.action_space_size, p=probs))
+        self.ep_states.append(np.asarray(state, dtype=np.float32).copy())
+        self.ep_masks.append(action_mask(valid_actions, self.action_space_size))
         self.ep_actions.append(action)
         return action
 
@@ -41,7 +48,11 @@ class REINFORCEAgent(BaseAgent):
             return
         self.ep_rewards.append(reward)
         if done:
-            self._update_policy()
+            if self._transition_truncated:
+                self.ep_states, self.ep_actions, self.ep_rewards, self.ep_masks = [], [], [], []
+                self.skipped_truncated = getattr(self, "skipped_truncated", 0) + 1
+            else:
+                self._update_policy()
 
     def _compute_returns(self) -> np.ndarray:
         returns = np.zeros(len(self.ep_rewards))
@@ -61,12 +72,13 @@ class REINFORCEAgent(BaseAgent):
         baseline = self._get_baseline(returns)
         advantages = returns - baseline
         # on normalise les avantages
-        if np.std(advantages) > 1e-8:
-            advantages = (advantages - np.mean(advantages)) / (np.std(advantages) + 1e-8)
+        if not np.all(np.isfinite(advantages)):
+            raise FloatingPointError("Non-finite advantages")
 
         states = np.array(self.ep_states, dtype=np.float32)
         actions = np.array(self.ep_actions)
         probs = self.policy_net.forward(states, training=True)
+        probs = masked_batch(probs, np.array(self.ep_masks))
 
         grad = probs.copy()
         for i in range(len(actions)):
@@ -75,13 +87,14 @@ class REINFORCEAgent(BaseAgent):
         self.policy_net.backward(grad)
 
         self.ep_states, self.ep_actions, self.ep_rewards = [], [], []
+        self.ep_masks = []
 
     def save(self, filepath: str):
-        os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
-        self.policy_net.save(filepath + '_policy.pkl')
+        os.makedirs(os.path.dirname(filepath) or ".", exist_ok=True)
+        self.policy_net.save(filepath + "_policy.pkl")
 
     def load(self, filepath: str):
-        self.policy_net = NeuralNetwork.load(filepath + '_policy.pkl')
+        self.policy_net = NeuralNetwork.load(filepath + "_policy.pkl")
 
 
 class REINFORCEMeanBaselineAgent(REINFORCEAgent):
@@ -94,27 +107,39 @@ class REINFORCEMeanBaselineAgent(REINFORCEAgent):
         self._episode_count = 0
 
     def _get_baseline(self, returns: np.ndarray) -> np.ndarray:
+        baseline = self._running_mean
         self._episode_count += 1
         self._running_mean += (np.mean(returns) - self._running_mean) / self._episode_count
-        return np.full_like(returns, self._running_mean)
+        return np.full_like(returns, baseline)
 
 
 class REINFORCECriticBaselineAgent(REINFORCEAgent):
     """REINFORCE critic"""
 
-    def __init__(self, input_size: int, action_space_size: int,
-                 learning_rate: float = 0.001, critic_lr: float = 0.005,
-                 discount_factor: float = 0.99,
-                 hidden_layers=None, seed: Optional[int] = None, **kwargs):
-        super().__init__(input_size, action_space_size,
-                         learning_rate=learning_rate,
-                         discount_factor=discount_factor,
-                         hidden_layers=hidden_layers, seed=seed)
+    def __init__(
+        self,
+        input_size: int,
+        action_space_size: int,
+        learning_rate: float = 0.001,
+        critic_lr: float = 0.005,
+        discount_factor: float = 0.99,
+        hidden_layers=None,
+        seed: Optional[int] = None,
+        **kwargs,
+    ):
+        super().__init__(
+            input_size,
+            action_space_size,
+            learning_rate=learning_rate,
+            discount_factor=discount_factor,
+            hidden_layers=hidden_layers,
+            seed=seed,
+        )
         self.name = "REINFORCE+CriticBaseline"
         h = hidden_layers or [128, 128]
         dims = [input_size] + h + [1]
-        acts = ['relu'] * len(h) + ['linear']
-        self.value_net = NeuralNetwork.build_mlp(dims, acts, lr=critic_lr)
+        acts = ["relu"] * len(h) + ["linear"]
+        self.value_net = NeuralNetwork.build_mlp(dims, acts, lr=critic_lr, rng=self.rng)
 
     def _get_baseline(self, returns: np.ndarray) -> np.ndarray:
         states = np.array(self.ep_states, dtype=np.float32)
@@ -127,8 +152,8 @@ class REINFORCECriticBaselineAgent(REINFORCEAgent):
 
     def save(self, filepath: str):
         super().save(filepath)
-        self.value_net.save(filepath + '_value.pkl')
+        self.value_net.save(filepath + "_value.pkl")
 
     def load(self, filepath: str):
         super().load(filepath)
-        self.value_net = NeuralNetwork.load(filepath + '_value.pkl')
+        self.value_net = NeuralNetwork.load(filepath + "_value.pkl")

@@ -1,0 +1,10 @@
+{
+  "episode_rewards": [],
+  "episode_lengths": [],
+  "step_times": [],
+  "episode_outcomes": [],
+  "episode_truncated": [],
+  "training_time_seconds": 0.0,
+  "transitions": 0,
+  "checkpoint_metrics": {}
+}

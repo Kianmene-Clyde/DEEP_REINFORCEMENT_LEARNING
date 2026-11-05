@@ -1,9 +1,11 @@
 """Adam Optimizer."""
+
 import numpy as np
 
 
 class Adam:
     """Adam optimizer pour une utilisation externe."""
+
     def __init__(self, lr=0.001, beta1=0.9, beta2=0.999, eps=1e-8):
         self.lr = lr
         self.beta1 = beta1
@@ -21,6 +23,6 @@ class Adam:
                 self.v[key] = np.zeros_like(params[key])
             self.m[key] = self.beta1 * self.m[key] + (1 - self.beta1) * grads[key]
             self.v[key] = self.beta2 * self.v[key] + (1 - self.beta2) * grads[key] ** 2
-            m_hat = self.m[key] / (1 - self.beta1 ** self.t)
-            v_hat = self.v[key] / (1 - self.beta2 ** self.t)
+            m_hat = self.m[key] / (1 - self.beta1**self.t)
+            v_hat = self.v[key] / (1 - self.beta2**self.t)
             params[key] -= self.lr * m_hat / (np.sqrt(v_hat) + self.eps)

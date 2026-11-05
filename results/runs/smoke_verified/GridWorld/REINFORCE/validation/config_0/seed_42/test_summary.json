@@ -1,0 +1,22 @@
+{
+  "environment": "GridWorld",
+  "agent": "REINFORCE",
+  "seed": 42,
+  "status": "OK",
+  "avg_reward": -10.0,
+  "std_reward": 0.0,
+  "avg_length": 1.0,
+  "avg_step_time_ms": 0.24496666446793824,
+  "win_rate": 0.0,
+  "loss_rate": 1.0,
+  "draw_rate": 0.0,
+  "success_rate": 0.0,
+  "timeout_rate": 0.0,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 3,
+  "evaluation_seed": 2000042,
+  "decision_count": 3,
+  "episodes_trained": 4,
+  "training_time_seconds": 0.04484119999688119,
+  "transitions": 78
+}

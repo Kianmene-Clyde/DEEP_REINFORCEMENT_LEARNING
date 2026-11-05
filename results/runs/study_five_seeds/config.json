@@ -1,0 +1,30 @@
+{
+  "episodes": 1000,
+  "eval_episodes": 100,
+  "max_steps": 100,
+  "seeds": [
+    11,
+    23,
+    37,
+    53,
+    71
+  ],
+  "checkpoints": [
+    1000
+  ],
+  "time_budget_seconds": 600,
+  "agent_params": {
+    "hidden_layers": [
+      32
+    ],
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "epsilon_decay": 0.9995,
+    "num_epochs": 4,
+    "tmax": 20
+  },
+  "opponent": "random",
+  "quiet": true,
+  "profile": "smoke",
+  "grid": "none"
+}

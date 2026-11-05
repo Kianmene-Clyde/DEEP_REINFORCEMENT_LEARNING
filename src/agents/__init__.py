@@ -1,4 +1,5 @@
 """Package d'agents"""
+
 from .base_agent import BaseAgent
 from .random_agent import RandomAgent
 from .tabular_q_learning import TabularQLearningAgent
@@ -23,22 +24,22 @@ from .muzero import MuZeroAgent
 from .muzero_stochastic import StochasticMuZeroAgent
 
 __all__ = [
-    'BaseAgent',
-    'RandomAgent',
-    'TabularQLearningAgent',
-    'DeepQLearningAgent',
-    'DoubleDeepQLearningAgent',
-    'DDQNWithERAgent',
-    'DDQNWithPERAgent',
-    'REINFORCEAgent',
-    'REINFORCEMeanBaselineAgent',
-    'REINFORCECriticBaselineAgent',
-    'PPOAgent',
-    'A2CAgent',
-    'RandomRolloutAgent',
-    'MCTSAgent',
-    'ExpertApprenticeAgent',
-    'AlphaZeroAgent',
-    'MuZeroAgent',
-    'StochasticMuZeroAgent',
+    "BaseAgent",
+    "RandomAgent",
+    "TabularQLearningAgent",
+    "DeepQLearningAgent",
+    "DoubleDeepQLearningAgent",
+    "DDQNWithERAgent",
+    "DDQNWithPERAgent",
+    "REINFORCEAgent",
+    "REINFORCEMeanBaselineAgent",
+    "REINFORCECriticBaselineAgent",
+    "PPOAgent",
+    "A2CAgent",
+    "RandomRolloutAgent",
+    "MCTSAgent",
+    "ExpertApprenticeAgent",
+    "AlphaZeroAgent",
+    "MuZeroAgent",
+    "StochasticMuZeroAgent",
 ]

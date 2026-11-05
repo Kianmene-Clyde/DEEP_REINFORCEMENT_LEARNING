@@ -1,0 +1,182 @@
+[
+  {
+    "environment": "LineWorld",
+    "agent": "DQN",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.12396777795705324,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.12494940000760835,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "PPO",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.2302766657925935,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.054974400001810864,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "MuZero",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 2.3229511118390493,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.2482977000036044,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "MuZero_Stochastic",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 1.1729611122670272,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.22555500002636109,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  }
+]

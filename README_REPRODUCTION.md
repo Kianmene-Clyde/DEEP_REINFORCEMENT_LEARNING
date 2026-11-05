@@ -1,102 +1,70 @@
-# Deep Reinforcement Learning - README de reproduction
+# Reproduction des expériences corrigées
 
-## 1. Objectif du projet
+Les instructions de ce fichier concernent le protocole version 2. Les anciens CSV, JSON, graphiques et modèles à la racine sont historiques et ne sont pas mélangés aux nouvelles expériences.
 
-Ce projet compare **17 agents** de Reinforcement Learning / Deep Reinforcement Learning sur 4 environnements : LineWorld, GridWorld, TicTacToe et Quarto. Le projet est implémenté en Python/NumPy, avec un réseau de neurones écrit from scratch.
+## Installation et vérification
 
-Les agents évalués sont :
-- **Value-based** : Random, TabularQL, DQN, DoubleDQN, DDQN+ER, DDQN+PER
-- **Policy gradient** : REINFORCE, REINFORCE+Mean, REINFORCE+Critic
-- **Actor-Critic** : PPO (A2C-style), A2C
-- **Planning** : RandomRollout, MCTS (UCT)
-- **Hybrides** : ExpertApprentice, AlphaZero, MuZero, MuZero Stochastique
+Suivre l’installation du README, puis :
 
-## 2. Installation
-
-```bash
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# Linux / macOS
-source .venv/bin/activate
-
-pip install -r requirements.txt
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.build/pytest
+.\.venv\Scripts\python.exe train_all.py --quick --quiet
 ```
 
-## 3. Vérification rapide
+Les dossiers de sortie portent un identifiant UTC et un suffixe aléatoire. `--output` permet de choisir un dossier vide. Un dossier déjà rempli est refusé.
 
-```bash
-python train_all.py --quick --max-configs-per-agent 1 --seed 42
+## Profils et budgets
+
+- `configs/smoke.json` : quatre épisodes, trois parties d’évaluation, une graine, limite de 30 décisions, budget de 300 secondes.
+- `configs/study.json` : 1 000 épisodes, 100 parties d’évaluation, cinq graines, limite de 100 décisions, budget de 600 secondes. Les learning rates par défaut propres aux agents sont conservés. L’étude exploratoire archivée dans study_five_seeds utilisait un taux commun de 0,001, défavorable à Q-Learning tabulaire sur LineWorld ; sa configuration est conservée dans configs/exploratory_shared_lr.json.
+- `configs/full.json` : 10 000 épisodes, 200 parties d’évaluation et cinq graines. Pas de limite globale de durée par défaut : choisir un sous-ensemble ou ajouter `--time-budget-seconds`.
+
+Les checkpoints d’évaluation sont prévus à 1 000, 10 000 et 100 000 épisodes lorsqu’ils sont atteints. Exemple :
+
+```powershell
+.\.venv\Scripts\python.exe train_all.py --profile full --env LineWorld --agent DQN --episodes 100000 --quiet
 ```
 
-Vérifie que les 17 agents fonctionnent sur les 4 environnements. Durée : ~5 minutes.
+Cette campagne n’a pas été exécutée dans la validation locale. Aucun résultat n’est inventé pour les checkpoints non atteints.
 
-## 4. Lancer l'expérience principale
+## Séparation des données expérimentales
 
-```bash
-# Entraînement standard avec grid search (durée : ~1-3h)
-python train_all.py --grid full --episodes 10000 --eval-episodes 200 --seed 42
+Chaque candidat est entraîné sur les mêmes graines afin de comparer les hyperparamètres. La sélection utilise uniquement le retour moyen de validation. Si plusieurs configurations sont comparées, le candidat retenu est réentraîné avec les graines augmentées de 10 000. Les parties du test final utilisent un domaine de graines distinct.
 
-# Version silencieuse
-python train_all.py --grid full --episodes 10000 --eval-episodes 200 --seed 42 --quiet
+L’évaluation travaille sur des copies du modèle et de l’environnement. Elle ne modifie ni poids, ni replay, ni mode ou générateur aléatoire de l’entraînement. La latence mesure seulement la décision de l’agent.
+
+## Fichiers produits
+
+- `config.json` : budget et paramètres déclarés.
+- `manifest.json` : versions, empreintes SHA-256, candidats retenus et modèles.
+- `validation_results.csv` : scores utilisés pour la sélection.
+- `test_results.csv` : mesures indépendantes finales.
+- `summary.json` : moyennes et incertitude entre graines.
+- `*/seed_*/agent.pkl` : checkpoint complet du protocole v2.
+- `training_metrics.json` : trajectoires et mesures d’apprentissage.
+- `test_episodes.json` : issues, retours et graines des parties de test.
+- `*_test_comparison.png` : figures générées à partir des résultats de test.
+
+Les checkpoints pickle sont des fichiers locaux de confiance. Ils contiennent notamment les poids, Adam, replay, RNG et buffers. Les anciens fichiers `*_qnet.pkl`, `*_actor.pkl`, etc. ne suffisent pas à une reprise exacte et ne sont pas chargés automatiquement par l’interface.
+
+## Reprise en fin d’épisode
+
+```powershell
+.\.venv\Scripts\python.exe train_all.py --env LineWorld --agent DQN --seed 42 --episodes 100 --resume-checkpoint CHEMIN/agent.pkl --quiet
 ```
 
-Les agents de planning (RandomRollout, MCTS) et hybrides (AlphaZero, MuZero, ExpertApprentice) sont automatiquement limités à 500 épisodes car ils effectuent une recherche arborescente à chaque coup.
+`--episodes` indique ici le nombre d’épisodes supplémentaires. L’agent, l’environnement, la graine et l’adversaire doivent correspondre au checkpoint. La reprise exacte a été testée sur DQN en fin d’épisode. La reprise au milieu d’une partie n’est pas prise en charge.
 
-## 5. Fichiers produits
+## Démonstration
 
-```text
-results/
-├── all_results.json                    # Tableau récapitulatif (17 agents × 4 envs)
-├── grid_search/all_config_results.csv  # Détails du grid search
-├── grid_search/best_by_agent_env.csv   # Meilleure config par agent/env
-├── *_learning_curves.png               # Courbes d'apprentissage
-└── *_comparison.png                    # Comparaisons entre agents
-
-models/
-└── *_best/                             # Modèles entraînés prêts à exécuter
+```powershell
+.\.venv\Scripts\python.exe gui.py
 ```
 
-## 6. Lancer l'interface graphique (démonstration)
+À http://127.0.0.1:5000 :
+1. Human sur LineWorld, puis neuf mouvements à droite.
+2. Human sur TicTacToe pour illustrer le step comprenant la réponse adverse.
+3. RandomRollout ou MCTS sur Quarto, en précisant le choix de pièce automatique.
+4. DQN sur LineWorld avec un checkpoint de l’étude : vérifier la graine et le nombre d’épisodes affichés.
 
-```bash
-python gui.py
-```
-
-Ouvrir **http://localhost:5000** dans un navigateur.
-
-### Scénario de démonstration (~5 min) :
-
-1. Sélectionner **Quarto** + **Human** → jouer quelques coups
-2. Sélectionner **Quarto** + **MCTS** → Auto Play pour voir l'agent jouer
-3. Sélectionner **TicTacToe** + **AlphaZero** → observer la stratégie
-4. Sélectionner **LineWorld** + **DQN** → l'agent atteint l'objectif en 9 steps
-5. Sélectionner **GridWorld** + **TabularQL** → l'agent évite le piège en (0,0)
-
-### Contrôles en mode humain :
-- **LineWorld** : flèches gauche/droite
-- **GridWorld** : flèches directionnelles
-- **TicTacToe** : clic sur les cases ou pavé numérique
-- **Quarto** : clic sur les cases vides du plateau
-
-## 7. Benchmark (parties/seconde)
-
-```bash
-python benchmark_random.py
-```
-
-## 8. Environnements
-
-| Environnement | Observation | Actions | Particularité |
-|--------------|-------------|---------|---------------|
-| LineWorld | 10 dim (one-hot) | 2 (gauche/droite) | Reward sparse, départ pos. 0, objectif pos. 9 |
-| GridWorld | 25 dim (one-hot) | 4 (haut/bas/gauche/droite) | Piège en (0,0) = reward -10, départ (1,0), objectif (4,4) |
-| TicTacToe | 9 dim (-1/0/+1) | 9 (positions) | Agent = X (premier joueur) vs Random |
-| Quarto | 101 dim (attributs) | 16 (positions) | Encodage par attributs binaires (5 val/case), heuristique de choix de pièce |
-
-## 9. Limites de reproduction
-
-- Les résultats peuvent varier selon la machine et la seed
-- Les agents de planning sont très coûteux sur Quarto (durée élevée)
-- L'implémentation NumPy est 10-100x plus lente que PyTorch/TensorFlow
-- Les agents hybrides (AlphaZero, MuZero) nécessitent plus d'épisodes pour converger pleinement
+`DRL_RUN_DIR` peut sélectionner explicitement un dossier d’expérience pour l’interface. Sinon, elle cherche le modèle compatible le plus récent dans les exécutions terminées de `results/runs/`.

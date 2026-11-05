@@ -1,0 +1,3017 @@
+[
+  {
+    "environment": "LineWorld",
+    "agent": "Random",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.005798888903680361,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "TabularQL",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.008661109960586248,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.008468500003800727,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "DQN",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.026601109453218263,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.033869399994728155,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "DoubleDQN",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.026560000939449917,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.04630250002082903,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "DDQN+ER",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.025254444982339114,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.03269840001303237,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "DDQN+PER",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.05574111160563512,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.03693380001641344,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "REINFORCE",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.036977777361041964,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.014058700005989522,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "REINFORCE+Mean",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.06318555727678662,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.020741699991049245,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "REINFORCE+Critic",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.03830000108185534,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.019851399993058294,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "PPO",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.05626666663576745,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.021534300001803786,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "A2C",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.037432222032091685,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.020213399984641,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "RandomRollout",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 2.0525355564637318,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "MCTS",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 2.0946077772855967,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "ExpertApprentice",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.1751522229622222,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 2.113698800021666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "AlphaZero",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 4.849022223303716,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.7018892999767559,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "MuZero",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 2.2066722226251536,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.2614836000138894,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "MuZero_Stochastic",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.0000000000000013,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 1.4531866678023815,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.22582829999737442,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "Random",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -6.7,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 10.666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.027834374577651033,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "TabularQL",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 10.54,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.040038096596531215,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.00970979999692645,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "DQN",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.122502256758253e-17,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.12698333205965656,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.05311359999177512,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "DoubleDQN",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.3000000000000001,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.13072444417048246,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.07469480001600459,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "DDQN+ER",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.3000000000000001,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.13359666627366096,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.05804699998407159,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "DDQN+PER",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.2999999999999998,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.11635111150098965,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.15361830001347698,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "REINFORCE",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -10.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.24496666446793824,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.04484119999688119,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "REINFORCE+Mean",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -10.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.12026667051638167,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.039317300004768185,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "REINFORCE+Critic",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -10.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.17456666682846844,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.04665320001367945,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "PPO",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -10.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.3635333365915964,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.053455399989616126,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "A2C",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -10.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.27809999786162126,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.06410639999376144,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "RandomRollout",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 10.493333333333334,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 11.666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 10.042062858285913,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "MCTS",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 3.58,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 25.666666666666668,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 4.194487011938525,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "ExpertApprentice",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -10.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.21050000214017928,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.9115692999912426,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "AlphaZero",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.20000000000000004,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 5.271681111157199,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.47479950000706594,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "MuZero",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.09999999999999985,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 30.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 2.207476667212581,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.2022760999680031,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "MuZero_Stochastic",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -3.1633333333333336,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 2.78480000027533,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.1364149000000907,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "Random",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.666666666666667,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.03420714451099879,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "TabularQL",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 3.6666666666666665,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.045672727124342186,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.007469100019079633,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "DQN",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.13746153966237146,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.024426100004347973,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "DoubleDQN",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.17123076787146813,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0194846999947913,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "DDQN+ER",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.14306153864778864,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.029925200011348352,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "DDQN+PER",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.16110769334213376,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.024307200001203455,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "REINFORCE",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.666666666666667,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.24048571503954008,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.012986899993848056,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "REINFORCE+Mean",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.1604769215471326,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.015182200004346669,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "REINFORCE+Critic",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.2589692314638971,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.016940999979851767,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "PPO",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.2630666640470736,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.010562499999650754,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "A2C",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.4411307700838034,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.014067399999476038,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "RandomRollout",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 3.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 14.639688888564706,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "MCTS",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.666666666666667,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 2.8838642860396897,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "ExpertApprentice",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.204061538589975,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.07562219997635111,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "AlphaZero",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 4.538124998362036,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.08289399999193847,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "MuZero",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.666666666666667,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 2.497821429902355,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.054287599996314384,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "TicTacToe",
+    "agent": "MuZero_Stochastic",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 4.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 3.57958461301258,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.07649350000428967,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "Random",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.03851363660280847,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "DQN",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.16996666644921615,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.1260426000226289,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "DoubleDQN",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 6.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.18803157773187482,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.14662550002685748,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "DDQN+ER",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.22476666726149794,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.10288340000261087,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "DDQN+PER",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.19257618779582636,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.15055299998493865,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "REINFORCE",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 6.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.23711111134616658,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.13136739998299163,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "REINFORCE+Mean",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 6.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.2650222223665979,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.11898509999446105,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "REINFORCE+Critic",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.23487619043970925,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.12448460000450723,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "PPO",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.2586227287379601,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.10177720001956914,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "A2C",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.19163333317486658,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.10088649997487664,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "RandomRollout",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 5.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 378.88590666407254,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "MCTS",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 5.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 27.828462499201123,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "ExpertApprentice",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 0.2347545464131558,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 1.4830007999989903,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "AlphaZero",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 6.666666666666667,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 18.466824998904485,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.5777687000227161,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "MuZero",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 5.666666666666667,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 2.076423528385075,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.15930289999232627,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  },
+  {
+    "environment": "Quarto",
+    "agent": "MuZero_Stochastic",
+    "n_training_seeds": 1,
+    "avg_reward": {
+      "mean": -0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "loss_rate": {
+      "mean": 0.6666666666666666,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "draw_rate": {
+      "mean": 0.3333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_length": {
+      "mean": 7.333333333333333,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "avg_step_time_ms": {
+      "mean": 6.122322727936658,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    },
+    "training_time_seconds": {
+      "mean": 0.25913400000717957,
+      "std_between_seeds": null,
+      "ci95_mean": null
+    }
+  }
+]

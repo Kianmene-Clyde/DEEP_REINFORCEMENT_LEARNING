@@ -1,0 +1,22 @@
+{
+  "environment": "TicTacToe",
+  "agent": "PPO",
+  "seed": 42,
+  "status": "OK",
+  "avg_reward": 0.3333333333333333,
+  "std_reward": 1.1547005383792517,
+  "avg_length": 4.0,
+  "avg_step_time_ms": 0.2630666640470736,
+  "win_rate": 0.6666666666666666,
+  "loss_rate": 0.3333333333333333,
+  "draw_rate": 0.0,
+  "success_rate": 0.6666666666666666,
+  "timeout_rate": 0.0,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 3,
+  "evaluation_seed": 2000042,
+  "decision_count": 12,
+  "episodes_trained": 4,
+  "training_time_seconds": 0.010562499999650754,
+  "transitions": 13
+}

@@ -1,0 +1,30 @@
+{
+  "checked_utc": "2026-11-05T11:32:26.315796+00:00",
+  "pytest": {
+    "passed": 119,
+    "skipped": 1,
+    "junit": "results/validation/pytest.xml"
+  },
+  "wheel": {
+    "built": true,
+    "installed_module_imported_from_isolated_target": true,
+    "installed_cli_smoke_status": "complete"
+  },
+  "presentation": {
+    "file": "deliverables\\Soutenance_DRL.pptx",
+    "slides": 10,
+    "sha256": "7310299064a085c7b27e65117b9b022e4766f14abb4e4807717d2e37bb264cc1",
+    "package_integrity": "pass",
+    "all_slides_visually_checked": true,
+    "editable_tables": 3,
+    "editable_charts": 2,
+    "native_powerpoint_opening_verified": false
+  },
+  "report": {
+    "file": "deliverables\\Rapport_DRL_verifie.docx",
+    "sha256": "a72f4c6f90cb8c4a921307266b28627e1e615fc91918045d6fc4268992cff0e5",
+    "pages": 7,
+    "render_engine": "Word PDF export and skill render_docx.py / Poppler",
+    "all_pages_visually_checked": true
+  }
+}

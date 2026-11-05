@@ -32,9 +32,17 @@ PIECE_ATTRS_NAMES = [
 class Quarto(BaseEnvironment):
     is_two_player = True
     ATTRS = np.array([[(p >> b) & 1 for b in range(4)] for p in range(16)], dtype=np.int32)
+    LINE_INDICES = np.array(
+        [[4 * r + c for c in range(4)] for r in range(4)]
+        + [[4 * r + c for r in range(4)] for c in range(4)]
+        + [[0, 5, 10, 15], [3, 6, 9, 12]],
+        dtype=np.int32,
+    )
 
     def __init__(self, opponent_type: str = "random", seed: Optional[int] = None):
         self.opponent_type = opponent_type
+        if opponent_type not in {"random", "heuristic"}:
+            raise ValueError("Unknown opponent type")
         self.board = np.full(16, -1, dtype=np.int32)
         self.available = np.ones(16, dtype=bool)
         self.current_piece = -1
@@ -75,7 +83,7 @@ class Quarto(BaseEnvironment):
         # Plateau : 16 cases x 5 valeurs = 80 dimensions
         board_enc = np.zeros(80, dtype=np.float32)
         for i in range(16):
-            board_enc[i * 5:(i + 1) * 5] = self._encode_piece_attrs(self.board[i])
+            board_enc[i * 5 : (i + 1) * 5] = self._encode_piece_attrs(self.board[i])
 
         # Piece courante : 5 dimensions
         piece_enc = self._encode_piece_attrs(self.current_piece)
@@ -86,7 +94,8 @@ class Quarto(BaseEnvironment):
         return np.concatenate([board_enc, piece_enc, avail_enc])
         # Total : 80 + 5 + 16 = 101
 
-    def reset(self) -> np.ndarray:
+    def reset(self, seed=None) -> np.ndarray:
+        self.reseed(seed)
         self.board = np.full(16, -1, dtype=np.int32)
         self.available = np.ones(16, dtype=bool)
         self._done = False
@@ -97,6 +106,7 @@ class Quarto(BaseEnvironment):
         return self._get_state()
 
     def step(self, action: int) -> Tuple[np.ndarray, float, bool, Dict]:
+        self._validate_action(action)
         if self._done:
             return self._get_state(), 0.0, True, {}
 
@@ -110,17 +120,17 @@ class Quarto(BaseEnvironment):
         self.board[pos] = self.current_piece
         if self._check_win():
             self._done = True
-            return self._get_state(), 1.0, True, {"winner": "agent"}
+            return self._get_state(), 1.0, True, {"winner": "agent", "outcome": "win"}
 
         if not np.any(self.board == -1) or not np.any(self.available):
             self._done = True
-            return self._get_state(), 0.0, True, {"result": "draw"}
+            return self._get_state(), 0.0, True, {"result": "draw", "outcome": "draw"}
 
         # L'agent choisit une piece pour l'adversaire
         opp_piece = self._agent_pick_piece_for_opponent()
         if opp_piece < 0:
             self._done = True
-            return self._get_state(), 0.0, True, {"result": "draw"}
+            return self._get_state(), 0.0, True, {"result": "draw", "outcome": "draw"}
         self.available[opp_piece] = False
 
         # L'adversaire place sa piece
@@ -129,17 +139,17 @@ class Quarto(BaseEnvironment):
             self.board[opp_pos] = opp_piece
             if self._check_win():
                 self._done = True
-                return self._get_state(), -1.0, True, {"winner": "opponent"}
+                return self._get_state(), -1.0, True, {"winner": "opponent", "outcome": "loss"}
 
         if not np.any(self.board == -1) or not np.any(self.available):
             self._done = True
-            return self._get_state(), 0.0, True, {"result": "draw"}
+            return self._get_state(), 0.0, True, {"result": "draw", "outcome": "draw"}
 
         # L'adversaire choisit une piece pour l'agent
         agent_piece = self._opponent_pick_piece_for_agent()
         if agent_piece < 0:
             self._done = True
-            return self._get_state(), 0.0, True, {"result": "draw"}
+            return self._get_state(), 0.0, True, {"result": "draw", "outcome": "draw"}
         self.current_piece = agent_piece
         self.available[agent_piece] = False
 
@@ -148,35 +158,26 @@ class Quarto(BaseEnvironment):
     # Verification de victoire
 
     def _get_lines(self) -> List[np.ndarray]:
-        b = self.board.reshape(4, 4)
-        lines = []
-        for i in range(4):
-            lines.append(b[i, :])
-            lines.append(b[:, i])
-        lines.append(np.array([b[i, i] for i in range(4)]))
-        lines.append(np.array([b[i, 3 - i] for i in range(4)]))
-        return lines
+        return self.board[self.LINE_INDICES]
 
     def _check_win(self) -> bool:
-        for line in self._get_lines():
-            if np.any(line == -1):
-                continue
-            pieces_attrs = self.ATTRS[line]
-            for attr in range(4):
-                if len(set(pieces_attrs[:, attr])) == 1:
-                    return True
-        return False
+        lines = self._get_lines()
+        full = np.all(lines >= 0, axis=1)
+        common_one = np.bitwise_and.reduce(lines, axis=1) != 0
+        common_zero = np.bitwise_or.reduce(lines, axis=1) != 15
+        return bool(np.any(full & (common_one | common_zero)))
 
     def _would_piece_win_somewhere(self, piece: int) -> bool:
         """Verifie si cette piece peut gagner en etant placee quelque part."""
         empty = np.where(self.board == -1)[0]
-        for pos in empty:
-            self.board[pos] = piece
-            won = self._check_win()
-            self.board[pos] = -1
-            if won:
-                return True
-        return False
+        if len(empty) == 0:
+            return False
+        boards = np.tile(self.board, (len(empty), 1))
+        boards[np.arange(len(empty)), empty] = piece
+        lines = boards[:, self.LINE_INDICES]
+        full = np.all(lines >= 0, axis=2)
+        common = (np.bitwise_and.reduce(lines, axis=2) != 0) | (np.bitwise_or.reduce(lines, axis=2) != 15)
+        return bool(np.any(full & common))
 
     def _count_dangerous_lines(self, piece: int) -> int:
         danger = 0
@@ -211,7 +212,7 @@ class Quarto(BaseEnvironment):
         scored.sort(key=lambda x: x[1])
         best_score = scored[0][1]
         best = [p for p, s in scored if s == best_score]
-        return int(np.random.choice(best))
+        return int(self.rng.choice(best))
 
     # Choix de piece : ADVERSAIRE pour l'agent
     def _opponent_pick_piece_for_agent(self) -> int:
@@ -220,7 +221,7 @@ class Quarto(BaseEnvironment):
             return -1
 
         if self.opponent_type == "random":
-            return int(np.random.choice(avail))
+            return int(self.rng.choice(avail))
 
         # Mode heuristic avec la meme logique que l'agent
         safe = [int(p) for p in avail if not self._would_piece_win_somewhere(int(p))]
@@ -233,7 +234,7 @@ class Quarto(BaseEnvironment):
         scored.sort(key=lambda x: x[1])
         best_score = scored[0][1]
         best = [p for p, s in scored if s == best_score]
-        return int(np.random.choice(best))
+        return int(self.rng.choice(best))
 
     # Placement de l'adversaire
 
@@ -243,7 +244,7 @@ class Quarto(BaseEnvironment):
             return None
         if self.opponent_type == "heuristic":
             return self._heuristic_place(piece, empty)
-        return int(np.random.choice(empty))
+        return int(self.rng.choice(empty))
 
     def _heuristic_place(self, piece: int, empty: np.ndarray) -> int:
         # Gagner si possible
@@ -253,7 +254,7 @@ class Quarto(BaseEnvironment):
                 self.board[pos] = -1
                 return int(pos)
             self.board[pos] = -1
-        return int(np.random.choice(empty))
+        return int(self.rng.choice(empty))
 
     # Affichage
 
@@ -289,4 +290,10 @@ class Quarto(BaseEnvironment):
         return self._action_space_size
 
     def get_valid_actions(self, state: Any = None) -> np.ndarray:
+        if self._done:
+            return np.array([], dtype=np.int32)
+        if state is not None:
+            encoded = np.asarray(state)
+            if encoded.shape == (101,):
+                return np.where(encoded[:80:5] == 0)[0].astype(np.int32)
         return np.where(self.board == -1)[0].astype(np.int32)

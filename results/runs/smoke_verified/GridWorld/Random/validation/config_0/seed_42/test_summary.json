@@ -1,0 +1,22 @@
+{
+  "environment": "GridWorld",
+  "agent": "Random",
+  "seed": 42,
+  "status": "OK",
+  "avg_reward": -6.7,
+  "std_reward": 5.715767664977295,
+  "avg_length": 10.666666666666666,
+  "avg_step_time_ms": 0.027834374577651033,
+  "win_rate": 0.0,
+  "loss_rate": 0.6666666666666666,
+  "draw_rate": 0.0,
+  "success_rate": 0.0,
+  "timeout_rate": 0.3333333333333333,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 3,
+  "evaluation_seed": 2000042,
+  "decision_count": 32,
+  "episodes_trained": 0,
+  "training_time_seconds": 0.0,
+  "transitions": 0
+}

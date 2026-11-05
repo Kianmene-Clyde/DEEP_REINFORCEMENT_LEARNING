@@ -1,0 +1,692 @@
+[
+  {
+    "environment": "LineWorld",
+    "agent": "Random",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": -5.874599999999992,
+      "std_between_seeds": 0.2568594946658577,
+      "ci95_mean": [
+        -6.1935331871234,
+        -5.555666812876584
+      ]
+    },
+    "win_rate": {
+      "mean": 0.6759999999999999,
+      "std_between_seeds": 0.037148351242013405,
+      "ci95_mean": [
+        0.6298742296701638,
+        0.722125770329836
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 0.324,
+      "std_between_seeds": 0.03714835124201342,
+      "ci95_mean": [
+        0.27787422967016384,
+        0.3701257703298362
+      ]
+    },
+    "avg_length": {
+      "mean": 66.182,
+      "std_between_seeds": 2.255009977804976,
+      "ci95_mean": [
+        63.38203529496929,
+        68.9819647050307
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.04548762955012294,
+      "std_between_seeds": 0.004702952320894873,
+      "ci95_mean": [
+        0.03964814296799894,
+        0.05132711613224694
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "TabularQL",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": -9.999999999999982,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        -9.999999999999982,
+        -9.999999999999982
+      ]
+    },
+    "win_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 1.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        1.0,
+        1.0
+      ]
+    },
+    "avg_length": {
+      "mean": 100.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        100.0,
+        100.0
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.03761414003325626,
+      "std_between_seeds": 0.001831924006670937,
+      "ci95_mean": [
+        0.035339505946727766,
+        0.03988877411978476
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 5.6349261600029426,
+      "std_between_seeds": 0.7683368930275585,
+      "ci95_mean": [
+        4.680909901438887,
+        6.588942418566998
+      ]
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "DQN",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": 0.2000000000000001,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.2000000000000001,
+        0.2000000000000001
+      ]
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        1.0,
+        1.0
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "avg_length": {
+      "mean": 9.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        9.0,
+        9.0
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.052476533197073474,
+      "std_between_seeds": 0.004711981269372143,
+      "ci95_mean": [
+        0.046625835694683614,
+        0.058327230699463335
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 13.874045020053746,
+      "std_between_seeds": 0.973246486974371,
+      "ci95_mean": [
+        12.665599895799382,
+        15.08249014430811
+      ]
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "PPO",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": 0.2000000000000001,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.2000000000000001,
+        0.2000000000000001
+      ]
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        1.0,
+        1.0
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "avg_length": {
+      "mean": 9.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        9.0,
+        9.0
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.2750679332788827,
+      "std_between_seeds": 0.015022564478668133,
+      "ci95_mean": [
+        0.25641495580502577,
+        0.2937209107527396
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 7.728280500002438,
+      "std_between_seeds": 2.764611751774085,
+      "ci95_mean": [
+        4.295561618813515,
+        11.160999381191361
+      ]
+    }
+  },
+  {
+    "environment": "LineWorld",
+    "agent": "A2C",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": 0.2000000000000001,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.2000000000000001,
+        0.2000000000000001
+      ]
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        1.0,
+        1.0
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "avg_length": {
+      "mean": 9.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        9.0,
+        9.0
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.06737726664869115,
+      "std_between_seeds": 0.0319231197364404,
+      "ci95_mean": [
+        0.027739478161605068,
+        0.10701505513577722
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 5.519274200033396,
+      "std_between_seeds": 0.33719612729985765,
+      "ci95_mean": [
+        5.10058990843143,
+        5.937958491635363
+      ]
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "Random",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": -5.5682,
+      "std_between_seeds": 0.7064213615116691,
+      "ci95_mean": [
+        -6.445337972151126,
+        -4.691062027848874
+      ]
+    },
+    "win_rate": {
+      "mean": 0.20800000000000002,
+      "std_between_seeds": 0.031144823004794868,
+      "ci95_mean": [
+        0.16932859454451785,
+        0.2466714054554822
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.758,
+      "std_between_seeds": 0.0420713679359253,
+      "ci95_mean": [
+        0.7057614970787773,
+        0.8102385029212227
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 0.034,
+      "std_between_seeds": 0.02302172886644268,
+      "ci95_mean": [
+        0.005414748090129776,
+        0.06258525190987023
+      ]
+    },
+    "avg_length": {
+      "mean": 21.326,
+      "std_between_seeds": 3.398268676841193,
+      "ci95_mean": [
+        17.10649212774275,
+        25.54550787225725
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.01643000913004635,
+      "std_between_seeds": 0.007867229519552666,
+      "ci95_mean": [
+        0.00666155347001191,
+        0.02619846479008079
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "TabularQL",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": 10.539999999999996,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        10.539999999999996,
+        10.539999999999996
+      ]
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        1.0,
+        1.0
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        7.0,
+        7.0
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.01098971426004677,
+      "std_between_seeds": 0.0011583322976240053,
+      "ci95_mean": [
+        0.009551454748130395,
+        0.012427973771963145
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 0.5010545598488534,
+      "std_between_seeds": 0.06710277267718988,
+      "ci95_mean": [
+        0.4177354628359355,
+        0.5843736568617712
+      ]
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "DQN",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": 10.539999999999996,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        10.539999999999996,
+        10.539999999999996
+      ]
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        1.0,
+        1.0
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        7.0,
+        7.0
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.038209057063795626,
+      "std_between_seeds": 0.004499762947509636,
+      "ci95_mean": [
+        0.032621863411421655,
+        0.0437962507161696
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 5.989895379939116,
+      "std_between_seeds": 1.6671885208791095,
+      "ci95_mean": [
+        3.9198074153449416,
+        8.059983344533292
+      ]
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "PPO",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": 10.539999999999996,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        10.539999999999996,
+        10.539999999999996
+      ]
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        1.0,
+        1.0
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        7.0,
+        7.0
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.09324639992805064,
+      "std_between_seeds": 0.015642004733908737,
+      "ci95_mean": [
+        0.07382428579022332,
+        0.11266851406587797
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 9.06672020003025,
+      "std_between_seeds": 2.925749366221262,
+      "ci95_mean": [
+        5.43392254422583,
+        12.69951785583467
+      ]
+    }
+  },
+  {
+    "environment": "GridWorld",
+    "agent": "A2C",
+    "n_training_seeds": 5,
+    "avg_reward": {
+      "mean": 10.539999999999996,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        10.539999999999996,
+        10.539999999999996
+      ]
+    },
+    "win_rate": {
+      "mean": 1.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        1.0,
+        1.0
+      ]
+    },
+    "loss_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "draw_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "timeout_rate": {
+      "mean": 0.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        0.0,
+        0.0
+      ]
+    },
+    "avg_length": {
+      "mean": 7.0,
+      "std_between_seeds": 0.0,
+      "ci95_mean": [
+        7.0,
+        7.0
+      ]
+    },
+    "avg_step_time_ms": {
+      "mean": 0.06009054286654906,
+      "std_between_seeds": 0.005475720947851218,
+      "ci95_mean": [
+        0.05329153730139201,
+        0.06688954843170611
+      ]
+    },
+    "training_time_seconds": {
+      "mean": 2.0131689400179313,
+      "std_between_seeds": 0.10617106924126529,
+      "ci95_mean": [
+        1.8813401456902532,
+        2.1449977343456097
+      ]
+    }
+  }
+]

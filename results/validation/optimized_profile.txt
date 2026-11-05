@@ -1,0 +1,23 @@
+         6602 function calls in 0.013 seconds
+
+   Ordered by: cumulative time
+   List reduced from 23 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.013    0.013 C:\Users\alexa\DEEP_REINFORCEMENT_LEARNING\tools\profile_validation.py:63(new_quarto)
+      200    0.005    0.000    0.012    0.000 C:\Users\alexa\DEEP_REINFORCEMENT_LEARNING\src\environments\quarto.py:167(_would_piece_win_somewhere)
+      800    0.003    0.000    0.003    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+      200    0.001    0.000    0.002    0.000 C:\Users\alexa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\numpy\lib\_shape_base_impl.py:1211(tile)
+      400    0.001    0.000    0.002    0.000 C:\Users\alexa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\numpy\_core\fromnumeric.py:89(_wrapreduction_any_all)
+      200    0.000    0.000    0.002    0.000 C:\Users\alexa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\numpy\_core\fromnumeric.py:2589(all)
+      200    0.000    0.000    0.001    0.000 C:\Users\alexa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\numpy\_core\fromnumeric.py:2477(any)
+      200    0.000    0.000    0.000    0.000 {method 'repeat' of 'numpy.ndarray' objects}
+      200    0.000    0.000    0.000    0.000 {built-in method numpy.arange}
+      400    0.000    0.000    0.000    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+      200    0.000    0.000    0.000    0.000 {method 'copy' of 'numpy.ndarray' objects}
+      400    0.000    0.000    0.000    0.000 C:\Users\alexa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\numpy\lib\_shape_base_impl.py:1284(<genexpr>)
+      600    0.000    0.000    0.000    0.000 C:\Users\alexa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\numpy\lib\_shape_base_impl.py:1294(<genexpr>)
+      200    0.000    0.000    0.000    0.000 {built-in method numpy.array}
+      800    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+
+

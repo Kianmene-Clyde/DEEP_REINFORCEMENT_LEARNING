@@ -1,0 +1,20 @@
+         2603 function calls in 0.007 seconds
+
+   Ordered by: cumulative time
+   List reduced from 15 to 12 due to restriction <12>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      100    0.001    0.000    0.007    0.000 C:\Users\alexa\DEEP_REINFORCEMENT_LEARNING\src\environments\quarto.py:170(_would_piece_win_somewhere)
+      100    0.002    0.000    0.005    0.000 C:\Users\alexa\DEEP_REINFORCEMENT_LEARNING\src\environments\quarto.py:160(_check_win)
+      100    0.001    0.000    0.002    0.000 C:\Users\alexa\DEEP_REINFORCEMENT_LEARNING\src\environments\quarto.py:150(_get_lines)
+      100    0.000    0.000    0.001    0.000 C:\Users\alexa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\numpy\_core\fromnumeric.py:2477(any)
+      100    0.000    0.000    0.001    0.000 C:\Users\alexa\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\numpy\_core\fromnumeric.py:89(_wrapreduction_any_all)
+      100    0.000    0.000    0.000    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+      200    0.000    0.000    0.000    0.000 {built-in method numpy.array}
+     1000    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+      100    0.000    0.000    0.000    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+      400    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+      100    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+

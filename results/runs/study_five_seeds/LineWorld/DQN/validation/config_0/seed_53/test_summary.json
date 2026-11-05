@@ -1,0 +1,22 @@
+{
+  "environment": "LineWorld",
+  "agent": "DQN",
+  "seed": 53,
+  "status": "OK",
+  "avg_reward": 0.2000000000000001,
+  "std_reward": 2.7895403077993544e-17,
+  "avg_length": 9.0,
+  "avg_step_time_ms": 0.04819722197781731,
+  "win_rate": 1.0,
+  "loss_rate": 0.0,
+  "draw_rate": 0.0,
+  "success_rate": 1.0,
+  "timeout_rate": 0.0,
+  "unknown_outcome_rate": 0.0,
+  "num_episodes": 100,
+  "evaluation_seed": 2000053,
+  "decision_count": 900,
+  "episodes_trained": 1000,
+  "training_time_seconds": 13.612112000118941,
+  "transitions": 10813
+}

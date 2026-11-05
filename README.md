@@ -1,96 +1,104 @@
-# Deep Reinforcement Learning - Projet M2 IABD 2025-2026
+# Laboratoire de Reinforcement Learning en NumPy
 
-## Description
+Ce projet compare 17 agents et prototypes sur LineWorld, GridWorld, TicTacToe et une variante de Quarto. Les réseaux et leurs gradients sont implémentés en NumPy. La version 0.2 corrige les calculs d’apprentissage, isole l’évaluation et rend chaque expérience traçable.
 
-Évaluation comparative de **17 algorithmes de Reinforcement Learning / Deep Reinforcement Learning** sur 4 environnements : LineWorld, GridWorld, TicTacToe et Quarto.
-
-Framework entièrement implémenté en **Python/NumPy** (pas de TensorFlow/PyTorch) — chaque ligne de code est compréhensible et explicable.
+Les fichiers historiques de modèles, résultats et présentation sont conservés. Ils ne constituent pas des résultats validés avec le protocole actuel. Les exécutions corrigées sont dans `results/runs/`.
 
 ## Installation
 
-```bash
-pip install -r requirements.txt
+Python 3.11 ou ultérieur. En PowerShell, depuis la racine du projet :
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.build/pytest
 ```
 
-## Utilisation rapide
+Sur Linux/macOS, remplacer `.\.venv\Scripts\python.exe` par `.venv/bin/python`. Une installation Python doit être présente dans le PATH. `requirements-lock.txt` décrit les versions réellement utilisées pour la validation sous Windows/Python 3.12. Une installation éditable optionnelle `python -m pip install -e ".[dev]"` expose `drl-train`.
 
-### Entraîner tous les agents
+## Première exécution
 
-```bash
-# Test rapide (~5 min)
-python train_all.py --quick
-
-# Entraînement standard (10 000 épisodes, ~1-3h)
-python train_all.py
-
-# Entraînement long (100 000 épisodes, ~10-20h)
-python train_all.py --episodes 100000
-
-# Un seul environnement
-python train_all.py --env TicTacToe
+```powershell
+.\.venv\Scripts\python.exe train_all.py --profile smoke --quiet
+.\.venv\Scripts\python.exe gui.py
 ```
 
-### Interface graphique (démonstration)
+Ouvrir http://127.0.0.1:5000. Les modes Human, Random, RandomRollout et MCTS fonctionnent sans modèle appris. Les autres agents nécessitent un checkpoint versionné compatible. Un modèle absent produit une erreur explicite. Le profil smoke ne fournit que des modèles de démonstration, sans preuve de convergence.
 
-```bash
-python gui.py
-# Ouvrir http://localhost:5000
+Chaque navigateur dispose de sa propre partie. L’interface est destinée à une démonstration locale, avec au plus 200 actions par partie. Le serveur sérialise les requêtes.
+
+## Entraînement et analyse
+
+```powershell
+# Un agent et un environnement
+.\.venv\Scripts\python.exe train_all.py --profile full --env LineWorld --agent DQN --quiet
+
+# Étude sur cinq graines avec budget borné
+.\.venv\Scripts\python.exe train_all.py --config configs/study.json --env LineWorld GridWorld --agent Random TabularQL DQN PPO A2C --quiet
+
+# Recherche limitée, validation, puis réentraînement sur de nouvelles graines
+.\.venv\Scripts\python.exe train_all.py --profile full --env TicTacToe --agent PPO --grid compact --max-configs-per-agent 2 --quiet
+
+# Analyse : remplacer le chemin par celui indiqué à la fin de l’exécution
+.\.venv\Scripts\python.exe benchmark_analyze_results.py --run results/runs/smoke_verified
+
+# Débit de simulation, distinct de la latence de décision
+.\.venv\Scripts\python.exe benchmark_random.py --games 100
 ```
 
-L'interface permet de regarder jouer les 17 agents et de jouer en mode humain.
+Le profil par défaut est smoke : quatre épisodes, trois parties d’évaluation, une graine, recherches courtes, budget de 300 secondes. Le profil full prévoit 10 000 épisodes, 200 évaluations et cinq graines. Il peut être coûteux, surtout pour les recherches arborescentes. Les agents de planification pure ne reçoivent pas de faux épisodes d’entraînement. Aucun plafonnement silencieux à 500 épisodes n’est appliqué.
 
-### Benchmark (parties/seconde)
+## Agents et portée scientifique
 
-```bash
-python benchmark_random.py
-```
+| Agents | Portée |
+|---|---|
+| Random | Baseline uniforme sur les actions légales |
+| TabularQL | Q-Learning dense, y compris TicTacToe, indisponible sur Quarto |
+| DQN, DoubleDQN, DDQN+ER, DDQN+PER | Cibles légales ; DoubleDQN seul est une ablation sans replay |
+| REINFORCE, +Mean, +Critic | Retours épisodiques ; baseline moyenne historique indépendante de l’épisode courant |
+| PPO | Objectif PPO-Clip, rapport des probabilités, GAE et masques conservés |
+| A2C | Variante synchrone à un acteur avec retours n-step |
+| RandomRollout, MCTS | Planification sur un simulateur connu, adversaire fixe échantillonné |
+| ExpertApprentice | Imitation des décisions UCT, sans boucle complète d’amélioration de l’expert |
+| AlphaZero | Prototype inspiré d’AlphaZero, politique/valeur et PUCT, sans self-play |
+| MuZero | Prototype scalaire avec modèle latent, terminaison apprise et rétropropagation sur K pas |
+| MuZero_Stochastic | Alias historique du prototype gaussien expérimental ; ne reproduit pas Stochastic MuZero publié |
 
-## Algorithmes implémentés (17)
+Voir [l’audit](docs/AUDIT.md) et [le protocole](docs/PROTOCOLE.md) pour les limites exactes. Le nombre de combinaisons prises en charge est 67.
 
-| # | Algorithme | Catégorie | Fichier |
-|---|-----------|-----------|---------|
-| 1 | Random | Baseline | random_agent.py |
-| 2 | Tabular Q-Learning | Value-based | tabular_q_learning.py |
-| 3 | DQN | Value-based (Deep) | deep_q_learning.py |
-| 4 | Double DQN | Value-based (Deep) | double_deep_q_learning.py |
-| 5 | DDQN + Experience Replay | Value-based (Deep) | double_deep_q_learning.py |
-| 6 | DDQN + Prioritized ER | Value-based (Deep) | double_deep_q_learning.py |
-| 7 | REINFORCE | Policy gradient | reinforce.py |
-| 8 | REINFORCE + Mean Baseline | Policy gradient | reinforce.py |
-| 9 | REINFORCE + Critic Baseline | Actor-Critic | reinforce.py |
-| 10 | PPO (A2C-style) | Actor-Critic | ppo.py |
-| 11 | A2C | Actor-Critic | a2c.py |
-| 12 | Random Rollout | Planning | random_rollout.py |
-| 13 | MCTS (UCT) | Planning | mcts.py |
-| 14 | Expert Apprentice | Imitation Learning | expert_apprentice.py |
-| 15 | AlphaZero | Hybrid (NN + MCTS) | alphazero.py |
-| 16 | MuZero | Model-based | muzero.py |
-| 17 | MuZero Stochastique | Model-based | muzero_stochastic.py |
+## Environnements
 
-## Environnements (4)
+| Environnement | Observation | Actions | Convention |
+|---|---:|---:|---|
+| LineWorld | 10 | 2 | But en 9, départ en 0, coût -0,1 hors but, +1 au but |
+| GridWorld | 25 | 4 | Départ (1,0), but (4,4), piège terminal (0,0) |
+| TicTacToe | 9 | 9 | X contrôlé contre O fixe, un step inclut la réponse adverse |
+| Quarto | 101 | 16 | Placement contrôlé, choix de pièce heuristique automatique |
 
-| Environnement | Dim. observation | Encodage | Actions | Type | Particularité |
-|--------------|-----------------|----------|---------|------|---------------|
-| LineWorld | 10 | One-hot | 2 | Single-player | Reward sparse (+1 en pos. 9) |
-| GridWorld | 25 | One-hot | 4 | Single-player | Piège en (0,0) = -10, départ en (1,0) |
-| TicTacToe | 9 | Valeurs (-1/0/+1) | 9 | Adversarial | Agent joue X (premier joueur) |
-| Quarto | 101 | Attributs binaires | 16 | Adversarial | 5 valeurs/case, heuristique choix pièce |
+La politique optimale de LineWorld atteint le but en neuf décisions pour un retour de 0,2. Le plus court chemin sûr de GridWorld compte sept décisions pour un retour de 10,54. Quarto est une variante réduite : les agents n’apprennent pas la phase de choix de la pièce donnée à l’adversaire.
 
-## Structure du projet
+## Organisation
 
 ```text
-DEEP_REINFORCEMENT_LEARNING/
-├── src/
-│   ├── agents/                        # 17 agents RL
-│   ├── environments/                  # 4 environnements
-│   ├── neural_network/                # Framework NN NumPy
-│   └── training/                      # Trainer, Evaluator, Replay Buffer
-├── models/                            # Modèles entraînés (.pkl)
-├── results/                           # Métriques JSON + graphiques PNG
-├── gui.py                             # Interface graphique Flask
-├── train_all.py                       # Script d'entraînement principal
-├── benchmark_random.py                # Benchmark parties/seconde
-├── RAPPORT_EXPERIMENTATIONS_DRL.docx  # Rapport
-├── Specifications_Encodage.docx       # Encodage des états/actions
-└── requirements.txt
+src/agents/          agents et recherche sur issues stochastiques
+src/environments/    règles et générateurs aléatoires locaux
+src/neural_network/  gradients, activations, Adam et sérialisation
+src/training/        transitions, replay, évaluation et checkpoints
+src/registry.py      configurations et construction des agents
+src/experiments.py   CLI et protocole train/validation/test
+configs/             profils smoke, full et study
+tests/               règles, gradients, reprise, CLI et interface
+tools/               mesures avant/après
+docs/                audit, protocole et documentation corrigée
+results/runs/        expériences versionnées indépendantes
 ```
+
+## Contrôles de qualité
+
+```powershell
+.\.venv\Scripts\python.exe -m ruff check src tests train_all.py gui.py benchmark_random.py benchmark_analyze_results.py plot_grid_search_results.py tools
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.build/pytest
+.\.venv\Scripts\python.exe tools/profile_validation.py
+```
+
+Une matrice CI Windows/Linux et Python 3.11/3.12 est fournie. Elle doit encore être exécutée sur le service distant. Les validations locales et leurs limites figurent dans `docs/VALIDATION.md`.

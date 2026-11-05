@@ -1,0 +1,802 @@
+[
+  {
+    "seed": 2304738268,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1950708370,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 613988747,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 180910183,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2210146248,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1297715956,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 4087830967,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3092438837,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1575372956,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 474842690,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2365938310,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2705070998,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1656165111,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1009162257,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 105359487,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1950224513,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 690253919,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2360476154,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1362698198,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2590823170,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 229698550,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3426936441,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3659589832,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2661058272,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3188497563,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1749962339,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2682428874,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2918561841,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 505765628,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3291732886,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2896692945,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 186461098,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3116536937,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2731151758,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 411260508,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2703572860,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 4239087229,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2787460990,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2415807724,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3029127553,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 625900863,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3628842783,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2056660693,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2189739684,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3759667506,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2546671492,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1832696489,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1371060253,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1623775982,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2087579884,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 701119026,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3065037120,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1888207401,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3548384258,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 250523013,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3508263041,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 411135351,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1920844803,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1935762949,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2298135291,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2419382292,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3574974101,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1499934785,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3772133632,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1618856316,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3561062829,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2169239687,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1303471893,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 4073808504,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2591933353,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2271001986,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 218064905,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1985307875,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1142578218,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3411324021,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3159870600,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2676381546,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1649090072,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1355509525,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1262810434,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 644312859,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 73138815,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1993044017,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2153209658,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3556659393,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1224482653,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3063805127,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2018200315,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 120471579,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2525961841,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2742383088,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1779592437,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3249540162,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3099188730,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 3870833598,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2703496170,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1606975531,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1243098692,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 1941196925,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  },
+  {
+    "seed": 2587935220,
+    "reward": 0.20000000000000007,
+    "length": 9,
+    "terminated": true,
+    "truncated": false,
+    "outcome": "success"
+  }
+]
